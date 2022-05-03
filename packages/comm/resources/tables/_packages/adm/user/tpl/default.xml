@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<GenRoBag><content>&lt;!--:columns= '$username,$email,$status--&gt;
+&lt;div&gt;
+	&lt;b&gt;Login:&lt;/b&gt; $username&lt;/div&gt;
+&lt;div&gt;
+	&lt;b&gt;Email:&lt;/b&gt; $email&lt;/div&gt;
+</content>
+<metadata><email><subject _T="NN"></subject>
+<to_address _T="NN"></to_address>
+<from_address _T="NN"></from_address>
+<cc_address _T="NN"></cc_address>
+<bcc_address _T="NN"></bcc_address>
+<attachments _T="NN"></attachments></email></metadata>
+<content_css _T="NN"></content_css>
+<varsbag _T="BAG"></varsbag>
+<parametersbag _T="NN"></parametersbag>
+<email><attached_reports _T="BAG"></attached_reports></email>
+<compiled><main maintable="adm.user" locale="it-IT" virtual_columns="" columns="" formats="{}::JS" masks="{}::JS" editcols="{}::JS" df_templates="{}::JS" dtypes="{}::JS">&lt;!--:columns= '$username,$email,$status--&gt;
+&lt;div&gt;
+	&lt;b&gt;Login:&lt;/b&gt; $username&lt;/div&gt;
+&lt;div&gt;
+	&lt;b&gt;Email:&lt;/b&gt; $email&lt;/div&gt;
+</main></compiled></GenRoBag>

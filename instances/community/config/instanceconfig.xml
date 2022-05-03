@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<GenRoBag>
+	<db dbname="community"/>
+
+	<packages>
+		<gnrcore_adm pkgcode="gnrcore:adm"/>
+		<gnrcore_sys pkgcode="gnrcore:sys"/>
+		<comm pkgcode="comm"/>
+	</packages>
+	
+	<authentication pkg="adm">
+		<py_auth defaultTags="user" pkg="adm" method="authenticate"/>
+	</authentication>
+
+	<site>
+		<wsgi mainpackage='comm'/>
+	</site>
+</GenRoBag>
