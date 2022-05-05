@@ -11,6 +11,7 @@ class Table(object):
         tbl.column('code', name_long='!![en]Code')
         tbl.column('description', name_long='!![en]Description')
         tbl.column('link', name_long='Link')
+        tbl.column('workspace_metadata', dtype='X', name_long='Workspace metadata')
         tbl.column('developer_id',size='22', group='_', name_long='!![en]Developer'
                     ).relation('developer.id', relation_name='workspaces', mode='foreignkey', onDelete='raise')
 
@@ -23,7 +24,8 @@ class Table(object):
                 workspace_code = w['workspace']['slug']
                 workspace_link = w['workspace']['links.html.href']
                 workspace_record = self.newrecord(code=workspace_code, 
-                                    link=workspace_link, developer_id=developer_id)
+                                    link=workspace_link, developer_id=developer_id,
+                                    workspace_metadata=w)
                 self.insert(workspace_record)
                 self.db.commit()
                 print('**Bitbucket workspace added: ', workspace_code)

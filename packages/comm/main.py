@@ -4,8 +4,8 @@ from gnr.app.gnrdbo import GnrDboTable, GnrDboPackage
 
 class Package(GnrDboPackage):
     def config_attributes(self):
-        return dict(comment='comm package',sqlschema='comm',sqlprefix=True,
-                    name_short='Comm', name_long='Comm', name_full='Comm')
+        return dict(comment='Community package',sqlschema='comm',sqlprefix=True,
+                    name_short='!![en]Community', name_long='!![en]Community', name_full='!![en]Community')
                     
     def config_db(self, pkg):
         pass

@@ -8,9 +8,9 @@ class View(BaseComponent):
     def th_struct(self,struct):
         r = struct.view().rows()
         r.fieldcell('code')
-        r.fieldcell('description')
-        r.fieldcell('developer_id', width='auto')
-        r.fieldcell('link', width='auto')
+        r.fieldcell('description', width='auto')
+        r.fieldcell('developer_id')
+        r.fieldcell('link', width='25em')
 
     def th_order(self):
         return 'code'

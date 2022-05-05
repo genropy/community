@@ -8,9 +8,9 @@ class View(BaseComponent):
     def th_struct(self,struct):
         r = struct.view().rows()
         r.fieldcell('name')
-        r.fieldcell('description')
-        r.fieldcell('app_url')
-        r.fieldcell('repository_url')
+        r.fieldcell('description', width='auto')
+        r.fieldcell('app_url', width='25em')
+        r.fieldcell('repository_url', width='25em')
         r.fieldcell('developer_id')
 
     def th_order(self):
@@ -31,6 +31,7 @@ class ViewFromDeveloper(View):
                         _ask=dict(title="!![en]Get projects",fields=[dict(
                                     name="workspace_slug", lbl="Workspace", 
                                     table='comm.workspace', tag='dbSelect',
+                                    alternatePkey='code',
                                     condition='$developer_id=:d_id',
                                     condition_d_id='=#FORM.record.id',
                                     hasDownArrow=True)]))

@@ -46,6 +46,10 @@ class Form(BaseComponent):
         top_right = top.borderContainer(region='right', width='300px')
         top_right.contentPane(region='top', height='50%').linkerBox('user_id', 
                                                     addEnabled=True, formResource='Form',
+                                                    default_group_code='COMM',
+                                                    default_firstname='=#FORM.record.name',
+                                                    default_lastname='=#FORM.record.surname',
+                                                    default_email='=#FORM.record.email',
                                                     dialog_height='500px', dialog_width='800px')  
         top_right.contentPane(region='center').linkerBox('repo_service', 
                                                     addEnabled=True, formResource='FormFromDeveloper',

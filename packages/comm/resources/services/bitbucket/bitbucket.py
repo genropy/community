@@ -10,6 +10,7 @@
 
 # --------------------------- BaseWebtool subclass ---------------------------
 
+#Create a Bitbucket OAuth consumer here: https://bitbucket.org/{your-user}/workspace/settings/api
 #Bitbucket OAuth: https://developer.atlassian.com/cloud/bitbucket/rest/intro/#authentication
 
 import requests, json
@@ -34,27 +35,13 @@ class Main(GnrBaseService):
         self.b_refresh_token = b_refresh_token
         self.b_client_id = b_client_id
         self.b_secret = b_secret
-
-    @public_method
-    def verifyToken(self):
-        "Verifies if token is expired"
-        params = dict(access_token=self.b_access_token)
-        r = requests.post(f'{auth_api_url}/access_token', params=params)
-        if not r.ok:
-            print("**Bitbucket Client** Token is expired / Getting new token")
-            b_token = self.refreshToken()
-        else:
-            print('**Bitbucket Client** Token is valid')
-            b_token = self.b_access_token
-        return b_token    
     
     @public_method
     def refreshToken(self):
         "Returns new access token if expired"
-        refresh_url = f'{auth_api_url}/access_token'
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
-        data = dict(grant_type='refresh_token', refresh_token=self.b_refresh_token), 
-        r = requests.post(refresh_url, headers=headers, data=data, auth=(f'{self.b_client_id}', f'{self.b_secret}'))
+        data = dict(grant_type='refresh_token', refresh_token=self.b_refresh_token)
+        r = requests.post(f'{auth_api_url}/access_token', headers=headers, data=data, auth=(f'{self.b_client_id}', f'{self.b_secret}'))
         if not r.ok:
             print("**Bitbucket Client** Error (refreshToken) / http code: " + str(r.status_code) + ", body message: " + str(r.content))
         else:
@@ -65,11 +52,10 @@ class Main(GnrBaseService):
     @public_method
     def getWorkspaces(self):
         "Returns workspace ID"
-        b_token = self.verifyToken()
+        b_token = self.refreshToken()
         headers = {'Authorization': f'Bearer {b_token}', 'Accept': 'application/json'}
 
         r = requests.get(f'{api_url}/user/permissions/workspaces', headers=headers)
-
         if not r.ok:
             print("**Bitbucket** Error (getWorkspaces) / http code: " + str(r.status_code) + ", body message: " + str(r.content))
         else:
@@ -81,11 +67,10 @@ class Main(GnrBaseService):
     @public_method
     def getProjects(self, workspace_slug=None):
         "Get All Bitbucket projects in a workspace"
-        b_token = self.verifyToken()
+        b_token = self.refreshToken()
         headers = {'Authorization': f'Bearer {b_token}', 'Accept': 'application/json'}
 
         r = requests.get(f'{api_url}/repositories/{workspace_slug}', headers=headers)
-        print(x) ###ARRIVATO QUI
         if not r.ok:
             print("**Bitbucket** Error (getProjects) / http code: " + str(r.status_code) + ", body message: " + str(r.content))
         else:
