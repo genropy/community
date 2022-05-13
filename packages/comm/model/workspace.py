@@ -20,13 +20,32 @@ class Table(object):
         repo_service = self.db.application.site.getService(service_name=service_name, service_type=service_type)
         assert repo_service,'set in siteconfig the service'
         workspaces = repo_service.getWorkspaces()
+        if not workspaces:
+            user_data = repo_service.getUser()
+            username = self.createWorkspaceForUserData(user_data, developer_id=developer_id)
+            return username
         for w in workspaces.digest('#v'):
-                workspace_code = w['workspace']['slug']
-                workspace_link = w['workspace']['links.html.href']
-                workspace_record = self.newrecord(code=workspace_code, 
-                                    link=workspace_link, developer_id=developer_id,
-                                    workspace_metadata=w)
-                self.insert(workspace_record)
-                self.db.commit()
-                print('**Bitbucket workspace added: ', workspace_code)
+            self.createNewWorkspace(w, developer_id=developer_id)
         return workspaces
+
+    def createNewWorkspace(self, w, developer_id=None):
+        workspace_code = w['workspace']['slug']
+        workspace_link = w['workspace']['links.html.href']
+        workspace_record = self.newrecord(code=workspace_code, 
+                            link=workspace_link, developer_id=developer_id,
+                            workspace_metadata=w)
+        self.insert(workspace_record)
+        self.db.commit()
+        print('**Workspace added: ', workspace_code)
+        return workspace_code
+
+    def createWorkspaceForUserData(self, user_data, developer_id=None):
+        workspace_code = user_data['login']
+        workspace_link = user_data['html_url']
+        workspace_record = self.newrecord(code=workspace_code, 
+                            link=workspace_link, developer_id=developer_id,
+                            workspace_metadata=user_data)
+        self.insert(workspace_record)
+        self.db.commit()
+        print('**Workspace added for user ', workspace_code)
+        return workspace_code

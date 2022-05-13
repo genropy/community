@@ -9,7 +9,7 @@ class Table(object):
         
         tbl.column('name', name_long='!![en]Name')
         tbl.column('description', name_long='!![en]Description', name_short='!![en]Descr.')
-        tbl.column('app_url', name_long='!![en]Project URL', name_short='!![en]URL')
+        tbl.column('app_url', name_long='!![en]Project URL', name_short='!![en]App')
         tbl.column('repository_url', name_long='!![en]Repository URL', name_short='!![en]Repo')
         tbl.column('project_metadata', dtype='X', name_long='Project metadata')
         tbl.column('developer_id',size='22', group='_', name_long='!![en]Developer'
@@ -22,17 +22,19 @@ class Table(object):
         repo_service = self.db.application.site.getService(service_name=service_name, service_type=service_type)
         assert repo_service,'set in siteconfig the service'
         projects = repo_service.getProjects(workspace_slug=workspace_slug)
+        if not projects:
+            return
         workspace_id = self.db.table('comm.workspace').readColumns(where='$code=:w_s', 
                                     w_s=workspace_slug, columns='$id')
         for p in projects.digest('#v'):
-                repository_url = p['links.html.href']
-                name = p['name']
-                description = p['description']
-                workspace_record = self.newrecord(repository_url=repository_url, 
-                                    name=name, description=description, 
-                                    project_metadata=p,
-                                    developer_id=developer_id, workspace_id=workspace_id)
-                self.insert(workspace_record)
-                self.db.commit()
-                print('**Bitbucket workspace added: ', name)
+            repository_url = p['links.html.href'] or p['url']
+            name = p['name']
+            description = p['description']
+            workspace_record = self.newrecord(repository_url=repository_url, 
+                                name=name, description=description, 
+                                project_metadata=p,
+                                developer_id=developer_id, workspace_id=workspace_id)
+            self.insert(workspace_record)
+            self.db.commit()
+            print('**Project added: ', name)
         return projects
