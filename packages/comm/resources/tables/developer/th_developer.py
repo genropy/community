@@ -21,8 +21,8 @@ class View(BaseComponent):
 class Form(BaseComponent):
     def th_form(self, form):
         bc = form.center.borderContainer() 
-        top = bc.borderContainer(region='top',datapath='.record',height='180px')
-        fb = top.contentPane(region='left').formbuilder(cols=2,border_spacing='4px',
+        top = bc.borderContainer(region='top',height='180px')
+        fb = top.contentPane(region='left', datapath='.record').formbuilder(cols=2,border_spacing='4px',
                             margin='10px')
         fb.field('name')
         fb.field('surname')
@@ -44,19 +44,19 @@ class Form(BaseComponent):
                 upload_folder='site:developers/avatars',
                 upload_filename='=#FORM.record.nickname')
         top_right = top.borderContainer(region='right', width='300px')
-        top_right.contentPane(region='top', height='50%').linkerBox('user_id', 
+        top_right.contentPane(region='top', height='50%', datapath='.record').linkerBox('user_id', 
                                                     addEnabled=True, formResource='Form',
                                                     default_group_code='COMM',
                                                     default_firstname='=#FORM.record.name',
                                                     default_lastname='=#FORM.record.surname',
                                                     default_email='=#FORM.record.email',
                                                     dialog_height='500px', dialog_width='800px')  
-        top_right.contentPane(region='center').linkerBox('repo_service', 
-                                                    addEnabled=True, formResource='FormFromDeveloper',
-                                                    default_service_name='=#FORM.record.@user_id.username',
-                                                    default_implementation='bitbucket',
-                                                    default_service_type='bitbucket',
-                                                    dialog_height='500px', dialog_width='800px')     
+        top_right.contentPane(region='center').dialogTableHandler(relation='@services', 
+                                                    viewResource='ViewFromDeveloper',
+                                                    formResource='FormFromDeveloper',
+                                                    default_service_type='repository',
+                                                    pbl_classes='*', configurable=False,
+                                                    searchOn=False)     
 
         tc = bc.tabContainer(region='center')
         tc.contentPane(title='Workspaces').inlineTableHandler(relation='@workspaces', viewResource='ViewFromDeveloper')

@@ -12,13 +12,18 @@ class Table(object):
         tbl.column('app_url', name_long='!![en]Project URL', name_short='!![en]App')
         tbl.column('repository_url', name_long='!![en]Repository URL', name_short='!![en]Repo')
         tbl.column('project_metadata', dtype='X', name_long='Project metadata')
+        tbl.column('linesofcode_metadata', dtype='X', name_long='!![en]Lines of code metadata')
         tbl.column('developer_id',size='22', group='_', name_long='!![en]Developer'
-                    ).relation('developer.id', relation_name='projects', mode='foreignkey', onDelete='raise')
+                    ).relation('developer.id', relation_name='projects', mode='foreignkey', onDelete='cascade')
         tbl.column('workspace_id',size='22', group='_', name_long='!![en]Workspace'
-                    ).relation('workspace.id', relation_name='projects', mode='foreignkey', onDelete='raise')
+                    ).relation('workspace.id', relation_name='projects', mode='foreignkey', onDelete='cascade')
+
+        tbl.bagItemColumn('linesofcode', bagcolumn='$linesofcode_metadata',
+                            itempath='linesOfCode', name_long='!![en]Lines of code', group='_')
 
     @public_method
-    def getProjects(self, service_name=None, service_type=None, developer_id=None, workspace_slug=None):
+    def getProjects(self, repo_service=None, developer_id=None, workspace_slug=None):
+        service_type, service_name = repo_service.split('_')
         repo_service = self.db.application.site.getService(service_name=service_name, service_type=service_type)
         assert repo_service,'set in siteconfig the service'
         projects = repo_service.getProjects(workspace_slug=workspace_slug)
@@ -38,3 +43,12 @@ class Table(object):
             self.db.commit()
             print('**Project added: ', name)
         return projects
+
+    @public_method
+    def countLinesOfCode(self, project_id=None, reponame=None, username=None, repo_service=None):
+        service_type, service_name = repo_service.split('_')
+        repo_service = self.db.application.site.getService(service_name=service_name, service_type=service_type )
+        assert repo_service,'set in siteconfig the service'
+        with self.recordToUpdate(project_id) as project_rec:
+            project_rec['linesofcode_metadata'] = repo_service.countLinesOfCode(username=username, reponame=reponame)
+        self.db.commit()    

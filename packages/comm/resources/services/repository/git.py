@@ -11,6 +11,7 @@
 # --------------------------- BaseWebtool subclass ---------------------------
 
 #Git OAuth: https://docs.github.com/en/rest/guides/basics-of-authentication
+#Count line of code tool: https://codetabs.com/count-loc/count-loc-online.html
 
 import requests, json
 from gnr.core.gnrdecorator import public_method
@@ -85,6 +86,19 @@ class Main(GnrBaseService):
             projects.fromJson(result)
             return projects
     
+    @public_method
+    def countLinesOfCode(self, username=None, reponame=None):
+        "Counts line of code of a Github repository."
+        r = requests.get(f'https://api.codetabs.com/v1/loc?github={username}/{reponame}')
+        if not r.ok:
+            print("**Github** Error (countLinesOfCode) / http code: " + str(r.status_code) + ", body message: " + str(r.content))
+        else:
+            result = json.loads(r.text)
+            linesofcode = Bag()
+            linesofcode.fromJson(result)
+            linesofcode.addItem('linesOfCode',result[-1]['linesOfCode'])
+            print('This projects has {loc} lines of code'.format(loc=result[-1]['linesOfCode']))
+            return linesofcode
 
 #Github SERVICE CONFIGURATION PAGE TO INSERT ACCESS TOKEN AND PAGE ID/SECRET
 class ServiceParameters(BaseComponent):

@@ -26,13 +26,12 @@ class GnrCustomWebPage(object):
     py_requires='gnrcomponents/externalcall:BaseRpc'
 
 class Main(GnrBaseService):
-    def __init__(self, parent, b_access_token=None, b_refresh_token=None, 
-                    b_client_id=None, b_secret=None, **kwargs):
+    def __init__(self, parent, token_parameters=None, b_client_id=None, b_secret=None, **kwargs):
         """Defines initial parameters (b_access_token, b_client_id and b_secret) and 
         API call parameters"""
         self.parent = parent
-        self.b_access_token = b_access_token
-        self.b_refresh_token = b_refresh_token
+        self.b_access_token = token_parameters['b_access_token']
+        self.b_refresh_token = token_parameters['b_refresh_token']
         self.b_client_id = b_client_id
         self.b_secret = b_secret
     
@@ -79,8 +78,6 @@ class Main(GnrBaseService):
             projects.fromJson(result)
             return projects
 
-    
-
 #Bitbucket Cloud SERVICE CONFIGURATION PAGE TO INSERT ACCESS TOKEN AND PAGE ID/SECRET
 class ServiceParameters(BaseComponent):
     def service_parameters(self,pane,datapath=None,**kwargs):        
@@ -95,10 +92,10 @@ class ServiceParameters(BaseComponent):
         fb.a('Get Code', href='^.token_url', target='_blank')
         fb.div('Paste the part of the url after <code=>: "http://0.0.0.0:8080/...?code=****************"')
         fb.textbox('^.b_code', lbl='Bitbucket Code')
-        fb.button('Get token').dataRpc(self.getToken, code='=.b_code', 
+        fb.button('Get token').dataRpc('.token_parameters', self.getToken, code='=.b_code', 
                                     client_id='=.b_client_id', client_secret='=.b_secret')
-        fb.div('^.b_access_token', lbl='Bitbucket Access Token')
-        fb.div('^.b_refresh_token', lbl='Bitbucket Refresh Token')
+        fb.div('^.token_parameters.b_access_token', lbl='Bitbucket Access Token')
+        fb.div('^.token_parameters.b_refresh_token', lbl='Bitbucket Refresh Token')
 
     @public_method
     def getToken(self, code=None, client_id=None, client_secret=None):
@@ -112,7 +109,7 @@ class ServiceParameters(BaseComponent):
         if not r.ok:
             print("**Bitbucket** Error (getToken) / http code: " + str(r.status_code) + ", body message: " + str(r.content))
         else:
-            b_access_token = json.loads(r.text)['access_token'] 
-            b_refresh_token = json.loads(r.text)['refresh_token']
-            self.setInClientData(value=b_access_token, path='sys_service.form.record.parameters.b_access_token')
-            self.setInClientData(value=b_refresh_token, path='sys_service.form.record.parameters.b_refresh_token')
+            token_parameters = Bag()
+            token_parameters.setItem('b_access_token', json.loads(r.text)['access_token'])
+            token_parameters.setItem('b_refresh_token', json.loads(r.text)['refresh_token'])
+            return token_parameters

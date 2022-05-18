@@ -17,6 +17,7 @@ class View(BaseComponent):
 
     def th_query(self):
         return dict(column='code', op='contains', val='')
+        
 
 class ViewFromDeveloper(View):
 
@@ -24,9 +25,14 @@ class ViewFromDeveloper(View):
         view.top.bar.replaceSlots('delrow','getworkspaces,2,delrow')
         view.top.bar.getworkspaces.slotButton('!![en]Get workspaces').dataRpc(
                 self.db.table('comm.workspace').getWorkspaces, 
-                        service_name='=#FORM.record.@repo_service.service_name',
-                        service_type='=#FORM.record.@repo_service.service_type',
-                        developer_id='=#FORM.record.id')
+                        developer_id='=#FORM.record.id',
+                        _ask=dict(title="!![en]Get projects",fields=[dict(
+                                    name="repo_service", lbl="Service", 
+                                    table='sys.service', tag='dbSelect',
+                                    condition='$developer_id=:d_id',
+                                    condition_d_id='=#FORM.record.id',
+                                    hasDownArrow=True,
+                                    auxColumns='$service_type,$implementation,$service_name')]))
 
     def th_options(self):
         return dict(searchOn=False)

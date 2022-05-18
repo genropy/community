@@ -3,7 +3,7 @@
 class Table(object):
     def config_db(self,pkg):
         tbl=pkg.table('developer', pkey='id', name_long='!![en]Developer', name_plural='!![en]Developers',
-                                    caption_field='fullname', group_card='!![en]Card Info')
+                                    caption_field='fullname')
         self.sysFields(tbl)
         
         tbl.column('name', size=':30', name_long='!![en]Name', group='card')
@@ -15,10 +15,7 @@ class Table(object):
         tbl.column('full_address', name_long='!![en]Full address')
         tbl.column('photo_url',dtype='P', name_long='!![en]Photo')
         tbl.column('user_id',size='22', group='_', name_long='!![en]User',unique=True
-                    ).relation('adm.user.id',one_one=True,  relation_name='student', 
-                         mode='foreignkey', onDelete='raise')
-        tbl.column('repo_service', size=':60', name_long='Repository service', name_short='service'
-                    ).relation('sys.service.service_identifier', one_one=True, relation_name='developers', 
+                    ).relation('adm.user.id', one_one=True, relation_name='student', 
                          mode='foreignkey', onDelete='raise')
         
         tbl.formulaColumn('fullname',"$name || ' ' || $surname")
@@ -30,5 +27,5 @@ class Table(object):
             return
         new_developer = self.newrecord(name = user_record['firstname'],
                             surname = user_record['lastname'], email = user_record['email'],
-                            nickname = user_record['username'], user_id = user_record['id'])
+                            user_id = user_record['id'], )
         self.insert(new_developer)
