@@ -38,8 +38,8 @@ class Form(BaseComponent):
         fb.field('name')
         fb.field('surname')
         fb.field('email',width='30em',colspan=2)
-        fb.geoCoderField(value='^.full_address',colspan=2,
-                width='30em',
+        fb.geoCoderField(value='^.full_address', lbl='Full address', 
+                colspan=2, width='30em',
                 selected_locality='.locality',
                 selected_country='.country',
                 selected_position='.position')

@@ -15,11 +15,11 @@ class Table(object):
         tbl.column('full_address', name_long='!![en]Full address')
         tbl.column('photo_url',dtype='P', name_long='!![en]Photo')
         tbl.column('user_id',size='22', group='_', name_long='!![en]User',unique=True
-                    ).relation('adm.user.id', one_one=True, relation_name='student', 
+                    ).relation('adm.user.id', one_one=True, relation_name='developer', 
                          mode='foreignkey', onDelete='raise')
         
         tbl.formulaColumn('fullname',"$name || ' ' || $surname")
-        tbl.aliasColumn('username', '@user_id.username', name_long='Username')
+        tbl.aliasColumn('username', '@user_id.username', name_long='Username', static=True)
        
     def createDeveloper(self,user_record):
         if self.checkDuplicate(user_id=user_record['id']):
