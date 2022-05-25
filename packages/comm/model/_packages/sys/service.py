@@ -12,6 +12,7 @@ class Table(object):
     def trigger_onInserting(self, record, old_record=None):
         if not record['developer_id']:
             record['developer_id'] = self.db.currentEnv['developer_id']
-        username = self.db.table('comm.developer').readColumns(record['developer_id'], columns='$username')
-        record['service_name'] = record['implementation'] + '-' + username
-        record['service_identifier'] = record['service_type'] + '_' + record['service_name']
+        if record['service_type'] == 'repository':
+            username = self.db.table('comm.developer').readColumns(record['developer_id'], columns='$username')
+            record['service_name'] = record['implementation'] + '-' + username
+            record['service_identifier'] = record['service_type'] + '_' + record['service_name']
