@@ -47,10 +47,11 @@ class ViewFromDeveloper(View):
         return dict(searchOn=False)
 
 class Form(BaseComponent):
+    py_requires="gnrcomponents/attachmanager/attachmanager:AttachManager"
 
     def th_form(self, form):
-        pane = form.record
-        fb = pane.formbuilder(cols=2, border_spacing='4px')
+        bc = form.center.borderContainer()
+        fb = bc.contentPane(region='top', height='30%', datapath='.record').formbuilder(cols=2, border_spacing='4px')
         fb.field('name')
         fb.field('description')
         fb.field('app_url')
@@ -58,6 +59,10 @@ class Form(BaseComponent):
         fb.field('developer_id')
         fb.field('workspace_id')
         fb.div('^.linesofcode_metadata.linesOfCode', lbl='!![en]Lines of code')
+        self.projectAttachments(bc.contentPane(region='center'))
+
+    def projectAttachments(self,pane):
+        pane.attachmentMultiButtonFrame()
 
     def th_top_custom(self, top):
         bar = top.bar.replaceSlots('right_placeholder','countlines,5,right_placeholder')

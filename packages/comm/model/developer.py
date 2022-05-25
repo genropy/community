@@ -18,7 +18,7 @@ class Table(object):
                     ).relation('adm.user.id', one_one=True, relation_name='developer', 
                          mode='foreignkey', onDelete='raise')
         
-        tbl.formulaColumn('fullname',"$name || ' ' || $surname")
+        tbl.formulaColumn('fullname',"$name || ' ' || $surname", name_long='Fullname')
         tbl.aliasColumn('username', '@user_id.username', name_long='Username', static=True)
        
     def createDeveloper(self,user_record):

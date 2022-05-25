@@ -9,8 +9,8 @@ class Table(object):
         
         tbl.column('name', name_long='!![en]Name')
         tbl.column('description', name_long='!![en]Description', name_short='!![en]Descr.')
-        tbl.column('app_url', name_long='!![en]Project URL', name_short='!![en]App')
-        tbl.column('repository_url', name_long='!![en]Repository URL', name_short='!![en]Repo')
+        tbl.column('app_url', name_long='!![en]Project URL')
+        tbl.column('repository_url', name_long='!![en]Repository URL')
         tbl.column('project_metadata', dtype='X', name_long='Project metadata')
         tbl.column('linesofcode_metadata', dtype='X', name_long='!![en]Lines of code metadata')
         tbl.column('developer_id',size='22', group='_', name_long='!![en]Developer'
