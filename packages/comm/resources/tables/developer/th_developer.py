@@ -53,7 +53,6 @@ class ViewMap(View):
     def th_struct(self,struct):
         r = struct.view().rows()
         r.fieldcell('username')
-        r.fieldcell('full_address', width='auto')
         r.fieldcell('locality')
         r.fieldcell('country')
         r.fieldcell('position', hidden=True)
@@ -63,7 +62,7 @@ class Form(BaseComponent):
         bc = form.center.borderContainer() 
         top = bc.borderContainer(region='top',height='180px')
         top_left = top.borderContainer(region='center', datapath='.record')
-        fb = top_left.contentPane(region='left', width='50%').formbuilder(cols=2,border_spacing='4px',
+        fb = top_left.contentPane(region='left', width='600px').formbuilder(cols=2,border_spacing='4px',
                             margin='10px')
         fb.field('name')
         fb.field('surname')
@@ -82,7 +81,7 @@ class Form(BaseComponent):
                     map_zoom=15,
                     centerMarker=True,
                     map_disableDefaultUI=True)
-        top_left.contentPane(region='right', padding='10px', width='25%').img(src='^.photo_url',
+        top_left.contentPane(region='right', padding='10px', width='160px').img(src='^.photo_url',
                 crop_height='156px',
                 crop_width='156px',
                 crop_border='2px dotted silver',
@@ -111,3 +110,8 @@ class Form(BaseComponent):
 
     def th_options(self):
         return dict(dialog_height='400px', dialog_width='600px')
+
+class FormDevelopers(Form):
+
+    def th_options(self):
+        return dict(readOnly=True)
