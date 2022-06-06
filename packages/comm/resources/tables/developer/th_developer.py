@@ -20,7 +20,7 @@ class View(BaseComponent):
     def th_query(self):
         return dict(column='fullname', op='contains', val='')
 
-class ViewMap(View):
+class ViewDevelopers(View):
 
     def th_struct(self,struct):
         r = struct.view().rows()
@@ -56,6 +56,20 @@ class ViewMap(View):
                             m=map_cp,
                             store='^.store',
                             _delay=100)
+                            
+    def th_options(self):
+        return dict(virtualStore=False, addrow=False, delrow=False)
+    
+class ViewMap(View):
+
+    def th_struct(self,struct):
+        r = struct.view().rows()
+        r.fieldcell('username')
+        r.fieldcell('locality')
+        r.fieldcell('country')
+        r.fieldcell('position', hidden=True)
+
+    
 class Form(BaseComponent):
     def th_form(self, form):
         bc = form.center.borderContainer() 

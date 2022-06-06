@@ -15,6 +15,6 @@ class Menu(object):
     @metadata(group_code='COMM')
     def config_developers(self,root,**kwargs):
         root.thpage("!![en]My profile", table='comm.developer', pkey=self.db.currentEnv.get('developer_id'))
-        root.thpage(u"!![en]Developers", table="comm.developer", viewResource='ViewMap', formResource='FormDevelopers')
+        root.thpage(u"!![en]Developers", table="comm.developer", viewResource='ViewDevelopers', formResource='FormDevelopers')
         root.thpage(u"!![en]Projects", table="comm.project", viewResource='ViewDevelopers', formResource='FormDevelopers')
         root.webpage(u"!![en]Community map", filepath="/comm/community_map")
