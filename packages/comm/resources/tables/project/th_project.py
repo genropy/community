@@ -20,8 +20,12 @@ class View(BaseComponent):
 
     def th_query(self):
         return dict(column='name', op='contains', val='')
-        s
 
+class ViewDevelopers(View):
+
+    def th_options(self):
+        return dict(virtualStore=False, addrow=False, delrow=False)
+        
 class ViewFromDeveloper(View):
 
     def th_view(self, view):

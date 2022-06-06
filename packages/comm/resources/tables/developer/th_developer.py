@@ -20,6 +20,15 @@ class View(BaseComponent):
     def th_query(self):
         return dict(column='fullname', op='contains', val='')
 
+class ViewMap(View):
+
+    def th_struct(self,struct):
+        r = struct.view().rows()
+        r.fieldcell('username')
+        r.fieldcell('locality')
+        r.fieldcell('country')
+        r.fieldcell('position', hidden=True)
+
     def th_page_map(self, pane):
         "Community map"
         map_cp = pane.contentPane(region='center').GoogleMap( 
@@ -47,16 +56,6 @@ class View(BaseComponent):
                             m=map_cp,
                             store='^.store',
                             _delay=100)
-
-class ViewMap(View):
-
-    def th_struct(self,struct):
-        r = struct.view().rows()
-        r.fieldcell('username')
-        r.fieldcell('locality')
-        r.fieldcell('country')
-        r.fieldcell('position', hidden=True)
-
 class Form(BaseComponent):
     def th_form(self, form):
         bc = form.center.borderContainer() 
@@ -106,7 +105,9 @@ class Form(BaseComponent):
 
         tc = bc.tabContainer(region='center')
         #tc.contentPane(title='Workspaces').inlineTableHandler(relation='@workspaces', viewResource='ViewFromDeveloper')
-        tc.contentPane(title='Projects').dialogTableHandler(relation='@projects', viewResource='ViewFromDeveloper')
+        tc.contentPane(title='Projects').dialogTableHandler(
+                                                    relation='@projects', viewResource='ViewFromDeveloper',
+                                                    addrow=False, delrow=False)
 
     def th_options(self):
         return dict(dialog_height='400px', dialog_width='600px')
