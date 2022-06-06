@@ -7,7 +7,7 @@
 		<gnrcore_sys pkgcode="gnrcore:sys"/>
 		<gnrextra_srvy pkgcode="gnrextra:srvy"/>
 		<comm pkgcode="comm"/>
-		<gnrextra_dem pkgcode="dem"/>
+		<gnrextra_dem pkgcode="gnrextra:dem"/>
 	</packages>
 	
 	<authentication pkg="adm">
