@@ -110,23 +110,58 @@ class Form(BaseComponent):
                                                     default_lastname='=#FORM.record.surname',
                                                     default_email='=#FORM.record.email',
                                                     dialog_height='500px', dialog_width='800px')  
-        top_right.contentPane(region='center').dialogTableHandler(relation='@services', 
-                                                    viewResource='ViewFromDeveloper',
-                                                    formResource='FormFromDeveloper',
-                                                    default_service_type='repository',
-                                                    pbl_classes='*', configurable=False,
-                                                    searchOn=False)     
+        #top_right.contentPane(region='center')
+        #.dialogTableHandler(relation='@services', 
+        #                                            viewResource='ViewFromDeveloper',
+        #                                            formResource='FormFromDeveloper',
+        #                                            default_service_type='repository',
+        #                                            pbl_classes='*', configurable=False,
+        #                                            searchOn=False)     
 
-        tc = bc.tabContainer(region='center')
+        #tc = bc.tabContainer(region='center')
         #tc.contentPane(title='Workspaces').inlineTableHandler(relation='@workspaces', viewResource='ViewFromDeveloper')
-        tc.contentPane(title='Projects').dialogTableHandler(
-                                                    relation='@projects', viewResource='ViewFromDeveloper',
-                                                    addrow=False, delrow=False)
+        bc.roundedGroupFrame(region='center', title='Projects', pbl_classes=True).dialogTableHandler(
+                                                    relation='@projects', viewResource='ViewFromDeveloper')
 
     def th_options(self):
         return dict(dialog_height='400px', dialog_width='600px')
 
 class FormDevelopers(Form):
 
+    def th_form(self, form):
+        bc = form.center.borderContainer() 
+        top = bc.borderContainer(region='top',height='180px')
+        top_left = top.borderContainer(region='center', datapath='.record')
+        fb = top_left.contentPane(region='left', width='600px').formbuilder(cols=2,border_spacing='4px',
+                            margin='10px')
+        fb.field('name')
+        fb.field('surname')
+        fb.field('email',width='30em',colspan=2)
+        fb.geoCoderField(value='^.full_address', lbl='Full address', 
+                colspan=2, width='30em',
+                selected_locality='.locality',
+                selected_country='.country',
+                selected_position='.position')
+        fb.field('locality')
+        fb.field('country')
+        top_left.contentPane(region='center', padding='10px').GoogleMap(
+                    height='160px',
+                    map_center="^.position",
+                    map_type='roadmap',
+                    map_zoom=15,
+                    centerMarker=True,
+                    map_disableDefaultUI=True)
+        top_left.contentPane(region='right', padding='10px', width='160px').img(src='^.photo_url',
+                crop_height='156px',
+                crop_width='156px',
+                crop_border='2px dotted silver',
+                crop_rounded=6,edit=True,
+                placeholder=True,
+                upload_folder='site:developers/avatars',
+                upload_filename='=#FORM.record.username')
+
+        bc.roundedGroupFrame(region='center', title='Projects', pbl_classes=True).dialogTableHandler(
+                            relation='@projects', viewResource='ViewFromDeveloper', addrow=False, delrow=False)
+                            
     def th_options(self):
         return dict(readOnly=True)

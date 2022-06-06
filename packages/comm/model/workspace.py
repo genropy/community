@@ -5,7 +5,7 @@ from gnr.core.gnrdecorator import public_method
 class Table(object):
     def config_db(self,pkg):
         tbl=pkg.table('workspace', pkey='id', name_long='!![en]Workspace', name_plural='!![en]Workspace',
-                        caption_field='code', lookup=True)
+                        caption_field='code')
         self.sysFields(tbl)
         
         tbl.column('code', name_long='!![en]Code')
@@ -14,15 +14,6 @@ class Table(object):
         tbl.column('workspace_metadata', dtype='X', name_long='Workspace metadata')
         tbl.column('developer_id',size='22', group='_', name_long='!![en]Developer'
                     ).relation('developer.id', relation_name='workspaces', mode='foreignkey', onDelete='cascade')
-        #tbl.pyColumn('workspace_type', name_long='!![en]Workspace type')        
-        #tbl.formulaColumn('workspace_type', select=dict(table='comm.workspace_type',
-        #                                        columns='$name',
-        #                                        where='$repo_url LIKE #THIS.link'),
-        #                                        name_long='!![en]Workspace type')
-
-    #def pyColumn_workspace_type(self,record,field):
-    #  return dict(m1='!![it]Gennaio',m2='!![it]Febbraio',m3='!![it]Marzo',m4='!![it]Aprile',m5='!![it]Maggio',m6='!![it]Giugno',
-    #              m7='!![it]Luglio',m8='!![it]Agosto',m9='!![it]Settembre',m10='!![it]Ottobre',m11='!![it]Novembre',m12='!!  [it]Dicembre')['m%s' %record['data_inizio'].month]
     
     @public_method
     def getWorkspaces(self, repo_service=None, developer_id=None):
