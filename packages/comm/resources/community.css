@@ -1,0 +1,30 @@
+.profile_center{
+    font-size:14px;
+}
+
+.page_thpage_comm_developer.pkg_comm .pbl_root{
+    max-width: 800px;
+    margin:auto;
+    background: white;
+}
+
+.page_thpage_comm_developer.pkg_comm #mainWindow{
+    background: #666;
+}
+
+.dev_username {
+    text-align: center;
+    font-weight: 600;
+}
+
+.comm_btn {
+    background: rgba(30, 48, 85, 1);
+    color: white;
+    padding: 10px;
+    border-radius: 3px;
+    display: flex;
+    float: right;
+    font-size: 14px;
+    margin: 5px;
+    cursor: pointer;
+}

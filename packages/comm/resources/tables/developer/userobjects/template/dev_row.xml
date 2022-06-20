@@ -1,0 +1,186 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<GenRoBag><_ins_ts _tag="__ins_ts" _T="DH" dtype="DH" name_long="!![en]Insert date" indexed="True::B" group="zzz" onInserting="setTSNow" _sysfield="True::B" as="t0___ins_ts">2022-06-10T09:53:41.003275+02:00</_ins_ts>
+<_del_ts _tag="__del_ts" _T="NN" dtype="DH" name_long="!![en]Logical delete date" indexed="True::B" group="zzz" _sysfield="True::B" as="t0___del_ts"></_del_ts>
+<_mod_ts _tag="__mod_ts" _T="DH" dtype="DH" name_long="!![en]Update date" indexed="True::B" group="zzz" onInserting="setTSNow" onUpdating="setTSNow" _sysfield="True::B" print_width="26::L" as="t0___mod_ts">2022-06-10T16:55:45.607323+02:00</_mod_ts>
+<_ins_user _tag="__ins_user" name_long="!![en]User Insert" group="zzz" onInserting="setCurrentUser" _sysfield="True::B" dtype="T" as="t0___ins_user">admin</_ins_user>
+<identifier size=":120" unique="True::B" indexed="True::B" sql_value="COALESCE(:tbl,:pkg,'')||:objtype||:code|| CASE WHEN :private THEN :userid ELSE '' END" dtype="A" as="t0_identifier">comm.developertemplatedev_row</identifier>
+<code size=":40" name_long="!![en]Code" indexed="y" dtype="A" print_width="30::L" as="t0_code">dev_row</code>
+<objtype size=":20" name_long="!![en]Object Type" indexed="y" dtype="A" print_width="15::L" as="t0_objtype">template</objtype>
+<pkg size=":50" name_long="!![en]Package" dtype="A" print_width="30::L" as="t0_pkg">comm</pkg>
+<tbl size=":50" name_long="!![en]Table" dtype="A" print_width="30::L" as="t0_tbl">comm.developer</tbl>
+<userid size=":50" name_long="!![en]User ID" indexed="y" dtype="A" print_width="30::L" as="t0_userid">admin</userid>
+<description size=":50" name_long="!![en]Description" indexed="y" dtype="A" print_width="30::L" as="t0_description">Developer Row</description>
+<notes _T="NN" dtype="T" name_long="!![en]Notes" as="t0_notes"></notes>
+<data dtype="X" name_long="!![en]Data" print_width="12::L" as="t0_data"><content>&lt;table cellpadding="1" cellspacing="1" style="border-collapse:collapse;width:100%;"&gt;
+	&lt;tbody&gt;
+		&lt;tr style="vertical-align:top;"&gt;
+			&lt;td width="110px"&gt;
+				&lt;img alt="" src="$photo" width="40px" /&gt;&lt;/td&gt;
+			&lt;td&gt;
+				&lt;div&gt;
+					&lt;strong&gt;$tg_username ($fullname)&lt;/strong&gt;&lt;/div&gt;
+				&lt;div&gt;
+					${locality}${, $city} ${($state)}&lt;/div&gt;
+				&lt;div&gt;
+					${$region}${, $country}&lt;/div&gt;
+			&lt;/td&gt;
+			&lt;td&gt;
+				&lt;div&gt;
+					${Linguaggi di programmazione: $linguaggi}&lt;/div&gt;
+				&lt;div&gt;
+					${Argomenti: $argomenti}&lt;/div&gt;
+				&lt;div&gt;
+					${Hobbies: $hobbies}&lt;/div&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;</content>
+<metadata><author>admin</author>
+<version _T="NN"></version>
+<date _T="NN"></date>
+<is_print _T="NN"></is_print>
+<is_mail _T="NN"></is_mail>
+<is_row _T="B" _valuelabel="">True</is_row>
+<row_height _T="L" _valuelabel="Height">35</row_height>
+<default_letterhead _T="NN"></default_letterhead>
+<summary _T="NN"></summary>
+<email><subject _T="NN"></subject>
+<to_address _T="NN"></to_address>
+<from_address _T="NN"></from_address>
+<cc_address _T="NN"></cc_address>
+<bcc_address _T="NN"></bcc_address>
+<attachments _T="NN"></attachments></email>
+<email_compiled _T="BAG"></email_compiled></metadata>
+<varsbag><galegam2tl _pkey="galegam2tl"><fieldpath dtype="::NN">photo_url</fieldpath>
+<dtype dtype="::NN">P</dtype>
+<fieldname dtype="::NN">Photo</fieldname>
+<varname dtype="::NN">photo</varname>
+<virtual_column _T="NN"></virtual_column>
+<required_columns _T="NN" dtype="::NN"></required_columns>
+<df_template _T="NN" dtype="::NN"></df_template>
+<format _T="NN" dtype="::NN"></format>
+<mask _T="NN" dtype="::NN"></mask>
+<editable _T="NN" dtype="::NN"></editable></galegam2tl>
+<galego9szd _pkey="galego9szd"><fieldpath dtype="::NN">locality</fieldpath>
+<dtype dtype="::NN">T</dtype>
+<fieldname dtype="::NN">Locality</fieldname>
+<varname dtype="::NN">locality</varname>
+<virtual_column _T="NN"></virtual_column>
+<required_columns _T="NN" dtype="::NN"></required_columns>
+<df_template _T="NN" dtype="::NN"></df_template>
+<format _T="NN" dtype="::NN"></format>
+<mask _T="NN" dtype="::NN"></mask>
+<editable _T="NN" dtype="::NN"></editable></galego9szd>
+<galegjjdy9 _pkey="galegjjdy9"><fieldpath dtype="::NN">fullname</fieldpath>
+<dtype dtype="::NN">A</dtype>
+<fieldname dtype="::NN">Fullname</fieldname>
+<varname dtype="::NN">fullname</varname>
+<virtual_column _T="B">True</virtual_column>
+<required_columns _T="NN" dtype="::NN"></required_columns>
+<df_template _T="NN" dtype="::NN"></df_template>
+<format _T="NN" dtype="::NN"></format>
+<mask _T="NN" dtype="::NN"></mask>
+<editable _T="NN" dtype="::NN"></editable></galegjjdy9>
+<galiu9oyu9 _pkey="galiu9oyu9"><fieldpath dtype="::NN">tg_username</fieldpath>
+<dtype dtype="::NN">T</dtype>
+<fieldname dtype="::NN">Telegram username</fieldname>
+<varname dtype="::NN" _loadedValue="telegram_username">tg_username</varname>
+<virtual_column _T="NN"></virtual_column>
+<required_columns _T="NN" dtype="::NN"></required_columns>
+<df_template _T="NN" dtype="::NN"></df_template>
+<format _T="NN" dtype="::NN"></format>
+<mask _T="NN" dtype="::NN"></mask>
+<editable _T="NN" dtype="::NN"></editable></galiu9oyu9>
+<galq2c4xox _pkey="galq2c4xox"><fieldpath dtype="::NN">state</fieldpath>
+<dtype dtype="::NN">T</dtype>
+<fieldname dtype="::NN">State</fieldname>
+<varname dtype="::NN">state</varname>
+<virtual_column _T="NN"></virtual_column>
+<required_columns _T="NN" dtype="::NN"></required_columns>
+<df_template _T="NN" dtype="::NN"></df_template>
+<format _T="NN" dtype="::NN"></format>
+<mask _T="NN" dtype="::NN"></mask>
+<editable _T="NN" dtype="::NN"></editable></galq2c4xox>
+<galq2cwew1 _pkey="galq2cwew1"><fieldpath dtype="::NN">city</fieldpath>
+<dtype dtype="::NN">T</dtype>
+<fieldname dtype="::NN">City</fieldname>
+<varname dtype="::NN">city</varname>
+<virtual_column _T="NN"></virtual_column>
+<required_columns _T="NN" dtype="::NN"></required_columns>
+<df_template _T="NN" dtype="::NN"></df_template>
+<format _T="NN" dtype="::NN"></format>
+<mask _T="NN" dtype="::NN"></mask>
+<editable _T="NN" dtype="::NN"></editable></galq2cwew1>
+<galq2f2xa1 _pkey="galq2f2xa1"><fieldpath dtype="::NN">region</fieldpath>
+<dtype dtype="::NN">T</dtype>
+<fieldname dtype="::NN">Region</fieldname>
+<varname dtype="::NN">region</varname>
+<virtual_column _T="NN"></virtual_column>
+<required_columns _T="NN" dtype="::NN"></required_columns>
+<df_template _T="NN" dtype="::NN"></df_template>
+<format _T="NN" dtype="::NN"></format>
+<mask _T="NN" dtype="::NN"></mask>
+<editable _T="NN" dtype="::NN"></editable></galq2f2xa1>
+<galq2jfpkh _pkey="galq2jfpkh"><fieldpath dtype="::NN">languages</fieldpath>
+<dtype dtype="::NN">A</dtype>
+<fieldname dtype="::NN">Languages</fieldname>
+<varname dtype="::NN" _loadedValue="languages">linguaggi</varname>
+<virtual_column _T="B">True</virtual_column>
+<required_columns _T="NN" dtype="::NN"></required_columns>
+<df_template _T="NN" dtype="::NN"></df_template>
+<format _T="NN" dtype="::NN"></format>
+<mask _T="NN" dtype="::NN"></mask>
+<editable _T="NN" dtype="::NN"></editable></galq2jfpkh>
+<galq2ktzr5 _pkey="galq2ktzr5"><fieldpath dtype="::NN">topics</fieldpath>
+<dtype dtype="::NN">A</dtype>
+<fieldname dtype="::NN">Topics</fieldname>
+<varname dtype="::NN" _loadedValue="topics">argomenti</varname>
+<virtual_column _T="B">True</virtual_column>
+<required_columns _T="NN" dtype="::NN"></required_columns>
+<df_template _T="NN" dtype="::NN"></df_template>
+<format _T="NN" dtype="::NN"></format>
+<mask _T="NN" dtype="::NN"></mask>
+<editable _T="NN" dtype="::NN"></editable></galq2ktzr5>
+<galq2lr5fd _pkey="galq2lr5fd"><fieldpath dtype="::NN">hobbies</fieldpath>
+<dtype dtype="::NN">A</dtype>
+<fieldname dtype="::NN">Hobbies</fieldname>
+<varname dtype="::NN">hobbies</varname>
+<virtual_column _T="B">True</virtual_column>
+<required_columns _T="NN" dtype="::NN"></required_columns>
+<df_template _T="NN" dtype="::NN"></df_template>
+<format _T="NN" dtype="::NN"></format>
+<mask _T="NN" dtype="::NN"></mask>
+<editable _T="NN" dtype="::NN"></editable></galq2lr5fd></varsbag>
+<parameters _T="BAG"></parameters>
+<email><attached_reports _T="BAG"></attached_reports></email>
+<content_css></content_css>
+<compiled><main maintable="comm.developer" locale="en-US" virtual_columns="fullname,languages,topics,hobbies" columns="$photo_url,$locality,$fullname,$tg_username,$state,$city,$region,$languages,$topics,$hobbies" formats="{}::JS" masks="{}::JS" editcols="{}::JS" df_templates="{}::JS" dtypes='{"photo": "P", "locality": "T", "fullname": "A", "tg_username": "T", "state": "T", "city": "T", "region": "T", "linguaggi": "A", "argomenti": "A", "hobbies": "A"}::JS'>&lt;table cellpadding="1" cellspacing="1" style="border-collapse:collapse;width:100%;"&gt;
+	&lt;tbody&gt;
+		&lt;tr style="vertical-align:top;"&gt;
+			&lt;td width="110px"&gt;
+				&lt;img alt="" src="$photo_url" width="40px" /&gt;&lt;/td&gt;
+			&lt;td&gt;
+				&lt;div&gt;
+					&lt;strong&gt;$tg_username ($fullname)&lt;/strong&gt;&lt;/div&gt;
+				&lt;div&gt;
+					$locality${, $city} ${($state)}&lt;/div&gt;
+				&lt;div&gt;
+					${$region}${, $country}&lt;/div&gt;
+			&lt;/td&gt;
+			&lt;td&gt;
+				&lt;div&gt;
+					${Linguaggi di programmazione: $languages}&lt;/div&gt;
+				&lt;div&gt;
+					${Argomenti: $topics}&lt;/div&gt;
+				&lt;div&gt;
+					${Hobbies: $hobbies}&lt;/div&gt;
+			&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;</main></compiled></data>
+<authtags _T="NN" dtype="T" name_long="!![en]Auth tags" print_width="20::L" as="t0_authtags"></authtags>
+<private _T="B" dtype="B" name_long="!![en]Private" print_width="11::L" as="t0_private">False</private>
+<quicklist _T="NN" dtype="B" name_long="!![en]Quicklist" as="t0_quicklist"></quicklist>
+<flags dtype="T" name_long="!![en]Flags" print_width="20::L" as="t0_flags">is_row</flags>
+<required_pkg _T="NN" name_long="!![en]Required pkg" dtype="T" print_width="20::L" as="t0_required_pkg"></required_pkg>
+<preview _T="NN" name_long="!![en][it]Preview" dtype="T" as="t0_preview"></preview></GenRoBag>
