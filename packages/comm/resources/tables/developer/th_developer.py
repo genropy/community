@@ -95,6 +95,7 @@ class Form(BaseComponent):
         self.developerLookupsTab(tc.contentPane(title='!![en]Languages'), field='language')
         self.developerLookupsTab(tc.contentPane(title='!![en]Topics'), field='topic')
         self.developerLookupsTab(tc.contentPane(title='!![en]Hobbies'), field='hobby')
+        self.developerNewsletterTab(tc.contentPane(title='!![en]Newsletter'))
         self.developerProjectsTab(tc.contentPane(title='!![en]Projects'))
 
     def developerInfo(self, pane):
@@ -165,6 +166,17 @@ class Form(BaseComponent):
             configurable=False
         )
 
+    def developerNewsletterTab(self, pane):
+        pane.plainTableHandler(
+            table=f'dem.lista',
+            viewResource='ViewSubscription',
+            view_store_onStart=True,
+            pbl_classes=True,
+            margin='2px',
+            searchOn=False,
+            configurable=False
+        )
+
     def developerProjectsTab(self, pane):
         pane.dialogTableHandler(relation='@projects', pbl_classes=True, 
                                     margin='2px',viewResource='ViewFromDeveloper')
@@ -192,6 +204,7 @@ class FormProfile(Form):
         self.developerLookupsTab(tc.contentPane(title='!![en]Languages'), field='language')
         self.developerLookupsTab(tc.contentPane(title='!![en]Topics'), field='topic')
         self.developerLookupsTab(tc.contentPane(title='!![en]Hobbies'), field='hobby')
+        self.developerNewsletterTab(tc.contentPane(title='!![en]Newsletter'))
         bc.contentPane(region='bottom', height='50px').lightbutton(
                 '!![en]Save', _class='comm_btn').dataController("this.form.save();")
 
@@ -203,6 +216,8 @@ class FormProfile(Form):
                                                         topic_info=recordCluster['topic_info'])
         self.db.table('comm.developer_hobby').updateHobbyInfo(developer_id=recordCluster['id'],
                                                         hobby_info=recordCluster['hobby_info'])
+        self.db.table('dem.contatto_lista').updateNewsletterSubscription(developer_id=recordCluster['id'],
+                                                        newsletter_subscription=recordCluster['newsletter_subscription'])
 
     @public_method
     def th_onLoading(self, record, newrecord, loadingParameters, recInfo):
@@ -217,6 +232,9 @@ class FormProfile(Form):
         hobby_info = self.db.table('comm.developer_hobby').getHobbyInfo(
                                                         developer_id=record['id'])
         record.addItem('hobby_info',hobby_info or Bag(), _sendback=True)
+        newsletter_subscription = self.db.table('dem.contatto_lista').getNewsletterSubscription(
+                                                        contatto_id=record['contatto_id'])
+        record.addItem('newsletter_subscription',newsletter_subscription or Bag(), _sendback=True)
 
     def th_options(self):
         return dict(showtoolbar=False)

@@ -27,6 +27,7 @@ class Table(object):
                          mode='foreignkey', onDelete='raise')
         
         tbl.formulaColumn('fullname',"$name || ' ' || $surname", name_long='Fullname')
+        tbl.aliasColumn('contatto_id', '@contatti.id', name_long='!![en]Contatto', static=True)
         tbl.pyColumn('dev_template', py_method='templateColumn', template_name='dev_row')
 
         tbl.formulaColumn('languages',"array_to_string(ARRAY(#lang),', ')",

@@ -8,6 +8,7 @@ class Menu(object):
         root.lookupBranch(u"!![en]Lookups", pkg="comm")
         root.webpage(u"!![en]Community", filepath="/comm/community_map")
         root.packageBranch(u"!![en]Surveys", pkg="srvy", tags='admin')
+        root.packageBranch(u"!![en]DEM", pkg="dem", tags='admin')
         root.packageBranch(u"!![en]Administration", tags="superadmin,_DEV_", pkg="adm")
         root.packageBranch(u"!![en]System", tags="_DEV_", pkg="sys")
 
