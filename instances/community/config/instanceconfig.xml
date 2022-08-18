@@ -6,9 +6,9 @@
 		<gnrcore_adm pkgcode="gnrcore:adm"/>
 		<gnrcore_sys pkgcode="gnrcore:sys"/>
 		<gnrextra_srvy pkgcode="gnrextra:srvy"/>
-		<comm pkgcode="comm"/>
 		<gnrcore_email pkgcode='gnrcore:email'/>
 		<gnrextra_dem pkgcode="gnrextra:dem"/>
+		<comm pkgcode="comm"/>
 	</packages>
 	
 	<authentication pkg="adm">
