@@ -60,3 +60,7 @@ class Table(object):
                             surname = user_record['lastname'], email = user_record['email'],
                             user_id = user_record['id'], )
         self.insert(new_developer)
+
+    def trigger_onDeleted(self, record):
+        if record['user_id']:
+            self.db.table('adm.user').deleteSelection(where='$id=:u_id', u_id=record['user_id'])

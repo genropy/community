@@ -10,14 +10,13 @@ class ViewSubscription(BaseComponent):
         r = struct.view().rows()
         r.fieldcell('id',hidden=True)
         r.fieldcell('nome',width='100%')
-        r.checkboxcolumn('subscription', name=u'!![en]Subscribed',width='4em')
+        r.checkboxcolumn('subscription', name=u'!![en]Subscribed', width='6em')
     
     def th_order(self):
         return 'id'
 
     def th_query(self):
         return dict(column='id', op='contains', val='')
-
 
     def th_view(self,view):
         view.dataController(

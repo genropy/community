@@ -167,8 +167,12 @@ class Form(BaseComponent):
         )
 
     def developerNewsletterTab(self, pane):
-        pane.plainTableHandler(
-            table=f'dem.lista',
+        bc = pane.borderContainer()
+        bc.contentPane(region='top', height='30px').formbuilder().radioButtonText(
+                        '^.record.consenso_id', table='dem.consenso_tipo', 
+                        lbl='!![en]Level of consent', cols=5)
+        bc.contentPane(region='center').plainTableHandler(
+            table='dem.lista',
             viewResource='ViewSubscription',
             view_store_onStart=True,
             pbl_classes=True,
@@ -180,6 +184,37 @@ class Form(BaseComponent):
     def developerProjectsTab(self, pane):
         pane.dialogTableHandler(relation='@projects', pbl_classes=True, 
                                     margin='2px',viewResource='ViewFromDeveloper')
+
+    @public_method
+    def th_onSaving(self,recordCluster,recordClusterAttr=None,resultAttr=None,**kwargs):
+        self.db.table('comm.developer_language').updateLanguageInfo(developer_id=recordCluster['id'],
+                                                        language_info=recordCluster['language_info'])
+        self.db.table('comm.developer_topic').updateTopicInfo(developer_id=recordCluster['id'],
+                                                        topic_info=recordCluster['topic_info'])
+        self.db.table('comm.developer_hobby').updateHobbyInfo(developer_id=recordCluster['id'],
+                                                        hobby_info=recordCluster['hobby_info'])
+        self.db.table('dem.contatto_lista').updateNewsletterSubscription(developer_id=recordCluster['id'],
+                                                        consenso_id=recordCluster['consenso_id'],
+                                                        newsletter_subscription=recordCluster['newsletter_subscription'])
+
+    @public_method
+    def th_onLoading(self, record, newrecord, loadingParameters, recInfo):
+        if newrecord:
+            return
+        language_info = self.db.table('comm.developer_language').getLanguageInfo(
+                                                        developer_id=record['id'])
+        record.addItem('language_info',language_info or Bag(), _sendback=True)
+        topic_info = self.db.table('comm.developer_topic').getTopicInfo(
+                                                        developer_id=record['id'])
+        record.addItem('topic_info',topic_info or Bag(), _sendback=True)
+        hobby_info = self.db.table('comm.developer_hobby').getHobbyInfo(
+                                                        developer_id=record['id'])
+        record.addItem('hobby_info',hobby_info or Bag(), _sendback=True)
+        newsletter_subscription = self.db.table('dem.contatto_lista').getNewsletterSubscription(
+                                                        contatto_id=record['contatto_id'])
+        consenso_id = self.db.table('dem.contatto').getSubscriptionConsent(contatto_id=record['contatto_id'])
+        record.addItem('newsletter_subscription',newsletter_subscription or Bag(), _sendback=True)
+        record.addItem('consenso_id', consenso_id or Bag(), _sendback=True)
 
     def th_options(self):
         return dict(dialog_height='400px', dialog_width='600px')
@@ -207,34 +242,6 @@ class FormProfile(Form):
         self.developerNewsletterTab(tc.contentPane(title='!![en]Newsletter'))
         bc.contentPane(region='bottom', height='50px').lightbutton(
                 '!![en]Save', _class='comm_btn').dataController("this.form.save();")
-
-    @public_method
-    def th_onSaving(self,recordCluster,recordClusterAttr=None,resultAttr=None,**kwargs):
-        self.db.table('comm.developer_language').updateLanguageInfo(developer_id=recordCluster['id'],
-                                                        language_info=recordCluster['language_info'])
-        self.db.table('comm.developer_topic').updateTopicInfo(developer_id=recordCluster['id'],
-                                                        topic_info=recordCluster['topic_info'])
-        self.db.table('comm.developer_hobby').updateHobbyInfo(developer_id=recordCluster['id'],
-                                                        hobby_info=recordCluster['hobby_info'])
-        self.db.table('dem.contatto_lista').updateNewsletterSubscription(developer_id=recordCluster['id'],
-                                                        newsletter_subscription=recordCluster['newsletter_subscription'])
-
-    @public_method
-    def th_onLoading(self, record, newrecord, loadingParameters, recInfo):
-        if newrecord:
-            return
-        language_info = self.db.table('comm.developer_language').getLanguageInfo(
-                                                        developer_id=record['id'])
-        record.addItem('language_info',language_info or Bag(), _sendback=True)
-        topic_info = self.db.table('comm.developer_topic').getTopicInfo(
-                                                        developer_id=record['id'])
-        record.addItem('topic_info',topic_info or Bag(), _sendback=True)
-        hobby_info = self.db.table('comm.developer_hobby').getHobbyInfo(
-                                                        developer_id=record['id'])
-        record.addItem('hobby_info',hobby_info or Bag(), _sendback=True)
-        newsletter_subscription = self.db.table('dem.contatto_lista').getNewsletterSubscription(
-                                                        contatto_id=record['contatto_id'])
-        record.addItem('newsletter_subscription',newsletter_subscription or Bag(), _sendback=True)
 
     def th_options(self):
         return dict(showtoolbar=False)
