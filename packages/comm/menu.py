@@ -18,3 +18,14 @@ class Menu(object):
         root.thpage("!![en]My profile", table='comm.developer', formResource='FormProfile',
                             pkey=self.db.currentEnv.get('developer_id'), form_locked=False)
         root.webpage(u"!![en]Community", filepath="/comm/community_map")
+        self.developerInterview(root)
+    
+    def developerInterview(self, root):
+        interview_id = self.db.table('srvy.interview').readColumns(where='$developer_id=:env_developer_id', 
+                                                                    columns='$id')
+        if not interview_id:
+            root.thpage(u"!![en]Start Interview", table='srvy.interview', 
+                                                    pkey='*newrecord*', formResource='InterviewStartForm')
+        else:
+            root.thpage(u"!![en]Update Interview", table='srvy.interview', 
+                                                    pkey=interview_id, formResource='InterviewStartForm')
