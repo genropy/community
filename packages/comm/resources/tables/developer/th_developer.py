@@ -9,9 +9,11 @@ class View(BaseComponent):
 
     def th_struct(self,struct):
         r = struct.view().rows()
-        r.fieldcell('username', width='12em')
-        r.fieldcell('fullname', width='12em')
-        r.fieldcell('email', width='12em')
+        r.fieldcell('badge_icon', width='2em', name=' ', 
+                            template="<img src='/_rsrc/common/css_icons/svg/16/$badge_icon.svg' width='15px'")
+        r.fieldcell('username', width='16em')
+        r.fieldcell('fullname', width='16em')
+        r.fieldcell('email', width='16em')
         r.fieldcell('locality', width='6em')
         r.fieldcell('country', width='6em')
 
@@ -84,10 +86,12 @@ class Form(BaseComponent):
         bc = form.center.borderContainer() 
         top = bc.borderContainer(region='top',height='50%', datapath='.record')
         self.developerInfo(top.contentPane(region='left', width='600px'))
-        self.developerPhoto(top.contentPane(region='center'))
+        center = top.borderContainer(region='center')
+        self.developerPhoto(center.contentPane(region='center'))
+        self.developerBadge(center.contentPane(region='bottom', height='60px'))
         right = top.borderContainer(region='right', width='300px')
         self.developerUser(right.contentPane(region='top', height='100px'))
-        self.developerServices(right.contentPane(region='center', datapath='#FORM'))
+        #self.developerServices(right.contentPane(region='center', datapath='#FORM'))
 
         tc= bc.tabContainer(region='center',margin='2px')
         self.developerGeoInfo(tc.contentPane(title='Address', datapath='.record').div(
@@ -137,6 +141,10 @@ class Form(BaseComponent):
                     crop_rounded=6,
                     placeholder=True,
                     upload_folder='*')
+
+    def developerBadge(self, pane):
+        fb = pane.formbuilder()
+        fb.field('badge_id')
 
     def developerUser(self, pane):
         pane.linkerBox('user_id', 

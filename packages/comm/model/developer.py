@@ -22,6 +22,8 @@ class Table(object):
         tbl.column('nickname', name_long='!![en]Nickname')
         tbl.column('github', name_long='!![en]Github')
         tbl.column('website', name_long='!![en]Website')
+        tbl.column('badge_id',size='22', group='_', name_long='!![en]Badge'
+                    ).relation('comm.badge.id', relation_name='developers', mode='foreignkey', onDelete='setnull')
         tbl.column('user_id',size='22', group='_', name_long='!![en]User',unique=True
                     ).relation('adm.user.id', one_one=True, relation_name='developer', 
                          mode='foreignkey', onDelete='raise')
@@ -29,6 +31,7 @@ class Table(object):
         tbl.formulaColumn('fullname',"$name || ' ' || $surname", name_long='Fullname')
         tbl.formulaColumn('username',"COALESCE(tg_username,@user_id.username)", name_long='Username')
         tbl.aliasColumn('contatto_id', '@contatti.id', name_long='!![en]Contatto', static=True)
+        tbl.aliasColumn('badge_icon', '@badge_id.icon', name_long='!![en]Badge icon')
         tbl.pyColumn('dev_template', py_method='templateColumn', template_name='dev_row')
 
         tbl.formulaColumn('languages',"array_to_string(ARRAY(#lang),', ')",
@@ -59,7 +62,7 @@ class Table(object):
             return
         new_developer = self.newrecord(name = user_record['firstname'],
                             surname = user_record['lastname'], email = user_record['email'],
-                            user_id = user_record['id'], )
+                            user_id = user_record['id'], badge_id=self.getPreference('user_default_badge', pkg='comm'))
         self.insert(new_developer)
 
     def trigger_onDeleted(self, record):
