@@ -3,7 +3,7 @@
 class Table(object):
     def config_db(self,pkg):
         tbl=pkg.table('developer', pkey='id', name_long='!![en]Developer', name_plural='!![en]Developers',
-                                    caption_field='tg_username')
+                                    caption_field='username')
         self.sysFields(tbl)
         
         tbl.column('name', size=':30', name_long='!![en]Name', group='card')
@@ -27,6 +27,7 @@ class Table(object):
                          mode='foreignkey', onDelete='raise')
         
         tbl.formulaColumn('fullname',"$name || ' ' || $surname", name_long='Fullname')
+        tbl.formulaColumn('username',"COALESCE(tg_username,@user_id.username)", name_long='Username')
         tbl.aliasColumn('contatto_id', '@contatti.id', name_long='!![en]Contatto', static=True)
         tbl.pyColumn('dev_template', py_method='templateColumn', template_name='dev_row')
 

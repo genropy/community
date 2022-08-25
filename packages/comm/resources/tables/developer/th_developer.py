@@ -9,20 +9,20 @@ class View(BaseComponent):
 
     def th_struct(self,struct):
         r = struct.view().rows()
-        r.fieldcell('tg_username', width='12em')
+        r.fieldcell('username', width='12em')
         r.fieldcell('fullname', width='12em')
         r.fieldcell('email', width='12em')
         r.fieldcell('locality', width='6em')
         r.fieldcell('country', width='6em')
 
     def th_order(self):
-        return 'fullname'
+        return 'username'
 
     def th_query(self):
-        return dict(column='fullname', op='contains', val='')
+        return dict(column='username', op='contains', val='')
 
     def th_queryBySample(self):                    
-        return dict(fields=[dict(field='$tg_username', lbl='!![en]Tg username'),
+        return dict(fields=[dict(field='$username', lbl='!![en]Username'),
                         dict(field='@languages.language_code', tag='checkboxtext', table='comm.language', 
                                     lbl='!![en]Languages', popup=True, order_by='$description'),
                         dict(field='@topics.topic_id', tag='checkboxtext', table='comm.topic', 
@@ -35,7 +35,7 @@ class ViewDevelopers(View):
 
     def th_struct(self,struct):
         r = struct.view().rows()
-        r.fieldcell('tg_username')
+        r.fieldcell('username')
         r.fieldcell('locality')
         r.fieldcell('country')
         r.fieldcell('position', hidden=True)
@@ -56,7 +56,7 @@ class ViewDevelopers(View):
                             var that = this;
                             store.forEach(function(n){
                                 console.log(n);
-                                m.gnr.setMarker(m, n.attr._pkey, n.attr.position, {title:n.attr.tg_username}
+                                m.gnr.setMarker(m, n.attr._pkey, n.attr.position, {title:n.attr.username}
                                                 );
                             }, 'static');
                          """,
@@ -72,7 +72,7 @@ class ViewMap(View):
     def th_struct(self,struct):
         r = struct.view().rows()
         r.fieldcell('dev_template', width='auto')
-        r.fieldcell('tg_username', hidden=True)
+        r.fieldcell('username', hidden=True)
         r.fieldcell('position', hidden=True)
 
     def th_queryBySample(self):                    
@@ -235,7 +235,7 @@ class FormProfile(Form):
     def th_form(self, form):
         bc = form.center.borderContainer() 
         top = bc.contentPane(region='top',height='60px', datapath='.record')
-        top.h1('^.tg_username', _class='dev_username')
+        top.h1('^.username', _class='dev_username')
         tc = bc.tabContainer(region='center',margin='2px', _class='profile_center')
         dev_info = tc.borderContainer(title='!![en]Developer info',datapath='.record')
         self.developerPhoto(dev_info.contentPane(region='top'))

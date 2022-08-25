@@ -18,14 +18,16 @@ class Menu(object):
         root.thpage("!![en]My profile", table='comm.developer', formResource='FormProfile',
                             pkey=self.db.currentEnv.get('developer_id'), form_locked=False)
         root.webpage(u"!![en]Community", filepath="/comm/community_map")
-        self.developerInterview(root)
+        default_srvy = self.application.getPreference('default_srvy', pkg='comm')
+        if default_srvy:
+            self.developerInterview(root, survey_id=default_srvy)
     
-    def developerInterview(self, root):
-        interview_id = self.db.table('srvy.interview').readColumns(where='$developer_id=:env_developer_id', 
-                                                                    columns='$id')
+    def developerInterview(self, root, survey_id=None):
+        interview_id = self.db.table('srvy.interview').readColumns(
+                                        where='$developer_id=:env_developer_id', columns='$id')
         if not interview_id:
-            root.thpage(u"!![en]Start Interview", table='srvy.interview', 
-                                                    pkey='*newrecord*', formResource='InterviewStartForm')
+            interview_id = self.db.table('srvy.interview').createNewDeveloperInterview(survey_id=survey_id)
+            item_lbl = "!![en]Start interview"
         else:
-            root.thpage(u"!![en]Update Interview", table='srvy.interview', 
-                                                    pkey=interview_id, formResource='InterviewStartForm')
+            item_lbl = "!![en]Edit/update interview"
+        root.webpage(item_lbl, filepath='/srvy/interview', url_interview_id=interview_id)
