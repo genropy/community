@@ -61,8 +61,10 @@ class Table(object):
             #existing developer with the same user_id
             return
         new_developer = self.newrecord(name = user_record['firstname'],
-                            surname = user_record['lastname'], email = user_record['email'],
-                            user_id = user_record['id'], badge_id=self.getPreference('user_default_badge', pkg='comm'))
+                            surname = user_record['lastname'], 
+                            email = user_record['email'],
+                            user_id = user_record['id'], 
+                            badge_id=self.db.application.getPreference('user_default_badge', pkg='comm'))
         self.insert(new_developer)
 
     def trigger_onDeleted(self, record):
