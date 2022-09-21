@@ -99,7 +99,7 @@ class Form(BaseComponent):
         self.developerLookupsTab(tc.contentPane(title='!![en]Languages'), field='language')
         self.developerLookupsTab(tc.contentPane(title='!![en]Topics'), field='topic')
         self.developerLookupsTab(tc.contentPane(title='!![en]Hobbies'), field='hobby')
-        self.developerNewsletterTab(tc.contentPane(title='!![en]Newsletter'))
+        self.developerNewsletterTab(tc.contentPane(title='!![en]Newsletter', checkpref='comm.enable_dem'))
         self.developerProjectsTab(tc.contentPane(title='!![en]Projects'))
 
     def developerInfo(self, pane):
@@ -252,7 +252,7 @@ class FormProfile(Form):
         self.developerLookupsTab(tc.contentPane(title='!![en]Languages'), field='language')
         self.developerLookupsTab(tc.contentPane(title='!![en]Topics'), field='topic')
         self.developerLookupsTab(tc.contentPane(title='!![en]Hobbies'), field='hobby')
-        self.developerNewsletterTab(tc.contentPane(title='!![en]Newsletter'))
+        self.developerNewsletterTab(tc.contentPane(title='!![en]Newsletter', checkpref='comm.enable_dem'))
         bc.contentPane(region='bottom', height='50px').lightbutton(
                 '!![en]Save', _class='comm_btn').dataController("this.form.save();")
 
