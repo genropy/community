@@ -8,10 +8,12 @@ class View(BaseComponent):
     def th_struct(self,struct):
         r = struct.view().rows()
         r.fieldcell('name')
+        r.fieldcell('start_date', width='6em')
+        r.fieldcell('end_date', width='6em')
+        r.fieldcell('project_type_id', hidden=True)
         r.fieldcell('description', width='auto')
         r.fieldcell('app_url', width='25em')
         r.fieldcell('repository_url', width='25em')
-        r.fieldcell('developer_id')
         #r.fieldcell('workspace_id')
         #r.fieldcell('linesofcode', width='6em')
 
@@ -20,6 +22,9 @@ class View(BaseComponent):
 
     def th_query(self):
         return dict(column='name', op='contains', val='')
+
+    def th_top_toolbar(self,top):
+        top.slotToolbar('*,sections@project_type_id,*', childname='top', _position='<bar')
 
 class ViewDevelopers(View):
 
@@ -55,12 +60,13 @@ class Form(BaseComponent):
 
     def th_form(self, form):
         bc = form.center.borderContainer()
-        fb = bc.contentPane(region='top', height='30%', datapath='.record').formbuilder(cols=2, border_spacing='4px')
-        fb.field('name')
-        fb.field('description')
-        fb.field('app_url')
-        fb.field('repository_url')
-        fb.field('developer_id')
+        fb = bc.contentPane(region='top', height='30%', datapath='.record').formbuilder(cols=2, border_spacing='4px', fld_width='100%')
+        fb.field('name', colspan=2)
+        fb.field('description', colspan=2)
+        fb.field('start_date')
+        fb.field('end_date')
+        fb.field('app_url', colspan=2)
+        fb.field('repository_url', colspan=2)
         #fb.field('workspace_id')
         #fb.div('^.linesofcode_metadata.linesOfCode', lbl='!![en]Lines of code')
         self.projectAttachments(bc.contentPane(region='center'))
@@ -88,6 +94,22 @@ class Form(BaseComponent):
         return dict(dialog_height='400px', dialog_width='600px')
 
 class FormDevelopers(Form):
+
+    def th_form(self, form):
+        bc = form.center.borderContainer()
+        fb = bc.contentPane(region='top', height='30%', datapath='.record').templateChunk(table='comm.project', 
+                                                                                            record_id='^#FORM.record.id',
+                                                                                            template='project_info')
+
+        self.projectAttachments(bc.contentPane(region='center'))
+
+    def th_top_custom(self, top):
+        bar = top.bar.replaceSlots('right_placeholder','subscribe,5,right_placeholder')
+        bar.subscribe.slotButton('!![en]Subscribe').dataRpc(
+                                self.db.table('comm.project').subscribeToProject,
+                                        project_id='=#FORM.record.id',
+                                        developer_id=self.db.currentEnv['developer_id'], 
+                                        _onResult='genro.publish("floating_message",{message:"Request has been sent", messageType:"message"});')
 
     def th_options(self):
         return dict(readOnly=True)

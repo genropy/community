@@ -11,10 +11,15 @@ class Table(object):
         tbl.column('description', name_long='!![en]Description', name_short='!![en]Descr.')
         tbl.column('app_url', name_long='!![en]Project URL')
         tbl.column('repository_url', name_long='!![en]Repository URL')
+        tbl.column('start_date', dtype='D', name_long='!![en]Start date', name_short='!![en]Start')
+        tbl.column('end_date', dtype='D', name_long='!![en]End date', name_short='!![en]End')
         tbl.column('project_metadata', dtype='X', name_long='Project metadata')
         tbl.column('linesofcode_metadata', dtype='X', name_long='!![en]Lines of code metadata')
-        tbl.column('developer_id',size='22', group='_', name_long='!![en]Developer'
-                    ).relation('developer.id', relation_name='projects', mode='foreignkey', onDelete='cascade')
+        tbl.column('project_type_id',size='22', group='_', name_long='!![en]Project type'
+                    ).relation('project_type.id', relation_name='projects', mode='foreignkey', onDelete='setnull')
+        tbl.column('project_fields', dtype='X', name_long='!![en]Project_fields', subfields='project_type_id')
+
+        #Bitbucket workspace/Github organization
         tbl.column('workspace_id',size='22', group='_', name_long='!![en]Workspace'
                     ).relation('workspace.id', relation_name='projects', mode='foreignkey', onDelete='cascade')
 

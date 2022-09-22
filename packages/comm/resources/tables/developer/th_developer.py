@@ -87,8 +87,8 @@ class Form(BaseComponent):
         top = bc.borderContainer(region='top',height='50%', datapath='.record')
         self.developerInfo(top.contentPane(region='left', width='600px'))
         center = top.borderContainer(region='center')
-        self.developerPhoto(center.contentPane(region='center'))
-        self.developerBadge(center.contentPane(region='bottom', height='60px'))
+        self.developerPhoto(center.contentPane(region='top', height='210px'))
+        self.developerBadge(center.contentPane(region='center'))
         right = top.borderContainer(region='right', width='300px')
         self.developerUser(right.contentPane(region='top', height='100px'))
         #self.developerServices(right.contentPane(region='center', datapath='#FORM'))
@@ -143,7 +143,7 @@ class Form(BaseComponent):
                     upload_folder='*')
 
     def developerBadge(self, pane):
-        fb = pane.formbuilder()
+        fb = pane.formbuilder(margin='auto', lblpos='T')
         fb.field('badge_id')
 
     def developerUser(self, pane):
@@ -191,7 +191,7 @@ class Form(BaseComponent):
 
     def developerProjectsTab(self, pane):
         pane.dialogTableHandler(relation='@projects', pbl_classes=True, 
-                                    margin='2px',viewResource='ViewFromDeveloper')
+                                    margin='2px', viewResource='ViewFromDeveloper')
 
     @public_method
     def th_onSaving(self,recordCluster,recordClusterAttr=None,resultAttr=None,**kwargs):
