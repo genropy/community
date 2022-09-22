@@ -11,6 +11,7 @@ class View(BaseComponent):
         r.fieldcell('developer_id')
         r.fieldcell('project_id')
         r.fieldcell('role_id')
+        r.fieldcell('status', semaphore=True)
 
     def th_order(self):
         return 'developer_id'
@@ -28,6 +29,21 @@ class ViewFromDeveloper(View):
         r.fieldcell('@project_id.description', width='auto')
         r.fieldcell('@project_id.app_url', width='25em')
         r.fieldcell('@project_id.repository_url', width='25em')
+
+class ViewFromProjects(View):
+
+    def th_struct(self,struct):
+        r = struct.view().rows()
+        r.fieldcell('developer_id', width='25em', edit=True)
+        r.fieldcell('role_id', edit=True)
+        r.fieldcell('status', semaphore=True)
+    
+    def th_view(self, view):
+        bar = view.top.bar.replaceSlots('searchOn','approve_btn,5,searchOn')
+        bar.approve_btn.slotButton('!![en]Approve').dataRpc(
+                                self.db.table('comm.project_developer').approveSubscription,
+                                                selectedPkeys='=.grid.currentSelectedPkeys')
+
 
 class Form(BaseComponent):
 

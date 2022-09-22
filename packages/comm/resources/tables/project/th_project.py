@@ -69,10 +69,17 @@ class Form(BaseComponent):
         fb.field('repository_url', colspan=2)
         #fb.field('workspace_id')
         #fb.div('^.linesofcode_metadata.linesOfCode', lbl='!![en]Lines of code')
-        self.projectAttachments(bc.contentPane(region='center'))
+
+        tc = bc.tabContainer(region='center')
+        self.projectAttachments(tc.contentPane(title='!![en]Attachments'))
+        self.projectDevelopers(tc.contentPane(title='!![en]Developers'))
 
     def projectAttachments(self,pane):
         pane.attachmentMultiButtonFrame()
+
+    def projectDevelopers(self, pane):
+        pane.inlineTableHandler(relation='@developers', picker='developer_id', 
+                                    viewResource='ViewFromProjects', default_status=True)
 
     #def th_top_custom(self, top):
     #    bar = top.bar.replaceSlots('right_placeholder','countlines,5,right_placeholder')
@@ -97,19 +104,26 @@ class FormDevelopers(Form):
 
     def th_form(self, form):
         bc = form.center.borderContainer()
-        fb = bc.contentPane(region='top', height='30%', datapath='.record').templateChunk(table='comm.project', 
-                                                                                            record_id='^#FORM.record.id',
+        bc.contentPane(region='top', height='30%', datapath='.record').templateChunk(table='comm.project', 
+                                                                                            record_id='^.id',
                                                                                             template='project_info')
 
-        self.projectAttachments(bc.contentPane(region='center'))
+        tc = bc.tabContainer(region='center')
+        self.projectAttachments(tc.contentPane(title='!![en]Attachments'))
+        self.projectDevelopers(tc.contentPane(title='!![en]Developers'))
+
+    def projectDevelopers(self, pane):
+        pane.inlineTableHandler(relation='@developers', liveUpdate=True,
+                                    viewResource='View', addrow=False, delrow=False)
 
     def th_top_custom(self, top):
-        bar = top.bar.replaceSlots('right_placeholder','subscribe,5,right_placeholder')
-        bar.subscribe.slotButton('!![en]Subscribe').dataRpc(
-                                self.db.table('comm.project').subscribeToProject,
+        bar = top.bar.replaceSlots('right_placeholder','subscribe_btn,5,right_placeholder')
+        bar.subscribe_btn.slotButton('!![en]Subscribe', 
+                    disabled="^#FORM.record.is_developer_subscribed").dataRpc(
+                                self.db.table('comm.project_developer').subscribeToProject,
                                         project_id='=#FORM.record.id',
-                                        developer_id=self.db.currentEnv['developer_id'], 
-                                        _onResult='genro.publish("floating_message",{message:"Request has been sent", messageType:"message"});')
+                                        developer_id='=gnr.rootenv.developer_id', 
+                                        _onResult='this.form.reload();genro.publish("floating_message",{message:"Request has been sent", messageType:"message"});')
 
     def th_options(self):
         return dict(readOnly=True)

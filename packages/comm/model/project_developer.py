@@ -22,10 +22,24 @@ class Table(object):
                                                                                     onDelete='cascade',
                                                                                     mode='foreignkey',
                                                                                     relation_name='project_developers')
+        tbl.column('status', dtype='B', name_long='!![en]Status')
 
     @public_method
     def subscribeToProject(self, project_id=None, developer_id=None):
         if not project_id or not developer_id:
             return
-            #Da finire
+        new_subscription = self.newrecord(project_id=project_id, developer_id=developer_id, status=False)
+        self.insert(new_subscription)
+        self.db.commit()
+
+    @public_method
+    def approveSubscription(self, selectedPkeys=None):
+        if not selectedPkeys:
+            return
+        for pkey in selectedPkeys:
+            with self.recordToUpdate(pkey) as subscription_rec:
+                if subscription_rec['status'] == True:
+                    continue
+                subscription_rec['status'] = True
+        self.db.commit()
         
