@@ -3,9 +3,8 @@
 class Table(object):
     def config_db(self,pkg):
         tbl=pkg.table('developer', pkey='id', name_long='!![en]Developer', name_plural='!![en]Developers',
-                                    caption_field='username')
+                                    caption_field='username',survey=True)
         self.sysFields(tbl)
-        
         tbl.column('name', size=':30', name_long='!![en]Name', group='card')
         tbl.column('surname', size=':30', name_long='!![en]Surname',group='card')
         tbl.column('email', name_long='Email',group='card')
@@ -70,3 +69,10 @@ class Table(object):
     def trigger_onDeleted(self, record):
         if record['user_id']:
             self.db.table('adm.user').deleteSelection(where='$id=:u_id', u_id=record['user_id'])
+
+    def createNewDeveloperInterview(self, survey_id=None):
+        interviewtbl = self.db.table('srvy.interview')
+        new_interview = interviewtbl.newrecord(survey_id=survey_id, developer_id=self.db.currentEnv['developer_id'])
+        interviewtbl.insert(new_interview)
+        self.db.commit()
+        return new_interview['id']
