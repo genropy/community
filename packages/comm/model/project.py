@@ -17,7 +17,7 @@ class Table(object):
         tbl.column('linesofcode_metadata', dtype='X', name_long='!![en]Lines of code metadata')
         tbl.column('project_type_id',size='22', group='_', name_long='!![en]Project type'
                     ).relation('project_type.id', relation_name='projects', mode='foreignkey', onDelete='setnull')
-        tbl.column('project_fields', dtype='X', name_long='!![en]Project_fields', subfields='project_type_id')
+        tbl.column('project_fields', dtype='X', name_long='!![en]Project fields', subfields='project_type_id')
 
         tbl.formulaColumn('is_developer_subscribed', exists=dict(table='comm.project_developer', 
                                                                 where='$developer_id=:env_developer_id AND $project_id=#THIS.id'), 

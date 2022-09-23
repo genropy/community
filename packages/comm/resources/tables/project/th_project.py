@@ -30,6 +30,11 @@ class ViewDevelopers(View):
 
     def th_options(self):
         return dict(virtualStore=False, addrow=False, delrow=False)
+
+class ViewSupporters(View):
+
+    def th_options(self):
+        return dict(virtualStore=False, delrow=False)
         
 class ViewFromDeveloper(View):
 
@@ -100,17 +105,7 @@ class Form(BaseComponent):
     def th_options(self):
         return dict(dialog_height='400px', dialog_width='600px')
 
-class FormDevelopers(Form):
-
-    def th_form(self, form):
-        bc = form.center.borderContainer()
-        bc.contentPane(region='top', height='30%', datapath='.record').templateChunk(table='comm.project', 
-                                                                                            record_id='^.id',
-                                                                                            template='project_info')
-
-        tc = bc.tabContainer(region='center')
-        self.projectAttachments(tc.contentPane(title='!![en]Attachments'))
-        self.projectDevelopers(tc.contentPane(title='!![en]Developers'))
+class FormSupporters(Form):
 
     def projectDevelopers(self, pane):
         pane.inlineTableHandler(relation='@developers', liveUpdate=True,
@@ -125,5 +120,17 @@ class FormDevelopers(Form):
                                         developer_id='=gnr.rootenv.developer_id', 
                                         _onResult='this.form.reload();genro.publish("floating_message",{message:"Request has been sent", messageType:"message"});')
 
+class FormDevelopers(FormSupporters):
+
+    def th_form(self, form):
+        bc = form.center.borderContainer()
+        bc.contentPane(region='top', height='30%', datapath='.record').templateChunk(table='comm.project', 
+                                                                                            record_id='^.id',
+                                                                                            template='project_info')
+
+        tc = bc.tabContainer(region='center')
+        self.projectAttachments(tc.contentPane(title='!![en]Attachments'))
+        self.projectDevelopers(tc.contentPane(title='!![en]Developers'))
+        
     def th_options(self):
         return dict(readOnly=True)
