@@ -28,7 +28,7 @@ class Menu(object):
                             viewResource='ViewDevelopers', formResource='FormDevelopers')
 
     @metadata(group_code='SUPP')
-    def config_community(self,root,**kwargs):
+    def config_supporters(self,root,**kwargs):
         root.thpage("!![en]My profile", table='comm.developer', formResource='FormProfile',
                             pkey=self.db.currentEnv.get('developer_id'), form_locked=False)
         root.webpage(u"!![en]Community", filepath="/comm/community_map")
