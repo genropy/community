@@ -124,11 +124,11 @@ class Form(BaseComponent):
                     selected_administrative_area_level_3='.city',
                     selected_country='.country',
                     selected_position='.position')
-        fb.field('locality')
-        fb.field('city')
-        fb.field('state')
-        fb.field('region')
-        fb.field('country')
+        fb.field('locality', readOnly=True, hidden='^.full_address?=!#v')
+        fb.field('city', readOnly=True, hidden='^.full_address?=!#v')
+        fb.field('state', readOnly=True, hidden='^.full_address?=!#v')
+        fb.field('region', readOnly=True, hidden='^.full_address?=!#v')
+        fb.field('country', readOnly=True, hidden='^.full_address?=!#v')
 
     def developerPhoto(self, pane):
         pane.img(src='^.photo_url',
