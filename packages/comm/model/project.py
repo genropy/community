@@ -18,7 +18,8 @@ class Table(object):
         tbl.column('project_type_id',size='22', group='_', name_long='!![en]Project type'
                     ).relation('project_type.id', relation_name='projects', mode='foreignkey', onDelete='setnull')
         tbl.column('project_fields', dtype='X', name_long='!![en]Project fields', subfields='project_type_id')
-
+        tbl.column('suggestion_id',size='22', group='_', name_long='!![en]Suggestion'
+                    ).relation('comm.suggestion.id', relation_name='projects', mode='foreignkey', onDelete='raise')
         tbl.formulaColumn('is_developer_subscribed', exists=dict(table='comm.project_developer', 
                                                                 where='$developer_id=:env_developer_id AND $project_id=#THIS.id'), 
                                                                 name_long='!![en]Developer is subscribed', static=True)
