@@ -33,8 +33,9 @@ class GnrCustomWebPage(object):
                                 // console.log(n);
                                 m.gnr.setMarker(m, n.attr._pkey, n.attr.position, {title:n.attr.tg_username, 
                                                                                     onClick:function(marker_name, e){
-                                                                                        //  console.log("single",marker_name,e);
-                                                                                         grid.setSelectedId(marker_name);
+                                                                                          console.log("single",marker_name,e);
+                                                                                          grid.selectByRowAttr('_pkey',marker_name,null,true);
+                                                                                         //grid.setSelectedId(marker_name);
                                                                                             },
                                                                                    // labelContent: n.attr.tg_username,
                                                                                    // labelAnchor: new google.maps.Point(15, 0),
