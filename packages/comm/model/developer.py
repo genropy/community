@@ -7,6 +7,7 @@ class Table(object):
         self.sysFields(tbl)
         tbl.column('name', size=':30', name_long='!![en]Name', group='card')
         tbl.column('surname', size=':30', name_long='!![en]Surname',group='card')
+        tbl.column('dob', dtype='D', name_long='!![en]Date of birth')
         tbl.column('email', name_long='Email',group='card')
         tbl.column('country', name_long='!![en]Country',group='card')
         tbl.column('position', name_long='!![en]Geocode')
@@ -26,7 +27,7 @@ class Table(object):
         tbl.column('user_id',size='22', group='_', name_long='!![en]User',unique=True
                     ).relation('adm.user.id', one_one=True, relation_name='developer', 
                          mode='foreignkey', onDelete='raise')
-        
+        tbl.column('address_bag','X', name_long='Address bag')
         tbl.formulaColumn('fullname',"$name || ' ' || $surname", name_long='Fullname')
         tbl.formulaColumn('username',"COALESCE(tg_username,@user_id.username)", name_long='Username')
         tbl.aliasColumn('contatto_id', '@contatti.id', name_long='!![en]Contatto', static=True)
@@ -54,7 +55,7 @@ class Table(object):
                                                     columns='$caption_from_developer',
                                                     where='$developer_id=#THIS.id'),
                                                     name_long='!![en]Hobbies')
-       
+
     def createDeveloper(self,user_record):
         if self.checkDuplicate(user_id=user_record['id']):
             #existing developer with the same user_id

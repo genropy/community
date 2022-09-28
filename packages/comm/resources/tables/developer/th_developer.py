@@ -94,8 +94,8 @@ class Form(BaseComponent):
         #self.developerServices(right.contentPane(region='center', datapath='#FORM'))
 
         tc= bc.tabContainer(region='center',margin='2px')
-        self.developerGeoInfo(tc.contentPane(title='Address', datapath='.record').div(
-                    padding='20px',padding_right='40px'))
+       #self.developerGeoInfo(tc.contentPane(title='Address', datapath='.record').div(
+       #            padding='20px',padding_right='40px'))
         self.developerLookupsTab(tc.contentPane(title='!![en]Languages'), field='language')
         self.developerLookupsTab(tc.contentPane(title='!![en]Topics'), field='topic')
         self.developerLookupsTab(tc.contentPane(title='!![en]Hobbies'), field='hobby')
@@ -103,40 +103,57 @@ class Form(BaseComponent):
         self.developerProjectsTab(tc.contentPane(title='!![en]Projects'))
 
     def developerInfo(self, pane):
-        fb = pane.div(padding='20px', padding_right='40px').formbuilder(cols=1, width='100%',
-                    colswidth='auto', fld_width='100%', border_spacing='6px')
-        fb.field('name')
-        fb.field('surname')
-        fb.field('email')
-        fb.field('tg_username')
-        fb.field('nickname')
-        fb.field('github')
-        fb.field('website')
-        fb.field('bio', tag='simpleTextArea', height='100px')
-    
-    def developerGeoInfo(self,pane):
-        fb = pane.formbuilder(cols=1, width='100%', colswidth='auto',
-                    fld_width='100%', border_spacing='6px')
-        fb.geoCoderField(value='^.full_address', lbl='Full address', 
+        fb = pane.div(padding='10px').formbuilder(cols=3, border_spacing='8px 0px', 
+                        width='100%',fld_width='100%',lblpos='T',
+                        lbl_text_align='left',lbl_font_size='.8em',
+                        lbl_padding_top='4px',
+                        lbl_font_weight='bold',fldalign='left',
+                        _class='mobilefields')
+        fb.field('name',validate_notnull=True)
+        fb.div(width='10px')
+        fb.field('surname',validate_notnull=True)
+        fb.field('full_address', lbl='Full address', tag='geocoderfield',
                     selected_locality='.locality',
                     selected_administrative_area_level_1='.region',
                     selected_administrative_area_level_2='.state',
                     selected_administrative_area_level_3='.city',
                     selected_country='.country',
-                    selected_position='.position')
-        fb.field('locality', readOnly=True, hidden='^.full_address?=!#v')
-        fb.field('city', readOnly=True, hidden='^.full_address?=!#v')
-        fb.field('state', readOnly=True, hidden='^.full_address?=!#v')
-        fb.field('region', readOnly=True, hidden='^.full_address?=!#v')
-        fb.field('country', readOnly=True, hidden='^.full_address?=!#v')
+                    selected_position='.position',
+                    selectedRecord='.address_bag',colspan=3,
+                    validate_notnull=True)        
+        fb.field('nickname')
+        fb.div(width='10px')
+        fb.field('tg_username',lbl='Telegram')
+        fb.field('github',colspan=3)
+        fb.field('email',colspan=3)
+        fb.field('website',colspan=3)
+        fb.field('bio', tag='simpleTextArea', height='100px',colspan=3)
+        #fb.field('position',validate_notnull=True,hidden=True)
+
+    #def developerGeoInfo(self,pane):
+    #    fb = pane.formbuilder(cols=1, width='100%', colswidth='auto',
+    #                fld_width='100%', border_spacing='6px')
+    #    fb.geoCoderField(value='^.full_address', lbl='Full address', 
+    #                selected_locality='.locality',
+    #                selected_administrative_area_level_1='.region',
+    #                selected_administrative_area_level_2='.state',
+    #                selected_administrative_area_level_3='.city',
+    #                selected_country='.country',
+    #                selected_position='.position',
+    #                selectedRecord='.address_bag')
+    #    fb.field('locality', readOnly=True, hidden='^.full_address?=!#v')
+    #    fb.field('city', readOnly=True, hidden='^.full_address?=!#v')
+    #    fb.field('state', readOnly=True, hidden='^.full_address?=!#v')
+    #    fb.field('region', readOnly=True, hidden='^.full_address?=!#v')
+    #    fb.field('country', readOnly=True, hidden='^.full_address?=!#v')
 
     def developerPhoto(self, pane):
         pane.img(src='^.photo_url',
                     edit='camera',
                     crop_margin='auto',
                     crop_margin_top='20px',
-                    crop_height='170px',
-                    crop_width='170px',
+                    crop_height='120px',
+                    crop_width='120px',
                     crop_border='2px dotted silver',
                     crop_rounded=6,
                     placeholder=True,
@@ -242,13 +259,11 @@ class FormProfile(Form):
 
     def th_form(self, form):
         bc = form.center.borderContainer() 
-        top = bc.contentPane(region='top',height='60px', datapath='.record')
-        top.h1('^.username', _class='dev_username')
         tc = bc.tabContainer(region='center',margin='2px', _class='profile_center')
         dev_info = tc.borderContainer(title='!![en]Developer info',datapath='.record')
         self.developerPhoto(dev_info.contentPane(region='top'))
         self.developerInfo(dev_info.contentPane(region='center'))
-        self.developerGeoInfo(tc.contentPane(title='!![en]Address', datapath='.record').div(padding='20px',padding_right='40px'))
+        #self.developerGeoInfo(tc.contentPane(title='!![en]Address', datapath='.record').div(padding='20px',padding_right='40px'))
         self.developerLookupsTab(tc.contentPane(title='!![en]Languages'), field='language')
         self.developerLookupsTab(tc.contentPane(title='!![en]Topics'), field='topic')
         self.developerLookupsTab(tc.contentPane(title='!![en]Hobbies'), field='hobby')

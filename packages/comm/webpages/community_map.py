@@ -10,16 +10,18 @@ class GnrCustomWebPage(object):
                         map_type='roadmap',
                         centerMarker=True,
                         nodeId='maps',
-                        autoFit=True)                     
-        th_dev = bc.contentPane(region='center').plainTableHandler(
+                        autoFit=True)         
+        center =   bc.borderContainer(region='center')
+        adminUser = self.application.checkResourcePermission('admin',self.userTags)
+        th_dev = center.contentPane(region='center').plainTableHandler(
                         nodeId='developers',
                         table='comm.developer', 
                         viewResource='ViewMap', 
-                        groupable=True,
-                        configurable=False,
+                        groupable=dict(static=not adminUser),
+                        configurable=adminUser,
                         view_store_onStart=True,
                         addrow=False, delrow=False,
-                        _class='noheader'
+                        grid__class='noheader'
                         )
         bc.dataController(""" 
                             if(!m.map){
