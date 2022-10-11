@@ -34,6 +34,10 @@ class Table(object):
         tbl.aliasColumn('badge_icon', '@badge_id.icon', name_long='!![en]Badge icon')
         tbl.pyColumn('dev_template', py_method='templateColumn', template_name='dev_row')
 
+        tbl.formulaColumn('caption_name', 'COALESCE($fullname,$username)', name_long='!![en]Caption name')  
+        tbl.formulaColumn('dev_location', """CASE WHEN $country IS NOT NULL AND $country != 'IT' THEN $country
+                                                WHEN $locality IS NOT NULL AND $region IS NOT NULL THEN ($locality || ', ' || $region)
+                                                ELSE NULL END""", name_long='!![en]Developer location')
         tbl.formulaColumn('languages',"array_to_string(ARRAY(#lang),', ')",
                             select_lang=dict(table='comm.developer_language',
                                                     columns='$caption_from_developer',
@@ -47,8 +51,9 @@ class Table(object):
                                                     name_long='!![en]Qualifications')
         tbl.formulaColumn('topics',"array_to_string(ARRAY(#topic),', ')",
                             select_topic=dict(table='comm.developer_topic',
-                                                    columns='$caption_from_developer',
-                                                    where='$developer_id=#THIS.id'),
+                                                    columns='$topic',
+                                                    where='$developer_id=#THIS.id',
+                                                    order_by='$level DESC'),
                                                     name_long='!![en]Topics')
         tbl.formulaColumn('hobbies',"array_to_string(ARRAY(#hobby),', ')",
                             select_hobby=dict(table='comm.developer_hobby',
