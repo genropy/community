@@ -12,12 +12,6 @@ class Menu(object):
         root.thpage(u"!![en]Suggestion types", table="comm.suggestion_type")
         root.lookupBranch(u"!![en]Lookups", pkg="comm")
         root.webpage(u"!![en]Community", filepath="/comm/community_map")
-        root.packageBranch(u"!![en]Surveys", pkg="srvy", tags='admin')
-        if self.db.application.getPreference('enable_dem', pkg='comm'):
-            root.packageBranch(u"!![en]DEM", pkg="dem", tags='admin')
-        root.packageBranch(u"!![en]E-mail", pkg="email", tags='admin')
-        root.packageBranch(u"!![en]Administration", tags="superadmin,_DEV_", pkg="adm")
-        root.packageBranch(u"!![en]System", tags="_DEV_", pkg="sys")
 
     @metadata(group_code='COMM')
     def config_community(self,root,**kwargs):

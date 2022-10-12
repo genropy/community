@@ -12,3 +12,5 @@ class AppPref(object):
         fb.dbSelect(value='^.user_default_badge', table='comm.badge', lbl='!![it]New user default badge')
         if 'dem' in self.db.packages:
             fb.checkbox('^.enable_dem', label='!![it]Abilita DEM')
+        if 'social' in self.db.packages:
+            fb.checkbox('^.enable_social', label='!![it]Abilita Social')
