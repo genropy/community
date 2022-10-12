@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<GenRoBag><_ins_ts _tag="__ins_ts" _T="DH" dtype="DH" name_long="!![en]Insert date" indexed="True::B" group="zzz" onInserting="setTSNow" _sysfield="True::B" _owner_package="pbg" as="t0___ins_ts">2022-06-10T15:18:25.510086+02:00</_ins_ts>
+<GenRoBag><_ins_ts _tag="__ins_ts" _T="DH" dtype="DH" name_long="!![en]Insert date" indexed="True::B" group="zzz" onInserting="setTSNow" _sysfield="True::B" _owner_package="pbg" as="t0___ins_ts">2022-09-28T06:54:40.675702+02:00</_ins_ts>
 <_del_ts _tag="__del_ts" _T="NN" dtype="DH" name_long="!![en]Logical delete date" indexed="True::B" group="zzz" _sysfield="True::B" _owner_package="pbg" as="t0___del_ts"></_del_ts>
-<_mod_ts _tag="__mod_ts" _T="DH" dtype="DH" name_long="!![en]Update date" indexed="True::B" group="zzz" onInserting="setTSNow" onUpdating="setTSNow" _sysfield="True::B" _owner_package="pbg" print_width="26::L" as="t0___mod_ts">2022-09-27T15:39:47.039645+02:00</_mod_ts>
+<_mod_ts _tag="__mod_ts" _T="DH" dtype="DH" name_long="!![en]Update date" indexed="True::B" group="zzz" onInserting="setTSNow" onUpdating="setTSNow" _sysfield="True::B" _owner_package="pbg" print_width="26::L" as="t0___mod_ts">2022-10-11T10:33:13.826558+02:00</_mod_ts>
 <_ins_user _tag="__ins_user" _T="NN" name_long="!![en]User Insert" group="zzz" onInserting="setCurrentUser" _sysfield="True::B" _owner_package="pbg" dtype="T" as="t0___ins_user"></_ins_user>
 <identifier size=":120" unique="True::B" indexed="True::B" sql_value="COALESCE(:tbl,:pkg,'')||:objtype||:code|| CASE WHEN :private THEN :userid ELSE '' END" _owner_package="pbg" dtype="A" as="t0_identifier">comm.developertemplatedev_row</identifier>
 <code size=":40" name_long="!![en]Code" indexed="y" _owner_package="pbg" dtype="A" print_width="30::L" as="t0_code">dev_row</code>
@@ -14,27 +14,25 @@
 <data dtype="X" name_long="!![en]Data" _owner_package="pbg" print_width="12::L" as="t0_data"><content>&lt;table cellpadding="1" cellspacing="1" style="border-collapse:collapse;width:100%;font-size:12px;"&gt;
 	&lt;tbody&gt;
 		&lt;tr style="vertical-align:middle;"&gt;
-			&lt;td width="44px"&gt;
-				&lt;img alt="" src="$photo" width="40px" /&gt;&lt;/td&gt;
-			&lt;td width="400px"&gt;
-				&lt;div&gt;
-					&lt;strong&gt;$username &lt;/strong&gt;&lt;/div&gt;
-				&lt;div&gt;
-					&lt;strong&gt;${$fullname}&lt;/strong&gt;&lt;/div&gt;
-			&lt;/td&gt;
-			&lt;td width="400px"&gt;
-				&lt;div&gt;
-					${$city} ${($state)}&lt;/div&gt;
-				&lt;div&gt;
-					${$region}${, $country}&lt;/div&gt;
-			&lt;/td&gt;
-			&lt;td width='22px'&gt;
+			&lt;td width="22px"&gt;
 				&lt;img src="/_rsrc/common/css_icons/svg/16/$badge_icon" width="20px" /&gt;&lt;/td&gt;
+			&lt;td width="300px"&gt;
+				&lt;div&gt;
+					&lt;strong style="font-size:14px"&gt;$caption_name&lt;/strong&gt;&lt;/div&gt;
+				&lt;div&gt;
+					&lt;span style="font-size:10px"&gt;$dev_location&lt;/span&gt;&lt;/div&gt;
+			&lt;/td&gt;
+			&lt;td width="500px"&gt;
+				&lt;div&gt;
+					$argomenti&lt;/div&gt;
+			&lt;/td&gt;
+			&lt;td width="44px" style='text-align:center'&gt;
+              &lt;img alt="" src="$photo" width="40px" /&gt;
+              &lt;span style='font-size:8px'&gt;$username&lt;/span&gt;
+            &lt;/td&gt;
 		&lt;/tr&gt;
 	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;div&gt;
-	&amp;nbsp;&lt;/div&gt;</content>
+&lt;/table&gt;</content>
 <metadata><author>admin</author>
 <version _T="NN"></version>
 <date _T="NN"></date>
@@ -160,37 +158,65 @@
 <df_template _T="NN" dtype="::NN"></df_template>
 <format _T="NN" dtype="::NN"></format>
 <mask _T="NN" dtype="::NN"></mask>
-<editable _T="NN" dtype="::NN"></editable></gdxtxmnmf5></varsbag>
+<editable _T="NN" dtype="::NN"></editable></gdxtxmnmf5>
+<gecz6y7ptd _pkey="gecz6y7ptd"><fieldpath dtype="::NN">caption_name</fieldpath>
+<dtype dtype="::NN">A</dtype>
+<fieldname dtype="::NN">Caption name</fieldname>
+<varname dtype="::NN">caption_name</varname>
+<virtual_column _T="B">True</virtual_column>
+<required_columns _T="NN" dtype="::NN"></required_columns>
+<df_template _T="NN" dtype="::NN"></df_template>
+<format _T="NN" dtype="::NN"></format>
+<mask _T="NN" dtype="::NN"></mask>
+<editable _T="NN" dtype="::NN"></editable></gecz6y7ptd>
+<ged0pq6jkh _pkey="ged0pq6jkh"><fieldpath dtype="::NN">topics</fieldpath>
+<dtype dtype="::NN">A</dtype>
+<fieldname dtype="::NN">Argomenti</fieldname>
+<varname dtype="::NN">argomenti</varname>
+<virtual_column _T="B">True</virtual_column>
+<required_columns _T="NN" dtype="::NN"></required_columns>
+<df_template _T="NN" dtype="::NN"></df_template>
+<format _T="NN" dtype="::NN"></format>
+<mask _T="NN" dtype="::NN"></mask>
+<editable _T="NN" dtype="::NN"></editable></ged0pq6jkh>
+<ged1mdserd _pkey="ged1mdserd"><fieldpath dtype="::NN">dev_location</fieldpath>
+<dtype dtype="::NN">A</dtype>
+<fieldname dtype="::NN">Developer location</fieldname>
+<varname dtype="::NN" _loadedValue="developer_location">dev_location</varname>
+<virtual_column _T="B">True</virtual_column>
+<required_columns _T="NN" dtype="::NN"></required_columns>
+<df_template _T="NN" dtype="::NN"></df_template>
+<format _T="NN" dtype="::NN"></format>
+<mask _T="NN" dtype="::NN"></mask>
+<editable _T="NN" dtype="::NN"></editable></ged1mdserd></varsbag>
 <parameters _T="BAG"></parameters>
 <email><attached_reports _T="BAG"></attached_reports></email>
 <content_css></content_css>
-<compiled><main maintable="comm.developer" locale="it-IT" virtual_columns="fullname,languages,topics,hobbies,badge_icon,username" columns="$photo_url,$locality,$fullname,$state,$city,$region,$languages,$topics,$hobbies,$badge_icon,$username" formats="{}::JS" masks="{}::JS" editcols="{}::JS" df_templates="{}::JS" dtypes='{"photo": "P", "locality": "T", "fullname": "A", "state": "T", "city": "T", "region": "T", "linguaggi": "A", "argomenti": "A", "hobbies": "A", "badge_icon": "T", "username": "A"}::JS'>&lt;table cellpadding="1" cellspacing="1" style="border-collapse:collapse;width:100%;font-size:12px;"&gt;
+<compiled><main maintable="comm.developer" locale="it-IT" virtual_columns="fullname,languages,topics,hobbies,badge_icon,username,caption_name,topics,dev_location" columns="$photo_url,$locality,$fullname,$state,$city,$region,$languages,$topics,$hobbies,$badge_icon,$username,$caption_name,$topics,$dev_location" formats="{}::JS" masks="{}::JS" editcols="{}::JS" df_templates="{}::JS" dtypes='{"photo": "P", "locality": "T", "fullname": "A", "state": "T", "city": "T", "region": "T", "linguaggi": "A", "argomenti": "A", "hobbies": "A", "badge_icon": "T", "username": "A", "caption_name": "A", "dev_location": "A"}::JS'>&lt;table cellpadding="1" cellspacing="1" style="border-collapse:collapse;width:100%;font-size:12px;"&gt;
 	&lt;tbody&gt;
 		&lt;tr style="vertical-align:middle;"&gt;
-			&lt;td width="44px"&gt;
-				&lt;img alt="" src="$photo_url" width="40px" /&gt;&lt;/td&gt;
-			&lt;td width="400px"&gt;
-				&lt;div&gt;
-					&lt;strong&gt;$username &lt;/strong&gt;&lt;/div&gt;
-				&lt;div&gt;
-					&lt;strong&gt;${$fullname}&lt;/strong&gt;&lt;/div&gt;
-			&lt;/td&gt;
-			&lt;td width="400px"&gt;
-				&lt;div&gt;
-					${$city} ${($state)}&lt;/div&gt;
-				&lt;div&gt;
-					${$region}${, $country}&lt;/div&gt;
-			&lt;/td&gt;
-			&lt;td width='22px'&gt;
+			&lt;td width="22px"&gt;
 				&lt;img src="/_rsrc/common/css_icons/svg/16/$badge_icon" width="20px" /&gt;&lt;/td&gt;
+			&lt;td width="300px"&gt;
+				&lt;div&gt;
+					&lt;strong style="font-size:14px"&gt;$caption_name&lt;/strong&gt;&lt;/div&gt;
+				&lt;div&gt;
+					&lt;span style="font-size:10px"&gt;$dev_location&lt;/span&gt;&lt;/div&gt;
+			&lt;/td&gt;
+			&lt;td width="500px"&gt;
+				&lt;div&gt;
+					$topics&lt;/div&gt;
+			&lt;/td&gt;
+			&lt;td width="44px" style='text-align:center'&gt;
+              &lt;img alt="" src="$photo_url" width="40px" /&gt;
+              &lt;span style='font-size:8px'&gt;$username&lt;/span&gt;
+            &lt;/td&gt;
 		&lt;/tr&gt;
 	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;div&gt;
-	&amp;nbsp;&lt;/div&gt;</main></compiled></data>
+&lt;/table&gt;</main></compiled></data>
 <authtags _T="NN" dtype="T" name_long="!![en]Auth tags" _owner_package="pbg" print_width="20::L" as="t0_authtags"></authtags>
 <private _T="B" dtype="B" name_long="!![en]Private" _owner_package="pbg" print_width="11::L" as="t0_private">False</private>
-<quicklist _T="NN" dtype="B" name_long="!![en]Quicklist" _owner_package="pbg" print_width="13::L" as="t0_quicklist"></quicklist>
+<quicklist _T="NN" dtype="B" name_long="!![en]Quicklist" _owner_package="pbg" as="t0_quicklist"></quicklist>
 <flags dtype="T" name_long="!![en]Flags" _owner_package="pbg" print_width="20::L" as="t0_flags">is_row</flags>
 <required_pkg _T="NN" name_long="!![en]Required pkg" _owner_package="pbg" dtype="T" print_width="20::L" as="t0_required_pkg"></required_pkg>
 <preview _T="NN" name_long="!![en][it]Preview" _owner_package="pbg" dtype="T" as="t0_preview"></preview></GenRoBag>

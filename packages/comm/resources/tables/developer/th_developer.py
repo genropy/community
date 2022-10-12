@@ -76,6 +76,10 @@ class ViewMap(View):
         r.fieldcell('dev_template', width='auto')
         r.fieldcell('username', hidden=True)
         r.fieldcell('position', hidden=True)
+        r.fieldcell('locality', hidden=True)
+        r.fieldcell('region', hidden=True)
+        r.fieldcell('country', hidden=True)
+        r.fieldcell('dev_location', hidden=True)
 
     def th_queryBySample(self):                    
         pass
