@@ -154,6 +154,7 @@ class Form(BaseComponent):
     def developerPhoto(self, pane):
         pane.img(src='^.photo_url',
                     edit='camera',
+                    takePicture=True,
                     crop_margin='auto',
                     crop_margin_top='20px',
                     crop_height='120px',
