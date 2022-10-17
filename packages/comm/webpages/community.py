@@ -10,6 +10,7 @@ class GnrCustomWebPage(object):
 
     def configuration(self):
         return [
+            {'title':'!!Home','url':'/adm/home'},
             {'title':'!!Profile','url':'/comm/profile'},
             {'title':'!!Community Map','url':'/comm/community_map'}
         ]
