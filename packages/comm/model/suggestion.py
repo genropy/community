@@ -20,6 +20,6 @@ class Table(object):
                                                                 where='$suggestion_id=#THIS.id', columns='COUNT(*)'),
                                                                 name_long='!![en]How many are interested')
         tbl.aliasColumn('is_project', '@projects.id', name_long='!![en]Is project')
+        tbl.aliasColumn('is_meeting', '@meetings.id', name_long='!![en]Is meeting')
         tbl.aliasColumn('is_event', '@events.id', name_long='!![en]Is event')
-        tbl.aliasColumn('is_event_series', '@event_series.id', name_long='!![en]Is event series')
-        tbl.formulaColumn('approved', '$is_project || $is_event || $is_event_series', name_long='!![en]Approved')
+        tbl.formulaColumn('approved', '$is_project || $is_meeting || $is_event', name_long='!![en]Approved')

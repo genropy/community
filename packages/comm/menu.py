@@ -6,7 +6,7 @@ class Menu(object):
         root.thpage(u"!![en]Developers", table="comm.developer")
         root.thpage(u"!![en]Projects", table="comm.project")
         root.thpage(u"!![en]Project types", table="comm.project_type")
-        root.thpage(u"!![en]Events", table="comm.event_series")
+        root.thpage(u"!![en]Events", table="comm.event")
         root.thpage(u"!![en]Event types", table="comm.event_type")
         root.thpage(u"!![en]Suggestions", table="comm.suggestion")
         root.thpage(u"!![en]Suggestion types", table="comm.suggestion_type")
@@ -21,7 +21,7 @@ class Menu(object):
         root.thpage(u"!![en]Suggestions", table="comm.suggestion")
         root.thpage(u"!![en]Projects", table="comm.project", 
                             viewResource='ViewDevelopers', formResource='FormDevelopers')
-        root.thpage(u"!![en]Events", table="comm.event_series",
+        root.thpage(u"!![en]Events", table="comm.event",
                             viewResource='ViewDevelopers', formResource='FormDevelopers')
 
     @metadata(group_code='SUPP')
@@ -32,5 +32,5 @@ class Menu(object):
         root.webpage(u"!![en]Community", filepath="/comm/community_map")
         root.thpage(u"!![en]Projects", table="comm.project", 
                             viewResource='ViewSupporters', formResource='FormSupporters')
-        root.thpage(u"!![en]Events", table="comm.event_series", 
+        root.thpage(u"!![en]Events", table="comm.event", 
                             viewResource='ViewSupporters', formResource='FormSupporters')

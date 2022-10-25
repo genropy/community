@@ -23,10 +23,10 @@ class ViewFromDeveloper(View):
         r = struct.view().rows()
         r.fieldcell('event_id')
         r.fieldcell('role_id')
-        r.fieldcell('@event_id.start_date')
-        r.fieldcell('@event_id.end_date')
-        r.fieldcell('@event_id.description', width='auto')
-        r.fieldcell('@event_id.event_url', width='25em')
+        r.fieldcell('@meeting_id.start_date')
+        r.fieldcell('@meeting_id.end_date')
+        r.fieldcell('@meeting_id.description', width='auto')
+        r.fieldcell('@meeting_id.event_url', width='25em')
 
 class ViewFromProjects(View):
 
