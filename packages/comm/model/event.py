@@ -13,6 +13,6 @@ class Table(object):
         tbl.column('repository_url', name_long='!![en]Repository URL')
         tbl.column('type_id',size='22', group='_', name_long='!![en]Event type'
                     ).relation('event_type.id', relation_name='events', mode='foreignkey', onDelete='setnull')
-        tbl.column('event_fields', dtype='X', name_long='!![en]Event fields', subfields='event_type_id')
+        tbl.column('event_fields', dtype='X', name_long='!![en]Event fields', subfields='type_id')
         tbl.column('suggestion_id',size='22', group='_', name_long='!![en]Suggestion'
                     ).relation('comm.suggestion.id', relation_name='events', mode='foreignkey', onDelete='raise')

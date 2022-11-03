@@ -42,30 +42,6 @@ class ViewDevelopers(View):
         r.fieldcell('country')
         r.fieldcell('position', hidden=True)
         
-    def th_page_map(self, pane):
-        "Community map"
-        map_cp = pane.GoogleMap( 
-                        height='100%',
-                        map_type='roadmap',
-                        centerMarker=True,
-                        nodeId='dev_maps',
-                        autoFit=True)
-        pane.dataController(""" 
-                            if(!m.map){
-                                        return;
-                                    }
-                            m.gnr.clearMarkers(m);
-                            var that = this;
-                            store.forEach(function(n){
-                                console.log(n);
-                                m.gnr.setMarker(m, n.attr._pkey, n.attr.position, {title:n.attr.username}
-                                                );
-                            }, 'static');
-                         """,
-                            m=map_cp,
-                            store='^.store',
-                            _delay=100)
-
     def th_options(self):
         return dict(virtualStore=False, addrow=False, delrow=False)
 
@@ -90,11 +66,10 @@ class Form(BaseComponent):
         bc = form.center.borderContainer() 
         top = bc.borderContainer(region='top',height='50%', datapath='.record')
         self.developerInfo(top.contentPane(region='left', width='600px'))
-        center = top.borderContainer(region='center')
-        self.developerPhoto(center.contentPane(region='top', height='210px'))
-        self.developerBadge(center.contentPane(region='center'))
+        self.developerPhoto(top.contentPane(region='center'))
         right = top.borderContainer(region='right', width='300px')
         self.developerUser(right.contentPane(region='top', height='100px'))
+        self.developerBadge(right.roundedGroupFrame(region='center', title='!![en]Badge', height='60px'))
         #self.developerServices(right.contentPane(region='center', datapath='#FORM'))
 
         tc= bc.tabContainer(region='center',margin='2px')
@@ -106,13 +81,9 @@ class Form(BaseComponent):
         self.developerNewsletterTab(tc.contentPane(title='!![en]Newsletter', checkpref='comm.enable_dem'))
         self.developerProjectsTab(tc.contentPane(title='!![en]Projects'))
 
-    def developerInfo(self, pane):
+    def developerInfo(self, pane, **kwargs):
         fb = pane.div(padding='10px').formbuilder(cols=3, border_spacing='8px 0px', 
-                        width='100%',fld_width='100%',lblpos='T',
-                        lbl_text_align='left',lbl_font_size='.8em',
-                        lbl_padding_top='4px',
-                        lbl_font_weight='bold',fldalign='left',
-                        _class='mobilefields')
+                        width='100%',fld_width='100%',**kwargs)
         fb.field('name',validate_notnull=True)
         fb.div(width='10px')
         fb.field('surname',validate_notnull=True)
@@ -165,8 +136,8 @@ class Form(BaseComponent):
                     upload_folder='*')
 
     def developerBadge(self, pane):
-        fb = pane.formbuilder(margin='auto', lblpos='T')
-        fb.field('badge_id')
+        fb = pane.formbuilder(cols=1, width='100%', fld_width='90%')
+        fb.dbSelect('^.badge_id', table='comm.badge', hasDownArrow=True)
 
     def developerUser(self, pane):
         pane.linkerBox('user_id', 
@@ -267,7 +238,12 @@ class FormProfile(Form):
         tc = bc.tabContainer(region='center',margin='2px', _class='profile_center')
         dev_info = tc.borderContainer(title='!![en]Developer info',datapath='.record')
         self.developerPhoto(dev_info.contentPane(region='top'))
-        self.developerInfo(dev_info.contentPane(region='center'))
+        self.developerInfo(dev_info.contentPane(region='center'), 
+                        lblpos='T',
+                        lbl_text_align='left',lbl_font_size='.8em',
+                        lbl_padding_top='4px',
+                        lbl_font_weight='bold',fldalign='left',
+                        _class='mobilefields')
         #self.developerGeoInfo(tc.contentPane(title='!![en]Address', datapath='.record').div(padding='20px',padding_right='40px'))
         self.developerLookupsTab(tc.contentPane(title='!![en]Languages'), field='language')
         self.developerLookupsTab(tc.contentPane(title='!![en]Topics'), field='topic')

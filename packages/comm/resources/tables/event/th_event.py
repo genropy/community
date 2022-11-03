@@ -33,21 +33,29 @@ class ViewSupporters(View):
         return dict(virtualStore=False, delrow=False)
 
 class Form(BaseComponent):
-    py_requires="gnrcomponents/attachmanager/attachmanager:AttachManager"
+    py_requires="""gnrcomponents/attachmanager/attachmanager:AttachManager,
+                    gnrcomponents/dynamicform/dynamicform:DynamicForm"""
 
     def th_form(self, form):
         bc = form.center.borderContainer()
-        fb = bc.contentPane(region='top', datapath='.record').formbuilder(cols=3, border_spacing='4px', fld_width='100%')
+        top = bc.borderContainer(region='top', height='120px', datapath='.record')
+        self.eventDetails(top.roundedGroupFrame(region='center', title='!![en]Event details'))
+        self.eventDynamicFields(top.roundedGroupFrame(region='right', width='30%', title='!![en]Additional details'))
+        self.eventMeetings(bc.contentPane(region='center'))
+        
+    def eventDetails(self, pane):
+        fb = pane.formbuilder(cols=3, border_spacing='4px')
         fb.field('name')
         fb.field('description', colspan=2)
         fb.field('event_url', colspan=3)
         fb.field('repository_url', colspan=3)
 
-        self.eventsSeries(bc.roundedGroupFrame(region='center', title='!![en]Events', pbl_classes='*'))
+    def eventDynamicFields(self, pane):
+        pane.dynamicFieldsPane('event_fields')
 
-    def eventsSeries(self, pane):
-        pane.borderTableHandler(relation='@meetings', formResource='FormFromEvents',
-                                                                            viewResource='ViewFromEvents')
+    def eventMeetings(self, pane):
+        pane.dialogTableHandler(relation='@meetings', 
+                                viewResource='ViewFromEvents', pbl_classes=True)
 
     def th_options(self):
         return dict(dialog_height='400px', dialog_width='600px', 
@@ -61,14 +69,14 @@ class Form(BaseComponent):
 class FormSupporters(Form):
 
     def eventSeriesEvents(self, pane):
-        pane.borderTableHandler(relation='@meetings', viewResource='ViewSupporters', vpane_height='30%',
-                                    formResource='FormSupporters', delrow=False)
+        pane.dialogTableHandler(relation='@meetings', 
+                                viewResource='ViewFromEvents', pbl_classes=True, delrow=False)
 
 class FormDevelopers(FormSupporters):
 
     def eventSeriesEvents(self, pane):
-        pane.borderTableHandler(relation='@meetings', viewResource='ViewDevelopers', vpane_height='30%',
-                                    formResource='FormDevelopers', addrow=False, delrow=False)
+        pane.dialogTableHandler(relation='@meetings', 
+                                viewResource='ViewFromEvents', pbl_classes=True, addrow=False, delrow=False)
 
     def th_options(self):
         return dict(readOnly=True)
