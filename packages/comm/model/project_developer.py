@@ -7,7 +7,7 @@ class Table(object):
     
     def config_db(self, pkg):
         tbl =  pkg.table('project_developer', pkey='id', name_plural='!![en]Project developers',
-                         name_long=u'!![en]Project developer', caption_field='project_name')
+                         name_long=u'!![en]Project developer', caption_field='project_title')
         self.sysFields(tbl)
         
         tbl.column('developer_id',size='22',name_long = '!![en]Developer',group='_').relation('comm.developer.id',
@@ -23,7 +23,7 @@ class Table(object):
                                                                                     mode='foreignkey',
                                                                                     relation_name='project_developers')
         tbl.column('status', dtype='B', name_long='!![en]Status')
-        tbl.aliasColumn('project_name', '@project_id.name', name_long='!![en]Project name')
+        tbl.aliasColumn('project_title', '@project_id.title', name_long='!![en]Project title')
 
     @public_method
     def subscribeToProject(self, project_id=None, developer_id=None):

@@ -28,13 +28,6 @@ class ViewFromSuggestions(View):
     def th_struct(self,struct):
         r = struct.view().rows()
         r.fieldcell('developer_id', width='25em', edit=True)
-    
-    def th_view(self, view):
-        bar = view.top.bar.replaceSlots('searchOn','make_initiative,5,searchOn')
-        bar.make_initiative.slotButton('!![en]Approve').dataRpc(
-                                self.db.table('comm.suggestion_developer').makeInitiativeFromSubscription,
-                                                selectedPkeys='=.grid.currentSelectedPkeys')
-
 
 class Form(BaseComponent):
 

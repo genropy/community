@@ -8,7 +8,7 @@ class View(BaseComponent):
     def th_struct(self,struct):
         r = struct.view().rows()
         r.fieldcell('event_id')
-        r.fieldcell('name')
+        r.fieldcell('title')
         r.fieldcell('start_date', width='10em')
         r.fieldcell('end_date', width='10em')
         r.fieldcell('description', width='auto')
@@ -18,7 +18,7 @@ class View(BaseComponent):
         return 'event_id'
 
     def th_query(self):
-        return dict(column='name', op='contains', val='')
+        return dict(column='title', op='contains', val='')
 
     def th_top_toolbar(self,top):
         top.slotToolbar('*,sections@event_type_id,*', childname='top', _position='<bar')
@@ -45,28 +45,29 @@ class Form(BaseComponent):
         bc = form.center.borderContainer()
         fb = bc.contentPane(region='top', height='110px', datapath='.record').formbuilder(cols=2, 
                                             margin='4px', border_spacing='4px', fld_width='100%')
-        fb.field('name', colspan=2)
+        fb.field('title', colspan=2)
         fb.field('description', colspan=2)
         fb.field('start_date')
         fb.field('end_date')
         fb.field('meeting_url', colspan=2)
 
         tc = bc.tabContainer(region='center')
-        self.eventAttachments(tc.contentPane(title='!![en]Attachments'))
-        self.eventDevelopers(tc.contentPane(title='!![en]Developers'))
+        self.meetingAttachments(tc.contentPane(title='!![en]Attachments'))
+        self.meetingDevelopers(tc.contentPane(title='!![en]Developers'))
 
-    def eventAttachments(self,pane):
+    def meetingAttachments(self,pane):
         pane.attachmentMultiButtonFrame()
 
-    def eventDevelopers(self, pane):
-        pane.inlineTableHandler(relation='@developers', picker='developer_id', viewResource='ViewFromEvents')
+    def meetingDevelopers(self, pane):
+        pane.inlineTableHandler(relation='@developers', picker='developer_id', 
+                                viewResource='ViewFromMeetings', pbl_classes=True)
 
     def th_options(self):
         return dict(dialog_height='400px', dialog_width='600px')
 
 class FormSupporters(Form):
 
-    def eventDevelopers(self, pane):
+    def meetingDevelopers(self, pane):
         pane.inlineTableHandler(relation='@developers', liveUpdate=True,
                                     viewResource='View', addrow=False, delrow=False)
 
@@ -88,8 +89,8 @@ class FormDevelopers(FormSupporters):
                                                                                             template='event_info')
 
         tc = bc.tabContainer(region='center')
-        self.eventAttachments(tc.contentPane(title='!![en]Attachments'))
-        self.eventDevelopers(tc.contentPane(title='!![en]Developers'))
+        self.meetingAttachments(tc.contentPane(title='!![en]Attachments'))
+        self.meetingDevelopers(tc.contentPane(title='!![en]Developers'))
 
     def th_options(self):
         return dict(readOnly=True)

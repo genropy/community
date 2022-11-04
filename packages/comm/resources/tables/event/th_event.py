@@ -7,20 +7,20 @@ class View(BaseComponent):
 
     def th_struct(self,struct):
         r = struct.view().rows()
-        r.fieldcell('name')
-        r.fieldcell('type_id', hidden=True)
+        r.fieldcell('title')
+        r.fieldcell('event_type_id', hidden=True)
         r.fieldcell('description', width='auto')
         r.fieldcell('event_url', width='25em')
         r.fieldcell('repository_url', width='25em')
 
     def th_order(self):
-        return 'name'
+        return 'title'
 
     def th_query(self):
-        return dict(column='name', op='contains', val='')
+        return dict(column='title', op='contains', val='')
 
     def th_top_toolbar(self,top):
-        top.slotToolbar('*,sections@type_id,*', childname='top', _position='<bar')
+        top.slotToolbar('*,sections@event_type_id,*', childname='top', _position='<bar')
 
 class ViewDevelopers(View):
 
@@ -38,17 +38,19 @@ class Form(BaseComponent):
 
     def th_form(self, form):
         bc = form.center.borderContainer()
-        top = bc.borderContainer(region='top', height='120px', datapath='.record')
-        self.eventDetails(top.roundedGroupFrame(region='center', title='!![en]Event details'))
-        self.eventDynamicFields(top.roundedGroupFrame(region='right', width='30%', title='!![en]Additional details'))
+        top = bc.borderContainer(region='top', height='140px', datapath='.record')
+        self.eventDetails(top)
         self.eventMeetings(bc.contentPane(region='center'))
         
-    def eventDetails(self, pane):
-        fb = pane.formbuilder(cols=3, border_spacing='4px')
-        fb.field('name')
+    def eventDetails(self, top):
+        left = top.roundedGroupFrame(region='center', title='!![en]Event details')
+        fb = left.formbuilder(cols=2, border_spacing='4px', width='600px')
+        fb.field('title')
+        fb.field('event_type_id')
         fb.field('description', colspan=2)
-        fb.field('event_url', colspan=3)
-        fb.field('repository_url', colspan=3)
+        fb.field('event_url', colspan=2)
+        fb.field('repository_url', colspan=2)
+        self.eventDynamicFields(top.roundedGroupFrame(region='right', width='30%', title='!![en]Additional details'))
 
     def eventDynamicFields(self, pane):
         pane.dynamicFieldsPane('event_fields')
@@ -59,7 +61,7 @@ class Form(BaseComponent):
 
     def th_options(self):
         return dict(dialog_height='400px', dialog_width='600px', 
-                    defaultPrompt=dict(title="!![en]Event type",
+                    defaultPrompt=dict(title="!![en]New event",
                                       fields=[dict(value='^.type_id',
                                                     tag='dbSelect',
                                                     lbl='!![en]Event type',
@@ -68,13 +70,16 @@ class Form(BaseComponent):
 
 class FormSupporters(Form):
 
-    def eventSeriesEvents(self, pane):
+    def eventMeetings(self, pane):
         pane.dialogTableHandler(relation='@meetings', 
                                 viewResource='ViewFromEvents', pbl_classes=True, delrow=False)
 
 class FormDevelopers(FormSupporters):
 
-    def eventSeriesEvents(self, pane):
+    def eventDetails(self, pane):
+        pane.templateChunk(table='comm.event', record_id='^.id', template='event_info')
+
+    def eventMeetings(self, pane):
         pane.dialogTableHandler(relation='@meetings', 
                                 viewResource='ViewFromEvents', pbl_classes=True, addrow=False, delrow=False)
 

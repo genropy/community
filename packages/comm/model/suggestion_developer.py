@@ -28,7 +28,4 @@ class Table(object):
         new_subscription = self.newrecord(suggestion_id=suggestion_id, developer_id=developer_id)
         self.insert(new_subscription)
         self.db.commit()
-
-    @public_method
-    def makeInitiativeFromSubscription(self, pkeys=None):
-        pass
+    

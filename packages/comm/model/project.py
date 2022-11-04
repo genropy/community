@@ -4,10 +4,10 @@ from gnr.core.gnrdecorator import public_method
 class Table(object):
     def config_db(self,pkg):
         tbl=pkg.table('project', pkey='id', name_long='!![en]Project', 
-                        name_plural='!![en]Projects', caption_field='name')
+                        name_plural='!![en]Projects', caption_field='title')
         self.sysFields(tbl)
         
-        tbl.column('name', name_long='!![en]Name')
+        tbl.column('title', name_long='!![en]Title')
         tbl.column('description', name_long='!![en]Description', name_short='!![en]Descr.')
         tbl.column('app_url', name_long='!![en]Project URL')
         tbl.column('repository_url', name_long='!![en]Repository URL')
@@ -42,7 +42,7 @@ class Table(object):
                                     w_s=workspace_slug, columns='$id')
         for p in projects.digest('#v'):
             repository_url = p['links.html.href'] or p['url']
-            name = p['name']
+            name = p['title']
             description = p['description']
             workspace_record = self.newrecord(repository_url=repository_url, 
                                 name=name, description=description, 

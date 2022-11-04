@@ -9,7 +9,7 @@ class View(BaseComponent):
     def th_struct(self,struct):
         r = struct.view().rows()
         r.fieldcell('developer_id')
-        r.fieldcell('event_id')
+        r.fieldcell('meeting_id')
         r.fieldcell('role_id')
 
     def th_order(self):
@@ -21,26 +21,21 @@ class View(BaseComponent):
 class ViewFromDeveloper(View):
     def th_struct(self,struct):
         r = struct.view().rows()
-        r.fieldcell('event_id')
+        r.fieldcell('meeting_id')
         r.fieldcell('role_id')
         r.fieldcell('@meeting_id.start_date')
         r.fieldcell('@meeting_id.end_date')
         r.fieldcell('@meeting_id.description', width='auto')
         r.fieldcell('@meeting_id.event_url', width='25em')
 
-class ViewFromProjects(View):
+class ViewFromMeetings(View):
 
     def th_struct(self,struct):
         r = struct.view().rows()
+        r.fieldcell('role_icon', width='2em', name=' ', 
+                    template="<img src='/_rsrc/common/css_icons/svg/16/$role_icon.svg' width='15px'")
         r.fieldcell('developer_id', width='25em', edit=True)
         r.fieldcell('role_id', edit=True)
-    
-    def th_view(self, view):
-        bar = view.top.bar.replaceSlots('searchOn','approve_btn,5,searchOn')
-        bar.approve_btn.slotButton('!![en]Approve').dataRpc(
-                                self.db.table('comm.project_developer').approveSubscription,
-                                                selectedPkeys='=.grid.currentSelectedPkeys')
-
 
 class Form(BaseComponent):
 
@@ -48,7 +43,7 @@ class Form(BaseComponent):
         pane = form.record
         fb = pane.formbuilder(cols=2, border_spacing='4px')
         fb.field('developer_id')
-        fb.field('event_id')
+        fb.field('meeting_id')
         fb.field('role_id')
 
 

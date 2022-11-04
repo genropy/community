@@ -7,7 +7,7 @@ class View(BaseComponent):
 
     def th_struct(self,struct):
         r = struct.view().rows()
-        r.fieldcell('name')
+        r.fieldcell('title')
         r.fieldcell('start_date', width='6em')
         r.fieldcell('end_date', width='6em')
         r.fieldcell('project_type_id', hidden=True)
@@ -18,10 +18,10 @@ class View(BaseComponent):
         #r.fieldcell('linesofcode', width='6em')
 
     def th_order(self):
-        return 'name'
+        return 'title'
 
     def th_query(self):
-        return dict(column='name', op='contains', val='')
+        return dict(column='title', op='contains', val='')
 
     def th_top_toolbar(self,top):
         top.slotToolbar('*,sections@project_type_id,*', childname='top', _position='<bar')
@@ -61,12 +61,22 @@ class ViewFromDeveloper(View):
         return dict(searchOn=False)
 
 class Form(BaseComponent):
-    py_requires="gnrcomponents/attachmanager/attachmanager:AttachManager"
+    py_requires="""gnrcomponents/attachmanager/attachmanager:AttachManager,
+                    gnrcomponents/dynamicform/dynamicform:DynamicForm"""
 
     def th_form(self, form):
         bc = form.center.borderContainer()
-        fb = bc.contentPane(region='top', height='30%', datapath='.record').formbuilder(cols=2, border_spacing='4px', fld_width='100%')
-        fb.field('name', colspan=2)
+        top = bc.borderContainer(region='top', height='180px', datapath='.record')
+        tc = bc.tabContainer(region='center')
+        self.projectDetails(top)
+        self.projectAttachments(tc.contentPane(title='!![en]Attachments'))
+        self.projectDevelopers(tc.contentPane(title='!![en]Developers'))
+
+    def projectDetails(self, top):
+        left = top.roundedGroupFrame(region='center', title='!![en]Project details')
+        fb = left.formbuilder(cols=2, border_spacing='4px', width='600px', fld_width='100%')
+        fb.field('title')
+        fb.field('project_type_id')
         fb.field('description', colspan=2)
         fb.field('start_date')
         fb.field('end_date')
@@ -75,16 +85,17 @@ class Form(BaseComponent):
         #fb.field('workspace_id')
         #fb.div('^.linesofcode_metadata.linesOfCode', lbl='!![en]Lines of code')
 
-        tc = bc.tabContainer(region='center')
-        self.projectAttachments(tc.contentPane(title='!![en]Attachments'))
-        self.projectDevelopers(tc.contentPane(title='!![en]Developers'))
+        self.projectDynamicFields(top.roundedGroupFrame(region='right', width='30%', title='!![en]Additional details'))
+
+    def projectDynamicFields(self, pane):
+        pane.dynamicFieldsPane('project_fields')
 
     def projectAttachments(self,pane):
         pane.attachmentMultiButtonFrame()
 
     def projectDevelopers(self, pane):
         pane.inlineTableHandler(relation='@developers', picker='developer_id', 
-                                    viewResource='ViewFromProjects', default_status=True)
+                                    viewResource='ViewFromProjects', default_status=True, pbl_classes=True)
 
     #def th_top_custom(self, top):
     #    bar = top.bar.replaceSlots('right_placeholder','countlines,5,right_placeholder')
@@ -103,13 +114,20 @@ class Form(BaseComponent):
 
 
     def th_options(self):
-        return dict(dialog_height='400px', dialog_width='600px')
+        return dict(dialog_height='400px', dialog_width='600px', 
+                    defaultPrompt=dict(title="!![en]New project",
+                                      fields=[dict(value='^.project_type_id',
+                                                    tag='dbSelect',
+                                                    lbl='!![en]Project type',
+                                                    table='comm.project_type',
+                                                    hasDownArrow=True)]))
+
 
 class FormSupporters(Form):
 
     def projectDevelopers(self, pane):
         pane.inlineTableHandler(relation='@developers', liveUpdate=True,
-                                    viewResource='View', addrow=False, delrow=False)
+                                    viewResource='View', addrow=False, delrow=False, pbl_classes=True)
 
     def th_top_custom(self, top):
         bar = top.bar.replaceSlots('right_placeholder','subscribe_btn,5,right_placeholder')
@@ -122,15 +140,8 @@ class FormSupporters(Form):
 
 class FormDevelopers(FormSupporters):
 
-    def th_form(self, form):
-        bc = form.center.borderContainer()
-        bc.contentPane(region='top', height='30%', datapath='.record').templateChunk(table='comm.project', 
-                                                                                            record_id='^.id',
-                                                                                            template='project_info')
-
-        tc = bc.tabContainer(region='center')
-        self.projectAttachments(tc.contentPane(title='!![en]Attachments'))
-        self.projectDevelopers(tc.contentPane(title='!![en]Developers'))
+    def projectDetails(self, pane):
+        pane.templateChunk(table='comm.project', record_id='^.id', template='project_info')
         
     def th_options(self):
         return dict(readOnly=True)

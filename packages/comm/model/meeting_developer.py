@@ -7,7 +7,7 @@ class Table(object):
     
     def config_db(self, pkg):
         tbl =  pkg.table('meeting_developer', pkey='id', name_plural='!![en]Meeting developers',
-                         name_long=u'!![en]Meeting developer', caption_field='meeting_name')
+                         name_long=u'!![en]Meeting developer', caption_field='meeting_title')
         self.sysFields(tbl)
         
         tbl.column('developer_id',size='22',name_long = '!![en]Developer',group='_').relation('comm.developer.id',
@@ -23,7 +23,8 @@ class Table(object):
                                                                                     mode='foreignkey',
                                                                                     relation_name='meeting_developers')
 
-        tbl.aliasColumn('meeting_name', '@meeting_id.name', name_long='!![en]Event name')
+        tbl.aliasColumn('meeting_title', '@meeting_id.title', name_long='!![en]Event title')
+        tbl.aliasColumn('role_icon', '@role_id.icon', name_long='!![en]Role icon')
 
     @public_method
     def subscribeToevent(self, meeting_id=None, developer_id=None):
