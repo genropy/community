@@ -13,8 +13,6 @@ class Table(object):
         tbl.column('speakers', name_long='!![en]Speakers')
         tbl.column('audience', name_long='!![en]Audience')
         tbl.column('topics', name_long='!![en]Topics')
-        tbl.column('developer_id',size='22', group='_', name_long='!![en]Developer'
-                    ).relation('comm.developer.id', relation_name='suggestions', mode='foreignkey', onDelete='raise')
         tbl.column('suggestion_type_id',size='22', group='_', name_long='!![en]Suggestion type'
                     ).relation('comm.suggestion_type.id', relation_name='suggestions', mode='foreignkey', onDelete='setnull')
         tbl.column('suggestion_fields', dtype='X', name_long='!![en]Suggestion fields', subfields='suggestion_type_id')

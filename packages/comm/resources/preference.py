@@ -14,3 +14,5 @@ class AppPref(object):
             fb.checkbox('^.enable_dem', label='!![it]Abilita DEM')
         if 'social' in self.db.packages:
             fb.checkbox('^.enable_social', label='!![it]Abilita Social')
+        if 'genrobot' in self.db.packages:
+            fb.checkbox('^.enable_genrobot', label='!![it]Abilita Genrobot')
