@@ -94,15 +94,15 @@ class Form(BaseComponent):
                     selected_administrative_area_level_3='.city',
                     selected_country='.country',
                     selected_position='.position',
-                    selectedRecord='.address_bag',colspan=3,
-                    validate_notnull=True)        
+                    selectedRecord='.address_bag',colspan=3)      
+        fb.field('position',protected=True,colspan=3)
         fb.field('nickname')
         fb.div(width='10px')
         fb.field('tg_username',lbl='Telegram')
         fb.field('github',colspan=3)
         fb.field('email',colspan=3)
         fb.field('website',colspan=3)
-        fb.field('bio', tag='simpleTextArea', height='100px',colspan=3)
+        fb.field('bio', tag='simpleTextArea', height='60px',colspan=3)
         #fb.field('position',validate_notnull=True,hidden=True)
 
     #def developerGeoInfo(self,pane):
