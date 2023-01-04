@@ -22,8 +22,7 @@
     color: white;
     padding: 10px;
     border-radius: 3px;
-    display: flex;
-    float: right;
+    text-align: center;
     font-size: 14px;
     margin: 5px;
     cursor: pointer;

@@ -78,6 +78,7 @@ class Form(BaseComponent):
         self.developerLookupsTab(tc.contentPane(title='!![en]Languages'), field='language')
         self.developerLookupsTab(tc.contentPane(title='!![en]Topics'), field='topic')
         self.developerLookupsTab(tc.contentPane(title='!![en]Hobbies'), field='hobby')
+        self.developerLookupsTab(tc.contentPane(title='!![en]Skills'), field='skill')
         self.developerNewsletterTab(tc.contentPane(title='!![en]Newsletter', checkpref='comm.enable_dem'))
         self.developerProjectsTab(tc.contentPane(title='!![en]Projects'))
 
@@ -87,23 +88,23 @@ class Form(BaseComponent):
         fb.field('name',validate_notnull=True)
         fb.div(width='10px')
         fb.field('surname',validate_notnull=True)
-        fb.field('full_address', lbl='Full address', tag='geocoderfield',
+        fb.field('full_address', lbl='!![en]Full address', tag='geocoderfield',
                     selected_locality='.locality',
                     selected_administrative_area_level_1='.region',
                     selected_administrative_area_level_2='.state',
                     selected_administrative_area_level_3='.city',
                     selected_country='.country',
                     selected_position='.position',
-                    selectedRecord='.address_bag',colspan=3,
-                    validate_notnull=True)        
+                    selectedRecord='.address_bag')
+        fb.div(width='10px')            
+        fb.field('position',protected=True)
         fb.field('nickname')
         fb.div(width='10px')
         fb.field('tg_username',lbl='Telegram')
         fb.field('github',colspan=3)
         fb.field('email',colspan=3)
         fb.field('website',colspan=3)
-        fb.field('bio', tag='simpleTextArea', height='100px',colspan=3)
-        #fb.field('position',validate_notnull=True,hidden=True)
+        fb.field('bio', tag='simpleTextArea', height='80px',colspan=3)
 
     #def developerGeoInfo(self,pane):
     #    fb = pane.formbuilder(cols=1, width='100%', colswidth='auto',
@@ -186,6 +187,17 @@ class Form(BaseComponent):
         pane.dialogTableHandler(relation='@projects', pbl_classes=True, 
                                     margin='2px', viewResource='ViewFromDeveloper')
 
+    def developerAccessTab(self, pane):
+        fb = pane.contentPane(margin='2px').formbuilder(cols=1)
+        fb.lightbutton('!![en]Change password', _class='comm_btn').dataController(
+                                                    "genro.mainGenroWindow.genro.publish('openNewPwd')")
+        fb.lightbutton('!![en]Delete account', _class='comm_btn').dataRpc(self.db.table('comm.developer').deleteDeveloper, 
+                                                    developer_id='=#FORM.pkey', _ask=dict(title="!![en]Are you sure?",
+                                                    fields=[dict(name="delete_request", 
+                                                            label="!![en]Confirm account deletion", 
+                                                            tag='checkbox')]),
+                                                    _onResult='genro.logout();')
+
     @public_method
     def th_onSaving(self,recordCluster,recordClusterAttr=None,resultAttr=None,**kwargs):
         if recordCluster['language_info']:
@@ -197,6 +209,9 @@ class Form(BaseComponent):
         if recordCluster['hobby_info']:
             self.db.table('comm.developer_hobby').updateHobbyInfo(developer_id=recordCluster['id'],
                                                         hobby_info=recordCluster['hobby_info'])
+        if recordCluster['skill_info']:
+            self.db.table('comm.developer_skill').updateSkillInfo(developer_id=recordCluster['id'],
+                                                        skill_info=recordCluster['skill_info'])
         if recordCluster['newsletter_subscription']:
             self.db.table('dem.contatto_lista').updateNewsletterSubscription(developer_id=recordCluster['id'],
                                                         consenso=recordCluster['consenso'],
@@ -206,17 +221,16 @@ class Form(BaseComponent):
     def th_onLoading(self, record, newrecord, loadingParameters, recInfo):
         if newrecord:
             return
-        language_info = self.db.table('comm.developer_language').getLanguageInfo(
-                                                        developer_id=record['id'])
+        language_info = self.db.table('comm.developer_language').getLanguageInfo(developer_id=record['id'])
         record.addItem('language_info',language_info or Bag(), _sendback=True)
-        topic_info = self.db.table('comm.developer_topic').getTopicInfo(
-                                                        developer_id=record['id'])
+        topic_info = self.db.table('comm.developer_topic').getTopicInfo(developer_id=record['id'])
         record.addItem('topic_info',topic_info or Bag(), _sendback=True)
-        hobby_info = self.db.table('comm.developer_hobby').getHobbyInfo(
-                                                        developer_id=record['id'])
+        hobby_info = self.db.table('comm.developer_hobby').getHobbyInfo(developer_id=record['id'])
         record.addItem('hobby_info',hobby_info or Bag(), _sendback=True)
+        skill_info = self.db.table('comm.developer_skill').getSkillInfo(developer_id=record['id'])
+        record.addItem('skill_info',skill_info or Bag(), _sendback=True)
         newsletter_subscription = self.db.table('dem.contatto_lista').getNewsletterSubscription(
-                                                        contatto_id=record['contatto_id'])
+                                                                        contatto_id=record['contatto_id'])
         record.addItem('newsletter_subscription',newsletter_subscription or Bag(), _sendback=True)
         consenso = self.db.table('dem.contatto').getSubscriptionConsent(contatto_id=record['contatto_id'])
         if consenso:
@@ -248,9 +262,11 @@ class FormProfile(Form):
         self.developerLookupsTab(tc.contentPane(title='!![en]Languages'), field='language')
         self.developerLookupsTab(tc.contentPane(title='!![en]Topics'), field='topic')
         self.developerLookupsTab(tc.contentPane(title='!![en]Hobbies'), field='hobby')
+        self.developerLookupsTab(tc.contentPane(title='!![en]Skills'), field='skill')
         self.developerNewsletterTab(tc.contentPane(title='!![en]Newsletter', checkpref='comm.enable_dem'))
+        self.developerAccessTab(tc.contentPane(title='!![en]Access'))
         bc.contentPane(region='bottom', height='50px').lightbutton(
-                '!![en]Save', _class='comm_btn').dataController("this.form.save();")
+                '!![en]Save', _class='comm_btn', float='right').dataController("this.form.save();")
 
     def th_options(self):
         return dict(showtoolbar=False)

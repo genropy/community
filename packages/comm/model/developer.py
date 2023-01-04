@@ -1,4 +1,6 @@
 # encoding: utf-8
+from datetime import datetime
+from gnr.core.gnrdecorator import public_method
 
 class Table(object):
     def config_db(self,pkg):
@@ -28,8 +30,9 @@ class Table(object):
                     ).relation('adm.user.id', one_one=True, relation_name='developer', 
                          mode='foreignkey', onDelete='raise')
         tbl.column('address_bag','X', name_long='Address bag')
+
         tbl.formulaColumn('fullname',"$name || ' ' || $surname", name_long='Fullname')
-        tbl.formulaColumn('username',"COALESCE(tg_username,@user_id.username)", name_long='Username')
+        tbl.formulaColumn('username',"COALESCE($tg_username,@user_id.username,$nickname)", name_long='Username')
         tbl.aliasColumn('contatto_id', '@contatti.id', name_long='!![en]Contatto', static=True)
         tbl.aliasColumn('badge_icon', '@badge_id.icon', name_long='!![en]Badge icon')
         tbl.pyColumn('dev_template', py_method='templateColumn', template_name='dev_row')
@@ -82,3 +85,18 @@ class Table(object):
         interviewtbl.insert(new_interview)
         self.db.commit()
         return new_interview['id']
+
+    @public_method
+    def deleteDeveloper(self, developer_id=None, delete_request=None):
+        if not delete_request or not developer_id:
+            return
+        with self.recordToUpdate(developer_id) as rec:
+            user_id = rec['user_id']
+            email = rec['email'].replace(rec['email'][3:], '*'*len(rec['email'][3:]))
+            rec.update({key: None for key in rec.keys()[5:]})
+            rec['email'] = email
+            rec['__del_ts'] = datetime.now()
+        self.db.table('adm.user').deleteSelection(where='$id=:u_id', u_id=user_id)
+        self.db.commit()
+        print('**Richiesta eliminazione developer completata: ', developer_id)
+        return developer_id
