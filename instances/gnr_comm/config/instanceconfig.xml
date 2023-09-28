@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<GenRoBag>
+	<db dbname="community"/>
+
+	<packages>
+		<gnrcore_adm pkgcode="gnrcore:adm"/>
+		<gnrcore_sys pkgcode="gnrcore:sys"/>
+		<gnr_it_glbl pkgcode="gnr_it:glbl"/>
+		<gnrcore_email pkgcode="gnrcore:email"/>
+		<gnrcore_flib pkgcode="gnrcore:flib"/>
+		<gnrcore_biz pkgcode="gnrcore:biz"/>
+		<gnrextra_wpn pkgcode="gnrextra:wpn"/>
+		<gnrextra_srvy pkgcode="gnrextra:srvy"/>
+		<gnrextra_genrobot pkgcode="gnrextra:genrobot"/>
+		<gnrextra_social pkgcode="gnrextra:social"/>
+		<gnrextra_video pkgcode="gnrextra:video"/>
+		<gnrextra_dem pkgcode="gnrextra:dem"/>
+		<community_comm pkgcode="community:comm"/>
+	</packages>
+	
+	<authentication pkg="adm">
+		<py_auth defaultTags="user" pkg="adm" method="authenticate"/>
+	</authentication>
+
+	<site>
+		<wsgi mainpackage='comm'/>
+	</site>
+</GenRoBag>

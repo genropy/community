@@ -34,3 +34,22 @@ class Menu(object):
                             viewResource='ViewSupporters', formResource='FormSupporters')
         root.thpage(u"!![en]Events", table="comm.event", 
                             viewResource='ViewSupporters', formResource='FormSupporters')
+        
+
+class ApplicationMenu(object):
+
+    def config(self,root,**kwargs):
+        root.packageBranch(u"!![en]Community", pkg="comm")
+        root.packageBranch(u"!![en]Surveys", pkg="srvy", tags='admin')
+        if self.db.application.getPreference('enable_social', pkg='comm'):
+            root.packageBranch(u"!![en]Social", pkg="social", tags='admin')
+            root.packageBranch(u"!![en]Video", pkg="video", tags='admin')
+        if self.db.application.getPreference('enable_genrobot', pkg='comm'):
+            root.packageBranch(u"!![en]Genrobot", pkg="genrobot", tags='admin')
+        if self.db.application.getPreference('enable_dem', pkg='comm'):
+            root.packageBranch(u"!![en]DEM", pkg="dem", tags='admin')
+        root.packageBranch(u"!![en]E-mail", pkg="email", tags='admin')
+        root.packageBranch(u"!![en]Administration", tags="superadmin,_DEV_", pkg="adm")
+        root.packageBranch(u"!![en]System", tags="_DEV_", pkg="sys")
+        root.packageBranch("!![en]Web Notifications", pkg="wpn")
+        root.packageBranch("!![en]Dashboard", pkg="biz")
