@@ -15,6 +15,7 @@
 		<gnrextra_social pkgcode="gnrextra:social"/>
 		<gnrextra_video pkgcode="gnrextra:video"/>
 		<gnrextra_dem pkgcode="gnrextra:dem"/>
+		<gnrextra_oidc pkgcode="gnrextra:oidc"/>
 		<community_comm pkgcode="community:comm"/>
 	</packages>
 	
