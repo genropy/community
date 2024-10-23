@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from gnr.web.gnrbaseclasses import BaseComponent
-from gnr.core.gnrdecorator import public_method
+from gnr.core.gnrdecorator import public_method, customizable
 from gnr.core.gnrbag import Bag
 
 class View(BaseComponent):
@@ -72,7 +72,11 @@ class Form(BaseComponent):
         self.developerBadge(right.roundedGroupFrame(region='center', title='!![en]Badge', height='60px'))
         #self.developerServices(right.contentPane(region='center', datapath='#FORM'))
 
-        tc= bc.tabContainer(region='center',margin='2px')
+        tc=bc.tabContainer(region='center',margin='2px')
+        self.mainContent(tc)
+    
+    @customizable
+    def mainContent(self, tc):
        #self.developerGeoInfo(tc.contentPane(title='Address', datapath='.record').div(
        #            padding='20px',padding_right='40px'))
         self.developerLookupsTab(tc.contentPane(title='!![en]Languages'), field='language')
@@ -81,7 +85,8 @@ class Form(BaseComponent):
         self.developerLookupsTab(tc.contentPane(title='!![en]Skills'), field='skill')
         self.developerNewsletterTab(tc.contentPane(title='!![en]Newsletter', checkpref='comm.enable_dem'))
         self.developerProjectsTab(tc.contentPane(title='!![en]Projects'))
-
+        return tc
+    
     def developerInfo(self, pane, **kwargs):
         fb = pane.div(padding='10px').formbuilder(cols=3, border_spacing='8px 0px', 
                         width='100%',fld_width='100%',**kwargs)
@@ -247,6 +252,7 @@ class FormDevelopers(Form):
 class FormProfile(Form):
     css_requires='community'
 
+    @customizable
     def th_form(self, form):
         bc = form.center.borderContainer() 
         tc = bc.tabContainer(region='center',margin='2px', _class='profile_center')
@@ -266,8 +272,9 @@ class FormProfile(Form):
         self.developerNewsletterTab(tc.contentPane(title='!![en]Newsletter', checkpref='comm.enable_dem'))
         self.developerAccessTab(tc.contentPane(title='!![en]Access'))
         bc.contentPane(region='bottom', height='50px').lightbutton(
-                '!![en]Save', _class='comm_btn', float='right').dataController("this.form.save();")
-
+                        '!![en]Save', _class='comm_btn', float='right').dataController("this.form.save();")
+        return tc
+    
     def th_options(self):
         return dict(showtoolbar=False)
 

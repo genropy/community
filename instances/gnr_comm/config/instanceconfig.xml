@@ -16,6 +16,7 @@
 		<gnrextra_video pkgcode="gnrextra:video"/>
 		<gnrextra_dem pkgcode="gnrextra:dem"/>
 		<gnrextra_oidc pkgcode="gnrextra:oidc"/>
+		<repomgm_gitmgm pkgcode="repomgm:gitmgm"/>
 		<community_comm pkgcode="community:comm"/>
 	</packages>
 	

@@ -9,10 +9,10 @@ class Table(object):
 
         tbl.aliasColumn('tg_username', '@developer_id.tg_username', name_long='!![en]Tg Username')
 
-    def trigger_onInserting(self, record, old_record=None):
-        if not record['developer_id']:
-            record['developer_id'] = self.db.currentEnv['developer_id']
-        if record['service_type'] == 'repository':
-            username = self.db.table('comm.developer').readColumns(record['developer_id'], columns='$tg_username')
-            record['service_name'] = record['implementation'] + '-' + username
-            record['service_identifier'] = record['service_type'] + '_' + record['service_name']
+    #def trigger_onInserting(self, record, old_record=None):
+    #    if not record['developer_id']:
+    #        record['developer_id'] = self.db.currentEnv['developer_id']
+    #    if record['service_type'] == 'repository':
+    #        username = self.db.table('comm.developer').readColumns(record['developer_id'], columns='$tg_username')
+    #        record['service_name'] = record['implementation'] + '-' + username
+    #        record['service_identifier'] = record['service_type'] + '_' + record['service_name']
