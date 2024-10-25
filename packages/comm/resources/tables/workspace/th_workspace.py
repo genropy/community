@@ -20,22 +20,8 @@ class View(BaseComponent):
         
 
 class ViewFromDeveloper(View):
+    pass
 
-    def th_view(self, view):
-        view.top.bar.replaceSlots('delrow','getworkspaces,2,delrow')
-        view.top.bar.getworkspaces.slotButton('!![en]Get workspaces').dataRpc(
-                self.db.table('comm.workspace').getWorkspaces, 
-                        developer_id='=#FORM.record.id',
-                        _ask=dict(title="!![en]Get projects",fields=[dict(
-                                    name="repo_service", lbl="Service", 
-                                    table='sys.service', tag='dbSelect',
-                                    condition='$developer_id=:d_id',
-                                    condition_d_id='=#FORM.record.id',
-                                    hasDownArrow=True,
-                                    auxColumns='$service_type,$implementation,$service_name')]))
-
-    def th_options(self):
-        return dict(searchOn=False)
 
 class Form(BaseComponent):
 

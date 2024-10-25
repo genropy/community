@@ -70,7 +70,6 @@ class Form(BaseComponent):
         right = top.borderContainer(region='right', width='300px')
         self.developerUser(right.contentPane(region='top', height='100px'))
         self.developerBadge(right.roundedGroupFrame(region='center', title='!![en]Badge', height='60px'))
-        #self.developerServices(right.contentPane(region='center', datapath='#FORM'))
 
         tc=bc.tabContainer(region='center',margin='2px')
         self.mainContent(tc)
@@ -153,14 +152,6 @@ class Form(BaseComponent):
                     default_lastname='=#FORM.record.surname',
                     default_email='=#FORM.record.email',
                     dialog_height='500px', dialog_width='800px')   
-
-    def developerServices(self, pane):
-        pane.dialogTableHandler(relation='@services', 
-                                    viewResource='ViewFromDeveloper',
-                                    formResource='FormFromDeveloper',
-                                    default_service_type='repository',
-                                    pbl_classes='*', configurable=False,
-                                    searchOn=False)     
     
     def developerLookupsTab(self, pane, field=None):
         pane.plainTableHandler(
