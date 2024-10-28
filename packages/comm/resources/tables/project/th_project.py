@@ -24,15 +24,18 @@ class View(BaseComponent):
     def th_top_toolbar(self,top):
         top.slotToolbar('*,sections@project_type_id,*', childname='top', _position='<bar')
 
+
 class ViewDevelopers(View):
 
     def th_options(self):
         return dict(virtualStore=False, addrow=False, delrow=False)
 
+
 class ViewSupporters(View):
 
     def th_options(self):
         return dict(virtualStore=False, delrow=False)
+
         
 class ViewFromDeveloper(View):
     pass

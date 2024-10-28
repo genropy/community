@@ -1,0 +1,9 @@
+.github_sign_in_button{
+    background: url(brand_icons/github.svg) center center no-repeat;
+    background-size: contain;
+}
+
+.bitbucket_sign_in_button{
+    background: url(brand_icons/bitbucket.svg) center center no-repeat;
+    background-size: contain;
+}

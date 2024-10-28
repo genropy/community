@@ -69,7 +69,7 @@ class Form(BaseComponent):
         self.developerPhoto(top.contentPane(region='center'))
         right = top.borderContainer(region='right', width='300px')
         self.developerUser(right.contentPane(region='top', height='100px'))
-        self.developerBadge(right.roundedGroupFrame(region='center', title='!![en]Badge', height='60px'))
+        self.developerBadge(right.roundedGroupFrame(region='center', title='!![en]Badge', height='65px'))
 
         tc=bc.tabContainer(region='center',margin='2px')
         self.mainContent(tc)
@@ -235,10 +235,12 @@ class Form(BaseComponent):
     def th_options(self):
         return dict(dialog_height='400px', dialog_width='600px')
 
+
 class FormDevelopers(Form):
 
     def th_options(self):
         return dict(dialog_height='400px', dialog_width='600px')
+
 
 class FormProfile(Form):
     css_requires='community'
