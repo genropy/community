@@ -5,7 +5,7 @@ class Table(object):
 
     @metadata(mandatory=True)
     def sysRecord_COMM(self):
-        return self.newrecord(code='COMM', description='!![en]Community Developer')
+        return self.newrecord(code='COMM', description='!![en]Community Developer', rootpage='/comm/app_dev/index')
 
     @metadata(mandatory=True)
     def sysRecord_SUPP(self):

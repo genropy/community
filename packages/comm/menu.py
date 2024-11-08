@@ -15,29 +15,36 @@ class Menu(object):
 
     @metadata(group_code='COMM')
     def config_community(self,root,**kwargs):
+        self.subMenuDevelopers(root, formResource='FormDevelopers')
+
+    @metadata(group_code='SUPP')
+    def config_supporters(self,root,**kwargs):
+        self.subMenuDevelopers(root, formResource='FormSupporters')
+    
+    def subMenuDevelopers(self, branch, formResource=None):
+        branch.thpage("!![en]My profile", table='comm.developer', formResource='FormProfile',
+                            pkey=self.db.currentEnv.get('developer_id'), form_locked=False, openOnStart=True)
+        branch.webpage(u"!![en]Community", filepath="/comm/community_map")
+        branch.thpage(u"!![en]Suggestions", table="comm.suggestion")
+        branch.thpage(u"!![en]Projects", table="comm.project", 
+                            viewResource='ViewDevelopers', formResource=formResource)
+        branch.thpage(u"!![en]Events", table="comm.event",
+                            viewResource='ViewDevelopers', formResource=formResource)
+
+class ApplicationMenu(object):
+
+    @metadata(group_code='COMM')
+    def config_community(self,root,**kwargs):
+        #root.packageBranch(u"!![en]Community", pkg="comm")     #DP Così non va, devo ripetere le voci a mano
         root.thpage("!![en]My profile", table='comm.developer', formResource='FormProfile',
-                            pkey=self.db.currentEnv.get('developer_id'), form_locked=False)
+                            pkey=self.db.currentEnv.get('developer_id'), form_locked=False, openOnStart=True)
         root.webpage(u"!![en]Community", filepath="/comm/community_map")
         root.thpage(u"!![en]Suggestions", table="comm.suggestion")
         root.thpage(u"!![en]Projects", table="comm.project", 
                             viewResource='ViewDevelopers', formResource='FormDevelopers')
         root.thpage(u"!![en]Events", table="comm.event",
                             viewResource='ViewDevelopers', formResource='FormDevelopers')
-
-    @metadata(group_code='SUPP')
-    def config_supporters(self,root,**kwargs):
-        root.thpage("!![en]My profile", table='comm.developer', formResource='FormProfile',
-                            pkey=self.db.currentEnv.get('developer_id'), form_locked=False)
-        root.thpage(u"!![en]Suggestions", table="comm.suggestion")
-        root.webpage(u"!![en]Community", filepath="/comm/community_map")
-        root.thpage(u"!![en]Projects", table="comm.project", 
-                            viewResource='ViewSupporters', formResource='FormSupporters')
-        root.thpage(u"!![en]Events", table="comm.event", 
-                            viewResource='ViewSupporters', formResource='FormSupporters')
         
-
-class ApplicationMenu(object):
-
     def config(self,root,**kwargs):
         root.packageBranch(u"!![en]Community", pkg="comm")
         root.packageBranch(u"!![en]Git management", pkg="gitmgm")

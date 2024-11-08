@@ -10,7 +10,7 @@ class View(BaseComponent):
     def th_struct(self,struct):
         r = struct.view().rows()
         r.fieldcell('badge_icon', width='2em', name=' ', 
-                            template="<img src='/_rsrc/common/css_icons/svg/16/$badge_icon.svg' width='15px'")
+                            template="<img src='/_rsrc/common/css_icons/svg/16/$badge_icon.svg' width='15px'>")
         r.fieldcell('username', width='16em')
         r.fieldcell('fullname', width='16em')
         r.fieldcell('email', width='16em')
@@ -69,63 +69,52 @@ class Form(BaseComponent):
         self.developerPhoto(top.contentPane(region='center'))
         right = top.borderContainer(region='right', width='300px')
         self.developerUser(right.contentPane(region='top', height='100px'))
-        self.developerBadge(right.roundedGroupFrame(region='center', title='!![en]Badge', height='65px'))
+        self.developerBadge(right.roundedGroup(region='center', title='!![en]Badge', height='65px'))
 
         tc=bc.tabContainer(region='center',margin='2px')
         self.mainContent(tc)
     
     @customizable
     def mainContent(self, tc):
-       #self.developerGeoInfo(tc.contentPane(title='Address', datapath='.record').div(
-       #            padding='20px',padding_right='40px'))
+        self.developerGeoInfo(tc.contentPane(title='Address', datapath='.record').div(
+                    padding='20px',padding_right='40px'))
         self.developerLookupsTab(tc.contentPane(title='!![en]Languages'), field='language')
         self.developerLookupsTab(tc.contentPane(title='!![en]Topics'), field='topic')
         self.developerLookupsTab(tc.contentPane(title='!![en]Hobbies'), field='hobby')
-        self.developerLookupsTab(tc.contentPane(title='!![en]Skills'), field='skill')
-        self.developerNewsletterTab(tc.contentPane(title='!![en]Newsletter', checkpref='comm.enable_dem'))
+        self.developerLookupsTab(tc.contentPane(title='!![en]Human Skills'), field='skill')
+        self.developerNewsletterTab(tc.borderContainer(title='!![en]Newsletter', checkpref='comm.enable_dem'))
         self.developerProjectsTab(tc.contentPane(title='!![en]Projects'))
         return tc
     
     def developerInfo(self, pane, **kwargs):
-        fb = pane.div(padding='10px').formbuilder(cols=3, border_spacing='8px 0px', 
-                        width='100%',fld_width='100%',**kwargs)
+        fb = pane.div(padding='10px').mobileFormBuilder(cols=3, border_spacing='8px 0px', **kwargs)
         fb.field('name',validate_notnull=True)
         fb.div(width='10px')
         fb.field('surname',validate_notnull=True)
-        fb.field('full_address', lbl='!![en]Full address', tag='geocoderfield',
-                    selected_locality='.locality',
-                    selected_administrative_area_level_1='.region',
-                    selected_administrative_area_level_2='.state',
-                    selected_administrative_area_level_3='.city',
-                    selected_country='.country',
-                    selected_position='.position',
-                    selectedRecord='.address_bag')
-        fb.div(width='10px')            
-        fb.field('position',protected=True)
         fb.field('nickname')
         fb.div(width='10px')
         fb.field('tg_username',lbl='Telegram')
         fb.field('github',colspan=3)
         fb.field('email',colspan=3)
         fb.field('website',colspan=3)
-        fb.field('bio', tag='simpleTextArea', height='80px',colspan=3)
+        fb.field('bio', tag='simpleTextArea', height='140px',colspan=3)
 
-    #def developerGeoInfo(self,pane):
-    #    fb = pane.formbuilder(cols=1, width='100%', colswidth='auto',
-    #                fld_width='100%', border_spacing='6px')
-    #    fb.geoCoderField(value='^.full_address', lbl='Full address', 
-    #                selected_locality='.locality',
-    #                selected_administrative_area_level_1='.region',
-    #                selected_administrative_area_level_2='.state',
-    #                selected_administrative_area_level_3='.city',
-    #                selected_country='.country',
-    #                selected_position='.position',
-    #                selectedRecord='.address_bag')
-    #    fb.field('locality', readOnly=True, hidden='^.full_address?=!#v')
-    #    fb.field('city', readOnly=True, hidden='^.full_address?=!#v')
-    #    fb.field('state', readOnly=True, hidden='^.full_address?=!#v')
-    #    fb.field('region', readOnly=True, hidden='^.full_address?=!#v')
-    #    fb.field('country', readOnly=True, hidden='^.full_address?=!#v')
+    def developerGeoInfo(self,pane):
+        fb = pane.div(padding='10px').mobileFormBuilder(cols=3, border_spacing='8px 0px')
+        fb.geoCoderField(value='^.full_address', lbl='Full address', 
+                    selected_locality='.locality',
+                    selected_administrative_area_level_1='.region',
+                    selected_administrative_area_level_2='.state',
+                    selected_administrative_area_level_3='.city',
+                    selected_country='.country',
+                    selected_position='.position',
+                    selectedRecord='.address_bag', 
+                    colspan=3)
+        fb.field('locality', readOnly=True, hidden='^.full_address?=!#v', colspan=2)
+        fb.field('city', readOnly=True, hidden='^.full_address?=!#v')
+        fb.field('state', readOnly=True, hidden='^.full_address?=!#v')
+        fb.field('region', readOnly=True, hidden='^.full_address?=!#v')
+        fb.field('country', readOnly=True, hidden='^.full_address?=!#v')
 
     def developerPhoto(self, pane):
         pane.img(src='^.photo_url',
@@ -166,9 +155,9 @@ class Form(BaseComponent):
 
     def developerNewsletterTab(self, pane):
         bc = pane.borderContainer()
-        bc.contentPane(region='top', height='30px').formbuilder().radioButtonText(
+        bc.contentPane(region='top', height='50px').mobileFormBuilder().radioButtonText(
                         '^.record.consenso', table='dem.consenso_tipo', 
-                        lbl='!![en]Level of consent', cols=5)
+                        lbl='!![en]Level of consent', cols=5, popup=True)
         bc.contentPane(region='center').plainTableHandler(
             table='dem.lista',
             viewResource='ViewSubscription',
@@ -243,31 +232,45 @@ class FormDevelopers(Form):
 
 
 class FormProfile(Form):
-    css_requires='community'
-
+    css_requires='mobile,community'
+    
     @customizable
     def th_form(self, form):
-        bc = form.center.borderContainer() 
-        tc = bc.tabContainer(region='center',margin='2px', _class='profile_center')
-        dev_info = tc.borderContainer(title='!![en]Developer info',datapath='.record')
-        self.developerPhoto(dev_info.contentPane(region='top'))
-        self.developerInfo(dev_info.contentPane(region='center'), 
-                        lblpos='T',
-                        lbl_text_align='left',lbl_font_size='.8em',
-                        lbl_padding_top='4px',
-                        lbl_font_weight='bold',fldalign='left',
-                        _class='mobilefields')
-        #self.developerGeoInfo(tc.contentPane(title='!![en]Address', datapath='.record').div(padding='20px',padding_right='40px'))
+        frame = form.center.framePane()
+        self.navigationBar(frame.top)
+        self.mainContent(frame.center.stackContainer(margin_bottom='20px'))
+        self.saveBar(frame.bottom)
+
+    def navigationBar(self, top):
+        top.slotToolbar('*,stackButtons,*', _class='mobile_toolbar', height='38px')
+        
+    def saveBar(self, bottom):
+        bar = bottom.slotToolbar('*,savebtn,5', _class='mobile_toolbar', height='38px')
+        bar.savebtn.lightButton('!![en]Save', _class='comm_btn', float='right').dataController("this.form.save();")
+
+    def mainContent(self, sc):
+        self.profilePage(sc.borderContainer(title='!!Profile', datapath='.record'))
+        self.skillsPage(sc.tabContainer(title='!!Skills'))
+        self.settingsPage(sc.borderContainer(title='!!Settings'))
+    
+    def profilePage(self, bc):
+        top = bc.borderContainer(region='top')
+        self.developerPhoto(top)
+        top.div('^#FORM.record.dev_badge', _virtual_column='$dev_badge', _class='dev_badge')
+        self.developerInfo(bc.contentPane(region='center'))
+        self.developerGeoInfo(bc.contentPane(region='bottom'))
+        
+    def skillsPage(self, tc):
         self.developerLookupsTab(tc.contentPane(title='!![en]Languages'), field='language')
         self.developerLookupsTab(tc.contentPane(title='!![en]Topics'), field='topic')
         self.developerLookupsTab(tc.contentPane(title='!![en]Hobbies'), field='hobby')
         self.developerLookupsTab(tc.contentPane(title='!![en]Skills'), field='skill')
-        self.developerNewsletterTab(tc.contentPane(title='!![en]Newsletter', checkpref='comm.enable_dem'))
-        self.developerAccessTab(tc.contentPane(title='!![en]Access'))
-        bc.contentPane(region='bottom', height='50px').lightbutton(
-                        '!![en]Save', _class='comm_btn', float='right').dataController("this.form.save();")
-        return tc
-    
+        
+    def settingsPage(self, bc):
+        self.developerNewsletterTab(bc.roundedGroupFrame(title='!![en]Newsletter', region='top', 
+                                                         height='200px', checkpref='comm.enable_dem'))
+        self.developerAccessTab(bc.roundedGroup(title='!![en]Access', region='center'))
+            
     def th_options(self):
         return dict(showtoolbar=False)
 

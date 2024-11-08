@@ -7,17 +7,21 @@ class Table(object):
         tbl=pkg.table('developer', pkey='id', name_long='!![en]Developer', name_plural='!![en]Developers',
                                     caption_field='username',survey=True)
         self.sysFields(tbl)
-        tbl.column('name', size=':30', name_long='!![en]Name', group='card')
-        tbl.column('surname', size=':30', name_long='!![en]Surname',group='card')
+        
+        card = tbl.colgroup('card', name_long='!![en]Card')
+        pos = tbl.colgroup('position', name_long='!![en]Position')
+        
+        card.column('name', size=':30', name_long='!![en]Name')
+        card.column('surname', size=':30', name_long='!![en]Surname',)
         tbl.column('dob', dtype='D', name_long='!![en]Date of birth')
-        tbl.column('email', name_long='Email',group='card')
-        tbl.column('country', name_long='!![en]Country',group='card')
-        tbl.column('position', name_long='!![en]Geocode')
-        tbl.column('locality', name_long='!![en]Locality')
-        tbl.column('region', name_long='!![en]Region')
-        tbl.column('state', name_long='!![en]State')
-        tbl.column('city', name_long='!![en]City')
-        tbl.column('full_address', name_long='!![en]Full address')
+        card.column('email', name_long='Email',)
+        card.column('country', name_long='!![en]Country',)
+        pos.column('position', name_long='!![en]Geocode')
+        pos.column('locality', name_long='!![en]Locality')
+        pos.column('region', name_long='!![en]Region')
+        pos.column('state', name_long='!![en]State')
+        pos.column('city', name_long='!![en]City')
+        pos.column('full_address', name_long='!![en]Full address')
         tbl.column('photo_url',dtype='P', name_long='!![en]Photo')
         tbl.column('bio', name_long='!![en]Bio')
         tbl.column('tg_username', name_long='!![en]Telegram username')
@@ -29,12 +33,15 @@ class Table(object):
         tbl.column('user_id',size='22', group='_', name_long='!![en]User',unique=True
                     ).relation('adm.user.id', one_one=True, relation_name='developer', 
                          mode='foreignkey', onDelete='raise')
-        tbl.column('address_bag','X', name_long='Address bag')
+        tbl.column('organization_id',size='22', group='_', name_long='!![en]Organization'
+                    ).relation('organization.id', relation_name='developers', mode='foreignkey', onDelete='setnull')
+        pos.column('address_bag','X', name_long='Address bag')
 
         tbl.formulaColumn('fullname',"$name || ' ' || $surname", name_long='Fullname')
         tbl.formulaColumn('username',"COALESCE($tg_username,@user_id.username,$nickname)", name_long='Username')
         tbl.aliasColumn('contatto_id', '@contatti.id', name_long='!![en]Contatto', static=True)
         tbl.aliasColumn('badge_icon', '@badge_id.icon', name_long='!![en]Badge icon')
+        tbl.formulaColumn('dev_badge', """'<div><img src="/_rsrc/common/css_icons/svg/16/'||$badge_icon||'" width="15px" style="margin-right\\:3px">' ||@badge_id.description||'</div>'""")
         tbl.pyColumn('dev_template', py_method='templateColumn', template_name='dev_row')
 
         tbl.formulaColumn('caption_name', 'COALESCE($fullname,$username)', name_long='!![en]Caption name')  
