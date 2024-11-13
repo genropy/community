@@ -64,10 +64,15 @@ class Form(BaseComponent):
 
     def th_form(self, form):
         bc = form.center.borderContainer() 
-        top = bc.borderContainer(region='top',height='50%', datapath='.record')
-        self.developerInfo(top.contentPane(region='left', width='600px'))
-        self.developerPhoto(top.contentPane(region='center'))
+        top = bc.borderContainer(region='top', height='50%', datapath='.record')
+        left = top.contentPane(region='left', width='600px')
+        center = top.contentPane(region='center')
         right = top.borderContainer(region='right', width='300px')
+        
+        self.developerInfo(left.contentPane(region='top'))
+        self.developerGeoInfo(left.contentPane(region='center'))
+        self.developerPhoto(center.contentPane(region='top', height='160px'))
+        self.developerBio(center.contentPane(region='center', overflow='hidden'))
         self.developerUser(right.contentPane(region='top', height='100px'))
         self.developerBadge(right.roundedGroup(region='center', title='!![en]Badge', height='65px'))
 
@@ -76,8 +81,6 @@ class Form(BaseComponent):
     
     @customizable
     def mainContent(self, tc):
-        self.developerGeoInfo(tc.contentPane(title='Address', datapath='.record').div(
-                    padding='20px',padding_right='40px'))
         self.developerLookupsTab(tc.contentPane(title='!![en]Languages'), field='language')
         self.developerLookupsTab(tc.contentPane(title='!![en]Topics'), field='topic')
         self.developerLookupsTab(tc.contentPane(title='!![en]Hobbies'), field='hobby')
@@ -97,7 +100,9 @@ class Form(BaseComponent):
         fb.field('github',colspan=3)
         fb.field('email',colspan=3)
         fb.field('website',colspan=3)
-        fb.field('bio', tag='simpleTextArea', height='140px',colspan=3)
+
+    def developerBio(self, pane, height='180px', **kwargs):
+        pane.div(padding='0 20px').simpleTextArea('^.bio', height=height, width='100%', lbl='!![en]Bio', **kwargs)
 
     def developerGeoInfo(self,pane):
         fb = pane.div(padding='10px').mobileFormBuilder(cols=3, border_spacing='8px 0px')
@@ -254,17 +259,20 @@ class FormProfile(Form):
         self.settingsPage(sc.borderContainer(title='!!Settings'))
     
     def profilePage(self, bc):
-        top = bc.borderContainer(region='top')
+        top = bc.contentPane(region='top', height='180px')
+        center = bc.borderContainer(region='center')
+        bottom = bc.contentPane(region='bottom', height='140px')
         self.developerPhoto(top)
         top.div('^#FORM.record.dev_badge', _virtual_column='$dev_badge', _class='dev_badge')
-        self.developerInfo(bc.contentPane(region='center'))
-        self.developerGeoInfo(bc.contentPane(region='bottom'))
+        self.developerInfo(center.contentPane(region='center'))
+        self.developerBio(center.contentPane(region='bottom', height='180px', overflow='hidden'), height='160px')
+        self.developerGeoInfo(bottom)
         
     def skillsPage(self, tc):
         self.developerLookupsTab(tc.contentPane(title='!![en]Languages'), field='language')
         self.developerLookupsTab(tc.contentPane(title='!![en]Topics'), field='topic')
         self.developerLookupsTab(tc.contentPane(title='!![en]Hobbies'), field='hobby')
-        self.developerLookupsTab(tc.contentPane(title='!![en]Skills'), field='skill')
+        self.developerLookupsTab(tc.contentPane(title='!![en]Human skills'), field='skill')
         
     def settingsPage(self, bc):
         self.developerNewsletterTab(bc.roundedGroupFrame(title='!![en]Newsletter', region='top', 

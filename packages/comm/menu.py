@@ -10,8 +10,8 @@ class Menu(object):
         root.thpage(u"!![en]Event types", table="comm.event_type")
         root.thpage(u"!![en]Suggestions", table="comm.suggestion")
         root.thpage(u"!![en]Suggestion types", table="comm.suggestion_type")
-        root.lookupBranch(u"!![en]Lookups", pkg="comm")
         root.webpage(u"!![en]Community", filepath="/comm/community_map")
+        root.lookupBranch(u"!![en]Lookups", pkg="comm")
 
     @metadata(group_code='COMM')
     def config_community(self,root,**kwargs):
@@ -22,8 +22,7 @@ class Menu(object):
         self.subMenuDevelopers(root, formResource='FormSupporters')
     
     def subMenuDevelopers(self, branch, formResource=None):
-        branch.thpage("!![en]My profile", table='comm.developer', formResource='FormProfile',
-                            pkey=self.db.currentEnv.get('developer_id'), form_locked=False, openOnStart=True)
+        branch.webpage("!![en]My profile", filepath='/comm/app_dev/profile', openOnStart=True)
         branch.webpage(u"!![en]Community", filepath="/comm/community_map")
         branch.thpage(u"!![en]Suggestions", table="comm.suggestion")
         branch.thpage(u"!![en]Projects", table="comm.project", 
@@ -36,8 +35,7 @@ class ApplicationMenu(object):
     @metadata(group_code='COMM')
     def config_community(self,root,**kwargs):
         #root.packageBranch(u"!![en]Community", pkg="comm")     #DP Così non va, devo ripetere le voci a mano
-        root.thpage("!![en]My profile", table='comm.developer', formResource='FormProfile',
-                            pkey=self.db.currentEnv.get('developer_id'), form_locked=False, openOnStart=True)
+        root.webpage("!![en]My profile", filepath='/comm/app_dev/profile', openOnStart=True)
         root.webpage(u"!![en]Community", filepath="/comm/community_map")
         root.thpage(u"!![en]Suggestions", table="comm.suggestion")
         root.thpage(u"!![en]Projects", table="comm.project", 

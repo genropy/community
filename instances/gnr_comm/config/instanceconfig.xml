@@ -17,7 +17,7 @@
 		<gnrextra_dem pkgcode="gnrextra:dem"/>
 		<gnrextra_oidc pkgcode="gnrextra:oidc"/>
 		<community_comm pkgcode="community:comm"/>
-		<repomgm_repomgm pkgcode="repomgm:repomgm"/>
+		<repomgm_gitmgm pkgcode="repomgm:gitmgm"/>
 	</packages>
 	
 	<authentication pkg="adm">
