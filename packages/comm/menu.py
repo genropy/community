@@ -25,23 +25,20 @@ class Menu(object):
         branch.webpage("!![en]My profile", filepath='/comm/app_dev/profile', openOnStart=True)
         branch.webpage(u"!![en]Community", filepath="/comm/community_map")
         branch.thpage(u"!![en]Suggestions", table="comm.suggestion")
-        branch.thpage(u"!![en]Projects", table="comm.project", 
-                            viewResource='ViewDevelopers', formResource=formResource)
-        branch.thpage(u"!![en]Events", table="comm.event",
-                            viewResource='ViewDevelopers', formResource=formResource)
+        branch.thpage(u"!![en]Projects", table="comm.project", viewResource='ViewDevelopers', formResource=formResource)
+        branch.thpage(u"!![en]Events", table="comm.event", viewResource='ViewDevelopers', formResource=formResource)
 
 class ApplicationMenu(object):
 
     @metadata(group_code='COMM')
     def config_community(self,root,**kwargs):
-        #root.packageBranch(u"!![en]Community", pkg="comm")     #DP Così non va, devo ripetere le voci a mano
         root.webpage("!![en]My profile", filepath='/comm/app_dev/profile', openOnStart=True)
+        root.webpage('!![en]Messages', filepath='/comm/app_dev/messages', menucode='messages')
+        root.webpage('!![en]Subscriptions', filepath='/repomgm/user_subscriptions')
         root.webpage(u"!![en]Community", filepath="/comm/community_map")
-        root.thpage(u"!![en]Suggestions", table="comm.suggestion")
-        root.thpage(u"!![en]Projects", table="comm.project", 
-                            viewResource='ViewDevelopers', formResource='FormDevelopers')
-        root.thpage(u"!![en]Events", table="comm.event",
-                            viewResource='ViewDevelopers', formResource='FormDevelopers')
+        #root.thpage(u"!![en]Suggestions", table="comm.suggestion")
+        #root.thpage(u"!![en]Projects", table="comm.project", viewResource='ViewDevelopers', formResource='FormDevelopers')
+        #root.thpage(u"!![en]Events", table="comm.event", viewResource='ViewDevelopers', formResource='FormDevelopers')
         
     def config(self,root,**kwargs):
         root.packageBranch(u"!![en]Community", pkg="comm")
