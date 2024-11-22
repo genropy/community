@@ -101,8 +101,9 @@ class Form(BaseComponent):
         fb.field('email',colspan=3)
         fb.field('website',colspan=3)
 
-    def developerBio(self, pane, height='180px', **kwargs):
-        pane.div(padding='0 20px').simpleTextArea('^.bio', height=height, width='100%', lbl='!![en]Bio', **kwargs)
+    def developerBio(self, pane, **kwargs):
+        bio_height = '160px' if self.isMobile else '100px'
+        pane.div(padding='0 20px').simpleTextArea('^.bio', height=bio_height, width='100%', lbl='!![en]Bio', **kwargs)
 
     def developerGeoInfo(self,pane):
         fb = pane.div(padding='10px').mobileFormBuilder(cols=3, border_spacing='8px 0px')
@@ -265,7 +266,7 @@ class FormProfile(Form):
         self.developerPhoto(top)
         top.div('^#FORM.record.dev_badge', _virtual_column='$dev_badge', _class='dev_badge')
         self.developerInfo(center.contentPane(region='center'))
-        self.developerBio(center.contentPane(region='bottom', height='180px', overflow='hidden'), height='160px')
+        self.developerBio(center.contentPane(region='bottom', overflow='hidden'))
         self.developerGeoInfo(bottom)
         
     def skillsPage(self, tc):
