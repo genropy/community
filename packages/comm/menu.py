@@ -35,10 +35,14 @@ class ApplicationMenu(object):
         root.webpage("!![en]My profile", filepath='/comm/app_dev/profile', openOnStart=True)
         root.webpage('!![en]Messages', filepath='/comm/app_dev/messages', menucode='messages')
         root.webpage('!![en]Subscriptions', filepath='/repomgm/user_subscriptions')
-        root.webpage(u"!![en]Community", filepath="/comm/community_map")
+        root.webpage(u"!![en]Community map", filepath="/comm/community_map")
+        self.publicationsSubMenu(root.branch("!![en]Publications"))
         #root.thpage(u"!![en]Suggestions", table="comm.suggestion")
         #root.thpage(u"!![en]Projects", table="comm.project", viewResource='ViewDevelopers', formResource='FormDevelopers')
         #root.thpage(u"!![en]Events", table="comm.event", viewResource='ViewDevelopers', formResource='FormDevelopers')
+        
+    def publicationsSubMenu(self, branch):
+        branch.webpage('!![en]Social posts', filepath='/comm/app_dev/social_posts', menucode='social_posts')
         
     def config(self,root,**kwargs):
         root.packageBranch(u"!![en]Community", pkg="comm")

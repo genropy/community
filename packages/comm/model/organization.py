@@ -10,3 +10,6 @@ class Table(object):
         
         tbl.column('code', size=':5', name_long='!![en]Code')
         tbl.column('name', size=':30', name_long='!![en]Name')
+        
+    def getOrganizationIdByCode(self, code):
+        return self.readColumns(where='$code=:code', code=code, columns='$id')

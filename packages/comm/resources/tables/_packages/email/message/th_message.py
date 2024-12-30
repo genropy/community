@@ -28,8 +28,6 @@ class ViewApp(BaseComponent):
     def th_top_state(self, top):
         bar = top.bar.replaceSlots('vtitle', 'sections@readingstate')
         bar.attributes['_class'] = 'mobile_toolbar'
-        bar.attributes['background'] = 'transparent'
-        bar.attributes['margin'] = '10px'
     
     def th_sections_readingstate(self):
         return [dict(code='NOTREAD', caption='!![en]Not read', condition="$read IS NOT TRUE"),

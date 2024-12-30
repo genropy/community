@@ -27,7 +27,6 @@ class Table(object):
         tbl.column('tg_username', name_long='!![en]Telegram username')
         tbl.column('nickname', name_long='!![en]Nickname')
         tbl.column('github', name_long='!![en]Github')
-        tbl.column('website', name_long='!![en]Website')
         tbl.column('badge_id',size='22', group='_', name_long='!![en]Badge'
                     ).relation('comm.badge.id', relation_name='developers', mode='foreignkey', onDelete='setnull')
         tbl.column('user_id',size='22', group='_', name_long='!![en]User',unique=True

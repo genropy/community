@@ -4,7 +4,9 @@
 
 class Table(object):
     def config_db(self,pkg):
-        pkg.table('user', survey=True)
+        tbl = pkg.table('user', survey=True)
+        
+        tbl.formulaColumn('is_developer', "@developer.id IS NOT NULL", dtype='B', name_long='!![en]Is developer')
 
     def trigger_onUpdating(self,record,old_record=None):
         if old_record['status'] != 'conf' and record['status'] == 'conf':

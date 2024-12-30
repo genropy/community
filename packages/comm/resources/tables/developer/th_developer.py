@@ -65,22 +65,19 @@ class Form(BaseComponent):
     def th_form(self, form):
         bc = form.center.borderContainer() 
         top = bc.borderContainer(region='top', height='50%', datapath='.record')
-        left = top.contentPane(region='left', width='600px')
-        center = top.contentPane(region='center')
         right = top.borderContainer(region='right', width='300px')
         
-        self.developerInfo(left.contentPane(region='top'))
-        self.developerGeoInfo(left.contentPane(region='center'))
-        self.developerPhoto(center.contentPane(region='top', height='160px'))
-        self.developerBio(center.contentPane(region='center', overflow='hidden'))
-        self.developerUser(right.contentPane(region='top', height='100px'))
-        self.developerBadge(right.roundedGroup(region='center', title='!![en]Badge', height='65px'))
-
-        tc=bc.tabContainer(region='center',margin='2px')
-        self.mainContent(tc)
+        fb = self.developerInfo(top.contentPane(region='left'))
+        fb.field('badge_id', hasDownArrow=True)
+        
+        self.developerUser(right.contentPane(region='bottom', height='100px'))
+        self.developerPhoto(right.contentPane(region='center'))
+        self.mainContent(bc.tabContainer(region='center',margin='2px'))
     
     @customizable
     def mainContent(self, tc):
+        self.developerBio(tc.contentPane(title='!!Bio', datapath='.record', overflow='hidden'))
+        self.developerGeoInfo(tc.contentPane(title='!![en]Location', datapath='.record'))
         self.developerLookupsTab(tc.contentPane(title='!![en]Languages'), field='language')
         self.developerLookupsTab(tc.contentPane(title='!![en]Topics'), field='topic')
         self.developerLookupsTab(tc.contentPane(title='!![en]Hobbies'), field='hobby')
@@ -90,23 +87,20 @@ class Form(BaseComponent):
         return tc
     
     def developerInfo(self, pane, **kwargs):
-        fb = pane.div(padding='10px').mobileFormBuilder(cols=3, border_spacing='8px 0px', **kwargs)
+        fb = pane.div(padding='5px').mobileFormBuilder(cols=2, border_spacing='8px 0px', **kwargs)
         fb.field('name',validate_notnull=True)
-        fb.div(width='10px')
         fb.field('surname',validate_notnull=True)
         fb.field('nickname')
-        fb.div(width='10px')
         fb.field('tg_username',lbl='Telegram')
-        fb.field('github',colspan=3)
-        fb.field('email',colspan=3)
-        fb.field('website',colspan=3)
+        fb.field('github',colspan=2)
+        fb.field('email',colspan=2)
+        return fb
 
     def developerBio(self, pane, **kwargs):
-        bio_height = '160px' if self.isMobile else '100px'
-        pane.div(padding='0 20px').simpleTextArea('^.bio', height=bio_height, width='100%', lbl='!![en]Bio', **kwargs)
+        pane.simpleTextArea('^.bio', height='100%', width='100%', **kwargs)
 
     def developerGeoInfo(self,pane):
-        fb = pane.div(padding='10px').mobileFormBuilder(cols=3, border_spacing='8px 0px')
+        fb = pane.div(padding='5px').mobileFormBuilder(cols=3, border_spacing='8px 0px')
         fb.geoCoderField(value='^.full_address', lbl='Full address', 
                     selected_locality='.locality',
                     selected_administrative_area_level_1='.region',
@@ -134,10 +128,6 @@ class Form(BaseComponent):
                     crop_rounded=6,
                     placeholder=True,
                     upload_folder='*')
-
-    def developerBadge(self, pane):
-        fb = pane.formbuilder(cols=1, width='100%', fld_width='90%')
-        fb.dbSelect('^.badge_id', table='comm.badge', hasDownArrow=True)
 
     def developerUser(self, pane):
         pane.linkerBox('user_id', 
@@ -244,14 +234,14 @@ class FormProfile(Form):
     def th_form(self, form):
         frame = form.center.framePane()
         self.navigationBar(frame.top)
-        self.mainContent(frame.center.stackContainer(margin_bottom='20px'))
+        self.mainContent(frame.center.stackContainer())
         self.saveBar(frame.bottom)
 
     def navigationBar(self, top):
         top.slotToolbar('*,stackButtons,*', _class='mobile_toolbar', height='38px')
         
     def saveBar(self, bottom):
-        bar = bottom.slotToolbar('*,savebtn,5', _class='mobile_toolbar', height='38px')
+        bar = bottom.slotToolbar('*,stackButtons,*,savebtn,5', _class='mobile_toolbar', height='38px')
         bar.savebtn.lightButton('!![en]Save', _class='comm_btn', float='right').dataController("this.form.save();")
 
     def mainContent(self, sc):
@@ -262,12 +252,13 @@ class FormProfile(Form):
     def profilePage(self, bc):
         top = bc.contentPane(region='top', height='180px')
         center = bc.borderContainer(region='center')
-        bottom = bc.contentPane(region='bottom', height='140px')
         self.developerPhoto(top)
         top.div('^#FORM.record.dev_badge', _virtual_column='$dev_badge', _class='dev_badge')
-        self.developerInfo(center.contentPane(region='center'))
-        self.developerBio(center.contentPane(region='bottom', overflow='hidden'))
-        self.developerGeoInfo(bottom)
+        self.developerInfo(center.contentPane(region='top', height='185px'))
+        
+        bottom = center.tabContainer(region='center')
+        self.developerBio(bottom.contentPane(title='!!Bio', overflow='hidden'))
+        self.developerGeoInfo(bottom.contentPane(title='!!Location'))
         
     def skillsPage(self, tc):
         self.developerLookupsTab(tc.contentPane(title='!![en]Languages'), field='language')
