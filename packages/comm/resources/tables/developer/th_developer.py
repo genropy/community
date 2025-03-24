@@ -33,6 +33,7 @@ class View(BaseComponent):
                                     lbl='!![en]Hobbies', popup=True, order_by='$description')
                         ], cols=4, margin='10px', isDefault=True)
 
+
 class ViewDevelopers(View):
 
     def th_struct(self,struct):
@@ -93,7 +94,7 @@ class Form(BaseComponent):
         fb.field('nickname')
         fb.field('tg_username',lbl='Telegram')
         fb.field('github',colspan=2)
-        fb.field('email',colspan=2)
+        fb.textbox('^.@user_id.email',colspan=2)
         return fb
 
     def developerBio(self, pane, **kwargs):
@@ -135,7 +136,6 @@ class Form(BaseComponent):
                     default_group_code='COMM',
                     default_firstname='=#FORM.record.name',
                     default_lastname='=#FORM.record.surname',
-                    default_email='=#FORM.record.email',
                     dialog_height='500px', dialog_width='800px')   
     
     def developerLookupsTab(self, pane, field=None):

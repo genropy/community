@@ -14,6 +14,7 @@
 		<gnrextra_genrobot pkgcode="gnrextra:genrobot"/>
 		<gnrextra_social pkgcode="gnrextra:social"/>
 		<gnrextra_video pkgcode="gnrextra:video"/>
+		<gnrextra_wordpress pkgcode="gnrextra:wordpress"/>
 		<gnrextra_dem pkgcode="gnrextra:dem"/>
 		<gnrextra_oidc pkgcode="gnrextra:oidc"/>
 		<community_comm pkgcode="community:comm"/>

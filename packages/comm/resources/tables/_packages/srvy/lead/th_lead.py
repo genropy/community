@@ -27,7 +27,7 @@ class Form(BaseComponent):
     def th_form(self, form):
         pane = form.record
         fb = pane.formbuilder(cols=2, border_spacing='4px')
-        fb.field('email')
+        fb.textbox('^.@user_id.email',colspan=2)
         fb.field('firstname')
         fb.field('lastname')
         fb.field('message', tag='simpleTextArea', width='100%', height='50px', colspan=2)

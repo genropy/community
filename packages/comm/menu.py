@@ -33,7 +33,9 @@ class ApplicationMenu(object):
     @metadata(group_code='COMM')
     def config_community(self,root,**kwargs):
         root.webpage("!![en]My profile", filepath='/comm/app_dev/profile', openOnStart=True)
-        root.webpage('!![en]Messages', filepath='/comm/app_dev/messages', menucode='messages')
+        root.thpage('!!Messages', table='email.message', 
+                         titleCounter=True, titleCounter_condition='$dest_user_id=:env_user_id AND $read IS NOT TRUE',
+                         viewResource='ViewMobile', formResource='FormMobile', menucode='messages')
         root.webpage('!![en]Subscriptions', filepath='/repomgm/user_subscriptions')
         root.webpage(u"!![en]Community map", filepath="/comm/community_map")
         self.publicationsSubMenu(root.branch("!![en]Publications"))
@@ -43,6 +45,7 @@ class ApplicationMenu(object):
         
     def publicationsSubMenu(self, branch):
         branch.webpage('!![en]Social posts', filepath='/comm/app_dev/social_posts', menucode='social_posts')
+        branch.webpage('!![en]Blog posts', filepath='/comm/app_dev/blog_posts', menucode='blog_posts')
         
     def config(self,root,**kwargs):
         root.packageBranch(u"!![en]Community", pkg="comm")
@@ -51,6 +54,7 @@ class ApplicationMenu(object):
         if self.db.application.getPreference('enable_social', pkg='comm'):
             root.packageBranch(u"!![en]Social", pkg="social", tags='admin')
             root.packageBranch(u"!![en]Video", pkg="video", tags='admin')
+            root.packageBranch('!![en]Blog', pkg='wordpress', tags='admin')
         if self.db.application.getPreference('enable_genrobot', pkg='comm'):
             root.packageBranch(u"!![en]Genrobot", pkg="genrobot", tags='admin')
         if self.db.application.getPreference('enable_dem', pkg='comm'):

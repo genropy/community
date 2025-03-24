@@ -14,7 +14,6 @@ class Table(object):
         card.column('name', size=':30', name_long='!![en]Name')
         card.column('surname', size=':30', name_long='!![en]Surname',)
         tbl.column('dob', dtype='D', name_long='!![en]Date of birth')
-        card.column('email', name_long='Email',)
         card.column('country', name_long='!![en]Country',)
         pos.column('position', name_long='!![en]Geocode')
         pos.column('locality', name_long='!![en]Locality')
@@ -30,14 +29,14 @@ class Table(object):
         tbl.column('badge_id',size='22', group='_', name_long='!![en]Badge'
                     ).relation('comm.badge.id', relation_name='developers', mode='foreignkey', onDelete='setnull')
         tbl.column('user_id',size='22', group='_', name_long='!![en]User',unique=True
-                    ).relation('adm.user.id', one_one=True, relation_name='developer', 
-                         mode='foreignkey', onDelete='raise')
+                    ).relation('adm.user.id', one_one='*', mode='foreignkey', onDelete='raise')
         tbl.column('organization_id',size='22', group='_', name_long='!![en]Organization'
                     ).relation('organization.id', relation_name='developers', mode='foreignkey', onDelete='setnull')
         pos.column('address_bag','X', name_long='Address bag')
 
-        tbl.formulaColumn('fullname',"$name || ' ' || $surname", name_long='Fullname')
-        tbl.formulaColumn('username',"COALESCE($tg_username,@user_id.username,$nickname)", name_long='Username')
+        card.aliasColumn('email', '@user_id.email', name_long='!![en]Email')
+        tbl.formulaColumn('fullname',"$name || ' ' || $surname", name_long='!!Fullname')
+        tbl.formulaColumn('username',"COALESCE($tg_username,@user_id.username,$nickname)", name_long='!!Username')
         tbl.aliasColumn('contatto_id', '@contatti.id', name_long='!![en]Contatto', static=True)
         tbl.aliasColumn('badge_icon', '@badge_id.icon', name_long='!![en]Badge icon')
         tbl.formulaColumn('dev_badge', """'<div><img src="/_rsrc/common/css_icons/svg/16/'||$badge_icon||'" width="15px" style="margin-right\\:3px">' ||@badge_id.description||'</div>'""")
@@ -76,7 +75,6 @@ class Table(object):
             return
         new_developer = self.newrecord(name = user_record['firstname'],
                             surname = user_record['lastname'], 
-                            email = user_record['email'],
                             user_id = user_record['id'], 
                             badge_id=self.db.application.getPreference('user_default_badge', pkg='comm'))
         self.insert(new_developer)
@@ -98,9 +96,7 @@ class Table(object):
             return
         with self.recordToUpdate(developer_id) as rec:
             user_id = rec['user_id']
-            email = rec['email'].replace(rec['email'][3:], '*'*len(rec['email'][3:]))
             rec.update({key: None for key in rec.keys()[5:]})
-            rec['email'] = email
             rec['__del_ts'] = datetime.now()
         self.db.table('adm.user').deleteSelection(where='$id=:u_id', u_id=user_id)
         self.db.commit()
