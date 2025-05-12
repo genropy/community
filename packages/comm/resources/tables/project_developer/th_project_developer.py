@@ -19,6 +19,7 @@ class View(BaseComponent):
     def th_query(self):
         return dict(column='developer_id', op='contains', val='')
 
+
 class ViewFromDeveloper(View):
     def th_struct(self,struct):
         r = struct.view().rows()
@@ -29,6 +30,7 @@ class ViewFromDeveloper(View):
         r.fieldcell('@project_id.description', width='auto')
         r.fieldcell('@project_id.app_url', width='25em')
         r.fieldcell('@project_id.repository_url', width='25em')
+
 
 class ViewFromProjects(View):
 

@@ -14,8 +14,6 @@ class View(BaseComponent):
         r.fieldcell('description', width='auto')
         r.fieldcell('app_url', width='25em')
         r.fieldcell('repository_url', width='25em')
-        #r.fieldcell('workspace_id')
-        #r.fieldcell('linesofcode', width='6em')
 
     def th_order(self):
         return 'title'
@@ -26,39 +24,22 @@ class View(BaseComponent):
     def th_top_toolbar(self,top):
         top.slotToolbar('*,sections@project_type_id,*', childname='top', _position='<bar')
 
+
 class ViewDevelopers(View):
 
     def th_options(self):
         return dict(virtualStore=False, addrow=False, delrow=False)
 
+
 class ViewSupporters(View):
 
     def th_options(self):
         return dict(virtualStore=False, delrow=False)
+
         
 class ViewFromDeveloper(View):
+    pass
 
-    #def th_view(self, view):
-    #    view.top.bar.replaceSlots('delrow','getprojects,2,delrow')
-    #    view.top.bar.getprojects.slotButton('!![en]Get projects').dataRpc(
-    #            self.db.table('comm.project').getProjects, 
-    #                    developer_id='=#FORM.record.id', 
-    #                    _ask=dict(title="!![en]Get projects",fields=[dict(
-    #                                name="repo_service", lbl="Service", 
-    #                                table='sys.service', tag='dbSelect',
-    #                                condition='$developer_id=:d_id',
-    #                                condition_d_id='=#FORM.record.id',
-    #                                hasDownArrow=True,
-    #                                auxColumns='$service_type,$implementation,$service_name'),
-    #                                dict(name="workspace_slug", lbl="Workspace", 
-    #                                table='comm.workspace', tag='dbSelect',
-    #                                alternatePkey='code',
-    #                                condition='$developer_id=:d_id',
-    #                                condition_d_id='=#FORM.record.id',
-    #                                hasDownArrow=True)]))
-
-    def th_options(self):
-        return dict(searchOn=False)
 
 class Form(BaseComponent):
     py_requires="""gnrcomponents/attachmanager/attachmanager:AttachManager,

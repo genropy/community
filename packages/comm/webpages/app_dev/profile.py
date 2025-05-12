@@ -7,5 +7,6 @@ class GnrCustomWebPage(object):
         root.thFormHandler(datapath='main',
             table='comm.developer',
             startKey=self.rootenv['developer_id'],
-            formResource='FormProfile'
+            formResource='FormProfile',
+            form_locked=False
         )

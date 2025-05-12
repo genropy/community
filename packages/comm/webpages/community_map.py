@@ -5,15 +5,17 @@ class GnrCustomWebPage(object):
 
     def main(self, root, **kwargs):
         bc = root.borderContainer(datapath='main')
-        map_cp = bc.contentPane(region='right', width='50%').GoogleMap( 
-                        height='100%',
+        th_args = dict(region='bottom', height='50%') if self.isMobile else dict(region='right', width='50%') 
+        map_cp = bc.contentPane(**th_args).GoogleMap( 
+                        height='100%', width='100%',
                         map_type='roadmap',
                         centerMarker=True,
-                        nodeId='maps',
+                        map_center='^gnr.user_coords',
+                        nodeId='gma',
                         autoFit=True)         
-        center =   bc.borderContainer(region='center')
+        
         adminUser = self.application.checkResourcePermission('admin',self.userTags)
-        th_dev = center.contentPane(region='center').plainTableHandler(
+        th_dev = bc.contentPane(region='center').plainTableHandler(
                         nodeId='developers',
                         table='comm.developer', 
                         viewResource='ViewMap', 
@@ -23,27 +25,25 @@ class GnrCustomWebPage(object):
                         addrow=False, delrow=False,
                         grid__class='noheader'
                         )
-        bc.dataController(""" 
+        bc.dataController("""
                             if(!m.map){
                                         return;
                                     }
+                            genro.getUserLocation();
                             m.gnr.clearMarkers(m);
                             var that = this;
                             store.forEach(function(n){
-                                // console.log(n);
+                                console.log(n);
                                 m.gnr.setMarker(m, n.attr._pkey, n.attr.position, {title:n.attr.tg_username, 
-                                                                                    onClick:function(marker_name, e){
-                                                                                          console.log("single",marker_name,e);
-                                                                                          grid.selectByRowAttr('_pkey',marker_name,null,true);
-                                                                                         //grid.setSelectedId(marker_name);
-                                                                                            },
-                                                                                   // labelContent: n.attr.tg_username,
-                                                                                   // labelAnchor: new google.maps.Point(15, 0),
-                                                                                   // labelClass: "markerlabel" // the CSS class for the label
+                                                                                   onClick:function(marker_name, e){
+                                                                                            grid.setSelectedId(marker_name); },
+                                                                                    labelContent: n.attr.tg_username,
+                                                                                    labelAnchor: new google.maps.Point(15, 0),
+                                                                                    labelClass: "markerlabel" // the CSS class for the label
                                                                                     }
                                                 );
                             }, 'static');
-                         """,
+                            m.gnr.fitMarkers(m);""",
                             m=map_cp,
                             store='^#developers.view.store',
                             grid=th_dev.view.grid.js_widget,
