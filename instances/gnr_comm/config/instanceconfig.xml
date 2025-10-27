@@ -11,11 +11,11 @@
 		<gnrcore_biz pkgcode="gnrcore:biz"/>
 		<gnrextra_wpn pkgcode="gnrextra:wpn"/>
 		<gnrextra_srvy pkgcode="gnrextra:srvy"/>
-		<gnrextra_genrobot pkgcode="gnrextra:genrobot"/>
-		<gnrextra_social pkgcode="gnrextra:social"/>
-		<gnrextra_video pkgcode="gnrextra:video"/>
-		<gnrextra_wordpress pkgcode="gnrextra:wordpress"/>
-		<gnrextra_dem pkgcode="gnrextra:dem"/>
+		<gnrcommunication_genrobot pkgcode="gnrcommunication:genrobot"/>
+		<gnrcommunication_social pkgcode="gnrcommunication:social"/>
+		<gnrcommunication_video pkgcode="gnrcommunication:video"/>
+		<gnrcommunication_wordpress pkgcode="gnrcommunication:wordpress"/>
+		<gnrcommunication_dem pkgcode="gnrcommunication:dem"/>
 		<gnrextra_oidc pkgcode="gnrextra:oidc"/>
 		<community_comm pkgcode="community:comm"/>
 		<repomgm_repomgm pkgcode="repomgm:repomgm"/>
