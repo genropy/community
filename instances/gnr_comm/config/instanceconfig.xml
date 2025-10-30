@@ -16,7 +16,7 @@
 		<gnrcommunication_video pkgcode="gnrcommunication:video"/>
 		<gnrcommunication_wordpress pkgcode="gnrcommunication:wordpress"/>
 		<gnrcommunication_dem pkgcode="gnrcommunication:dem"/>
-		<gnrextra_oidc pkgcode="gnrextra:oidc"/>
+		<gnrauth_oidc pkgcode="gnrauth:oidc"/>
 		<community_comm pkgcode="community:comm"/>
 		<repomgm_repomgm pkgcode="repomgm:repomgm"/>
 	</packages>
