@@ -29,7 +29,7 @@ class FormFromDeveloper(BaseComponent):
                                       fields=[dict(value='^.implementation',
                                                     tag='filteringSelect',
                                                     lbl='!![en]Implementation',
-                                                    values="git:Github,bitbucket:Bitbucket",
+                                                    values="git:Github",
                                                     hasDownArrow=True)]))
 
     @public_method

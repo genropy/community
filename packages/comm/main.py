@@ -11,7 +11,7 @@ class Package(GnrDboPackage):
         pass
     
     def required_packages(self):
-        return ['gnrcore:email']
+        return ['gnrcore:email', 'gnrcloudtools:github', 'gnrsubscriptions:sbs']
     
         
 class Table(GnrDboTable):

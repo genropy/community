@@ -36,7 +36,7 @@ class ApplicationMenu(object):
         root.webpage('!!Messages', filepath='/email/my_messages', table='email.message', 
                          titleCounter=True, titleCounter_condition='$dest_user_id=:env_user_id AND $read IS NOT TRUE',
                          menucode='messages')
-        root.webpage('!![en]Subscriptions', filepath='/repomgm/user_subscriptions')
+        root.webpage('!![en]Subscriptions', filepath='/sbs/user_subscriptions')
         root.webpage(u"!![en]Community map", filepath="/comm/community_map")
         self.publicationsSubMenu(root.branch("!![en]Publications"))
         #root.thpage(u"!![en]Suggestions", table="comm.suggestion")
@@ -49,7 +49,7 @@ class ApplicationMenu(object):
         
     def config(self,root,**kwargs):
         root.packageBranch(u"!![en]Community", pkg="comm")
-        root.packageBranch(u"!![en]Repository management", pkg="repomgm")
+        root.packageBranch(u"!![en]Repository management", pkg="sbs")
         root.packageBranch(u"!![en]Surveys", pkg="srvy", tags='admin')
         if self.db.application.getPreference('enable_social', pkg='comm'):
             root.packageBranch(u"!![en]Social", pkg="social", tags='admin')

@@ -1,0 +1,290 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<GenRoBag><main path="main.py" ext="py"><en_community base="Community" it="Comunità"></en_community></main>
+<menu path="menu.py" ext="py"><en_developers base="Developers" en="Developers" it="Sviluppatori"></en_developers>
+<en_projects base="Projects" it="Progetti"></en_projects>
+<en_project_types base="Project types" it="Tipi di progetto"></en_project_types>
+<en_events base="Events" it="Eventi"></en_events>
+<en_event_types base="Event types" it="Tipi di eventi"></en_event_types>
+<en_suggestions base="Suggestions" it="Suggerimenti"></en_suggestions>
+<en_suggestion_types base="Suggestion types" it="Tipi di suggerimenti"></en_suggestion_types>
+<en_community base="Community" it="Comunità"></en_community>
+<en_lookups base="Lookups" en="Lookups" it="Tabelle di configurazione"></en_lookups>
+<en_my_profile base="My profile" it="Il mio profilo"></en_my_profile>
+<en_messages base="Messages" it="Messaggi" en="Messages"></en_messages>
+<en_subscriptions base="Subscriptions" it="Abbonamenti"></en_subscriptions>
+<en_community_map base="Community map" it="Mappa della comunità"></en_community_map>
+<en_publications base="Publications" it="Pubblicazioni"></en_publications>
+<en_social_posts base="Social posts" it="Post sui social"></en_social_posts>
+<en_blog_posts base="Blog posts" it="Post del blog"></en_blog_posts>
+<en_repository_management base="Repository management" it="Gestione repository"></en_repository_management>
+<en_surveys base="Surveys" it="Sondaggi" en="Surveys" zh="调查"></en_surveys>
+<en_social base="Social" it="Social media"></en_social>
+<en_video base="Video" en="Video" it="Video"></en_video>
+<en_blog base="Blog" it=""></en_blog>
+<en_genrobot base="Genrobot" it=""></en_genrobot>
+<en_dem base="DEM" it=""></en_dem>
+<en_e_mail base="E-mail" en="E-mail" it="Posta elettronica"></en_e_mail>
+<en_administration fr="Administration" en="Administration" de="Verwaltung" it="Amministrazione sistema" base="Administration"></en_administration>
+<en_system fr="Système" de="System" en="System" it="Sistema" base="System"></en_system>
+<en_web_notifications base="Web Notifications" it="Notifiche Web"></en_web_notifications>
+<en_dashboard base="Dashboard" it="Cruscotto"></en_dashboard></menu>
+<model><_packages><adm><group path="model/_packages/adm/group.py" ext="py"><en_community_developer base="Community Developer" it="Sviluppatore della community"></en_community_developer>
+<en_community_supporter base="Community Supporter" it="Sostenitore della comunità"></en_community_supporter></group>
+<user path="model/_packages/adm/user.py" ext="py"><en_is_developer base="Is developer" it="È sviluppatore"></en_is_developer></user></adm>
+<dem><contatto path="model/_packages/dem/contatto.py" ext="py"><en_developer base="Developer" en="Developer" it="Sviluppatore"></en_developer></contatto></dem>
+<email><message path="model/_packages/email/message.py" ext="py"><en_destination_user fr="utilisateur Destinations" de="Zielbenutzer" en="Destination user" it="Utente destinatario" base="Destination user"></en_destination_user></message></email>
+<srvy><lead path="model/_packages/srvy/lead.py" ext="py"><en_first_name fr="Prénom" de="Vorname" en="First name" it="Nome" base="First name"></en_first_name>
+<en_name base="Name" de="Name" en="Name" fr="Nom" it="Nome"></en_name>
+<en_last_name fr="Nom de famille" de="Nachname" en="Last name" it="Cognome" base="Last name"></en_last_name>
+<en_surname base="Surname" en="Surname" it="Cognome"></en_surname>
+<en_message fr="Message" de="Nachricht" en="Message" it="Messaggio" base="Message"></en_message>
+<en_privacy base="Privacy" en="Privacy" it="Privacy"></en_privacy></lead></srvy>
+<sys><service path="model/_packages/sys/service.py" ext="py"><en_developer base="Developer" en="Developer" it="Sviluppatore"></en_developer>
+<en_tg_username base="Tg Username" it="Nome utente Tg"></en_tg_username></service></sys></_packages>
+<badge path="model/badge.py" ext="py"><en_badge base="Badge" it="Distintivo"></en_badge>
+<en_badges base="Badges" it="Distintivi"></en_badges>
+<en_description base="Description" en="Description" it="Descrizione"></en_description>
+<en_icon base="Icon" it="icona"></en_icon></badge>
+<developer path="model/developer.py" ext="py"><en_developer base="Developer" en="Developer" it="Sviluppatore"></en_developer>
+<en_developers base="Developers" en="Developers" it="Sviluppatori"></en_developers>
+<en_card base="Card" it="Carta"></en_card>
+<en_position base="Position" it="Posizione"></en_position>
+<en_name base="Name" de="Name" en="Name" fr="Nom" it="Nome"></en_name>
+<en_surname base="Surname" en="Surname" it="Cognome"></en_surname>
+<en_date_of_birth base="Date of birth" it="Data di nascita"></en_date_of_birth>
+<en_country base="Country" it="Paese"></en_country>
+<en_geocode base="Geocode" it="Geocodifica"></en_geocode>
+<en_locality base="Locality" it="Località"></en_locality>
+<en_region base="Region" it="Regione"></en_region>
+<en_state base="State" it="Stato"></en_state>
+<en_city base="City" it="Città"></en_city>
+<en_full_address base="Full address" en="" it="Indirizzo completo"></en_full_address>
+<en_photo base="Photo" en="Photo" it="Foto"></en_photo>
+<en_bio base="Bio" it=""></en_bio>
+<en_telegram_username base="Telegram username" it="Nome utente Telegram"></en_telegram_username>
+<en_nickname base="Nickname" it="Soprannome"></en_nickname>
+<en_github base="Github" it=""></en_github>
+<en_badge base="Badge" it="Distintivo"></en_badge>
+<en_user base="User" de="Benutzer" en="User" fr="Utilisateur" it="Utente"></en_user>
+<en_organization base="Organization" it="Organizzazione"></en_organization>
+<en_email fr="Email" de="E-Mail-" en="Email" it="Email" base="Email" es="Correo electrónico"></en_email>
+<en_fullname base="Fullname" it="Nome completo"></en_fullname>
+<en_username fr="Nom d'utilisateur" de="Benutzername" en="Username" it="Nome utente" base="Username"></en_username>
+<en_contatto base="Contatto" it=""></en_contatto>
+<en_badge_icon base="Badge icon" it="icona del badge"></en_badge_icon>
+<en_caption_name base="Caption name" it="Nome della didascalia"></en_caption_name>
+<en_developer_location base="Developer location" it="Ubicazione dello sviluppatore"></en_developer_location>
+<en_languages fr="Langues" de="Sprachen" en="Languages" it="Linguaggi" base="Languages"></en_languages>
+<en_qualifications base="Qualifications" it="Qualifiche"></en_qualifications>
+<en_topics base="Topics" en="Topics" it="Argomenti"></en_topics>
+<en_hobbies base="Hobbies" it="Hobby"></en_hobbies></developer>
+<developer_hobby path="model/developer_hobby.py" ext="py"><en_developer_hobbies base="Developer hobbies" it="Hobby degli sviluppatori"></en_developer_hobbies>
+<en_developer_hobby base="Developer hobby" it="Hobby per sviluppatori"></en_developer_hobby>
+<en_developer base="Developer" en="Developer" it="Sviluppatore"></en_developer>
+<en_hobby base="Hobby" it=""></en_hobby>
+<en_level base="Level" de="Höhe" en="Level" fr="Niveau" it="Livello"></en_level></developer_hobby>
+<developer_language path="model/developer_language.py" ext="py"><en_developer_languages base="Developer languages" it="Linguaggi per sviluppatori"></en_developer_languages>
+<en_developer_language base="Developer language" it="Linguaggio per sviluppatori"></en_developer_language>
+<en_developer base="Developer" en="Developer" it="Sviluppatore"></en_developer>
+<en_language base="Language" en="Language" it="Lingua"></en_language>
+<en_level base="Level" de="Höhe" en="Level" fr="Niveau" it="Livello"></en_level>
+<en_programming_language base="Programming language" it="Linguaggio di programmazione"></en_programming_language></developer_language>
+<developer_skill path="model/developer_skill.py" ext="py"><en_developer_skills base="Developer skills" it="Competenze per sviluppatori"></en_developer_skills>
+<en_developer_skill base="Developer skill" it="Abilità dello sviluppatore"></en_developer_skill>
+<en_developer base="Developer" en="Developer" it="Sviluppatore"></en_developer>
+<en_skill base="skill" it="Abilità"></en_skill>
+<en_provisioning base="Provisioning" it="Approvvigionamento"></en_provisioning></developer_skill>
+<developer_topic path="model/developer_topic.py" ext="py"><en_developer_topics base="Developer topics" it="Argomenti per sviluppatori"></en_developer_topics>
+<en_developer_topic base="Developer topic" it="Argomento per sviluppatori"></en_developer_topic>
+<en_developer base="Developer" en="Developer" it="Sviluppatore"></en_developer>
+<en_topic base="Topic" de="Thema" en="Topic" fr="Sujet" it="Argomento"></en_topic>
+<en_level base="Level" de="Höhe" en="Level" fr="Niveau" it="Livello"></en_level></developer_topic>
+<event path="model/event.py" ext="py"><en_event base="Event" de="Ereignis" en="Event" fr="Événement" it="Evento"></en_event>
+<en_events base="Events" it="Eventi"></en_events>
+<en_title base="Title" de="Titel" en="Title" fr="Titre" it="Titolo"></en_title>
+<en_description base="Description" en="Description" it="Descrizione"></en_description>
+<en_descr_ base="Descr." it="Descrive."></en_descr_>
+<en_event_url base="Event URL" it="URL dell'evento"></en_event_url>
+<en_repository_url base="Repository URL" it="URL del repository"></en_repository_url>
+<en_event_type base="Event type" it="Tipo di evento"></en_event_type>
+<en_event_fields base="Event fields" it="Campi evento"></en_event_fields>
+<en_suggestion base="Suggestion" it="Suggerimento"></en_suggestion></event>
+<event_type path="model/event_type.py" ext="py"><en_event_type base="Event type" it="Tipo di evento"></en_event_type>
+<en_event_types base="Event types" it="Tipi di eventi"></en_event_types>
+<en_description base="Description" en="Description" it="Descrizione"></en_description></event_type>
+<hobby path="model/hobby.py" ext="py"><en_hobby base="Hobby" it=""></en_hobby>
+<en_hobbies base="Hobbies" it="Hobby"></en_hobbies>
+<en_description base="Description" en="Description" it="Descrizione"></en_description></hobby>
+<language path="model/language.py" ext="py"><en_programming_language base="Programming Language" it="Linguaggio di programmazione"></en_programming_language>
+<en_programming_languages base="Programming Languages" it="Linguaggi di programmazione"></en_programming_languages>
+<en_code base="Code" en="Code" it="Codice"></en_code>
+<en_description base="Description" en="Description" it="Descrizione"></en_description></language>
+<meeting path="model/meeting.py" ext="py"><en_meeting base="Meeting" it="Riunione"></en_meeting>
+<en_meetings base="Meetings" it="Riunioni"></en_meetings>
+<en_title base="Title" de="Titel" en="Title" fr="Titre" it="Titolo"></en_title>
+<en_description base="Description" en="Description" it="Descrizione"></en_description>
+<en_descr_ base="Descr." it="Descrive."></en_descr_>
+<en_meeting_url base="Meeting URL" it="URL della riunione"></en_meeting_url>
+<en_start_date fr="Date De Début" de="Anfangsdatum" en="Start date" it="Data Di Inizio" base="Start date"></en_start_date>
+<en_start base="Start" en="Start" it="Inizio"></en_start>
+<en_end_date fr="Date De Fin" de="End Date" en="End date" it="Data Di Fine" base="End date"></en_end_date>
+<en_end base="End" en="End" it="Fine"></en_end>
+<en_event base="Event" de="Ereignis" en="Event" fr="Événement" it="Evento"></en_event>
+<en_suggestion base="Suggestion" it="Suggerimento"></en_suggestion>
+<en_meeting_type base="Meeting type" it="Tipo di riunione"></en_meeting_type>
+<en_developer_is_subscribed base="Developer is subscribed" it="Lo sviluppatore è abbonato"></en_developer_is_subscribed></meeting>
+<meeting_developer path="model/meeting_developer.py" ext="py"><en_meeting_developers base="Meeting developers" it="Incontro con gli sviluppatori"></en_meeting_developers>
+<en_meeting_developer base="Meeting developer" it="Sviluppatore della riunione"></en_meeting_developer>
+<en_developer base="Developer" en="Developer" it="Sviluppatore"></en_developer>
+<en_event base="event" de="Ereignis" en="Event" fr="Événement" it="Evento"></en_event>
+<en_role base="Role" it="Ruolo"></en_role>
+<en_event_title base="Event title" it="Titolo dell'evento"></en_event_title>
+<en_role_icon base="Role icon" it="Icona del ruolo"></en_role_icon></meeting_developer>
+<organization path="model/organization.py" ext="py"><en_organization base="Organization" it="Organizzazione"></en_organization>
+<en_organizations base="Organizations" it="Organizzazioni"></en_organizations>
+<en_code base="Code" en="Code" it="Codice"></en_code>
+<en_name base="Name" de="Name" en="Name" fr="Nom" it="Nome"></en_name></organization>
+<project path="model/project.py" ext="py"><en_project base="Project" en="Project" it="Progetto"></en_project>
+<en_projects base="Projects" it="Progetti"></en_projects>
+<en_title base="Title" de="Titel" en="Title" fr="Titre" it="Titolo"></en_title>
+<en_description base="Description" en="Description" it="Descrizione"></en_description>
+<en_descr_ base="Descr." it="Descrive."></en_descr_>
+<en_project_url base="Project URL" it="URL del progetto"></en_project_url>
+<en_repository_url base="Repository URL" it="URL del repository"></en_repository_url>
+<en_start_date fr="Date De Début" de="Anfangsdatum" en="Start date" it="Data Di Inizio" base="Start date"></en_start_date>
+<en_start base="Start" en="Start" it="Inizio"></en_start>
+<en_end_date fr="Date De Fin" de="End Date" en="End date" it="Data Di Fine" base="End date"></en_end_date>
+<en_end base="End" en="End" it="Fine"></en_end>
+<en_project_type base="Project type" it="Tipo di progetto"></en_project_type>
+<en_project_fields base="Project fields" it="Campi del progetto"></en_project_fields>
+<en_suggestion base="Suggestion" it="Suggerimento"></en_suggestion>
+<en_developer_is_subscribed base="Developer is subscribed" it="Lo sviluppatore è abbonato"></en_developer_is_subscribed>
+<en_workspace base="Workspace" it="Spazio di lavoro"></en_workspace></project>
+<project_developer path="model/project_developer.py" ext="py"><en_project_developers base="Project developers" it="Sviluppatori di progetti"></en_project_developers>
+<en_project_developer base="Project developer" it="Sviluppatore del progetto"></en_project_developer>
+<en_developer base="Developer" en="Developer" it="Sviluppatore"></en_developer>
+<en_project base="Project" en="Project" it="Progetto"></en_project>
+<en_role base="Role" it="Ruolo"></en_role>
+<en_status fr="Statut" de="Status" en="Status" it="Stato" base="Status"></en_status>
+<en_project_title base="Project title" it="Titolo del progetto"></en_project_title></project_developer>
+<project_type path="model/project_type.py" ext="py"><en_project_type base="Project type" it="Tipo di progetto"></en_project_type>
+<en_project_types base="Project types" it="Tipi di progetto"></en_project_types>
+<en_description base="Description" en="Description" it="Descrizione"></en_description></project_type>
+<role path="model/role.py" ext="py"><en_role base="Role" it="Ruolo"></en_role>
+<en_roles base="Roles" it="Ruoli"></en_roles>
+<en_description base="Description" en="Description" it="Descrizione"></en_description>
+<en_icon base="Icon" it="icona"></en_icon></role>
+<skill path="model/skill.py" ext="py"><en_skill base="Skill" it="Abilità"></en_skill>
+<en_skills base="Skills" it="Competenze"></en_skills>
+<en_description base="Description" en="Description" it="Descrizione"></en_description></skill>
+<suggestion path="model/suggestion.py" ext="py"><en_suggestion base="Suggestion" it="Suggerimento"></en_suggestion>
+<en_title base="Title" de="Titel" en="Title" fr="Titre" it="Titolo"></en_title>
+<en_description base="Description" en="Description" it="Descrizione"></en_description>
+<en_speakers base="Speakers" it="Relatori"></en_speakers>
+<en_audience base="Audience" it="Pubblico"></en_audience>
+<en_topics base="Topics" en="Topics" it="Argomenti"></en_topics>
+<en_suggestion_type base="Suggestion type" it="Tipo di suggerimento"></en_suggestion_type>
+<en_suggestion_fields base="Suggestion fields" it="Campi di suggerimento"></en_suggestion_fields>
+<en_developer_is_interested base="Developer is interested" it="Lo sviluppatore è interessato"></en_developer_is_interested>
+<en_how_many_are_interested base="How many are interested" it="Quanti sono interessati"></en_how_many_are_interested>
+<en_is_project base="Is project" it="È un progetto"></en_is_project>
+<en_is_meeting base="Is meeting" it="Sta incontrando"></en_is_meeting>
+<en_is_event base="Is event" it="È un evento"></en_is_event>
+<en_approved base="Approved" it="Approvato"></en_approved></suggestion>
+<suggestion_developer path="model/suggestion_developer.py" ext="py"><en_suggestion_developers base="Suggestion developers" it="Sviluppatori di suggerimenti"></en_suggestion_developers>
+<en_suggestion_developer base="Suggestion developer" it="Sviluppatore di suggerimenti"></en_suggestion_developer>
+<en_developer base="Developer" en="Developer" it="Sviluppatore"></en_developer>
+<en_suggestion base="Suggestion" it="Suggerimento"></en_suggestion>
+<en_suggestion_title base="Suggestion title" it="Titolo del suggerimento"></en_suggestion_title></suggestion_developer>
+<suggestion_type path="model/suggestion_type.py" ext="py"><en_suggestion_type base="Suggestion type" it="Tipo di suggerimento"></en_suggestion_type>
+<en_suggestion_types base="Suggestion types" it="Tipi di suggerimenti"></en_suggestion_types>
+<en_description base="Description" en="Description" it="Descrizione"></en_description></suggestion_type>
+<topic path="model/topic.py" ext="py"><en_topic base="Topic" de="Thema" en="Topic" fr="Sujet" it="Argomento"></en_topic>
+<en_topics base="Topics" en="Topics" it="Argomenti"></en_topics>
+<en_description base="Description" en="Description" it="Descrizione"></en_description></topic>
+<workspace path="model/workspace.py" ext="py"><en_workspace base="Workspace" it="Spazio di lavoro"></en_workspace>
+<en_code base="Code" en="Code" it="Codice"></en_code>
+<en_description base="Description" en="Description" it="Descrizione"></en_description>
+<en_developer base="Developer" en="Developer" it="Sviluppatore"></en_developer></workspace></model>
+<resources><preference path="resources/preference.py" ext="py"><it_new_user_default_badge base="New user default badge" it=""></it_new_user_default_badge>
+<it_abilita_dem base="Abilita DEM" it=""></it_abilita_dem>
+<it_abilita_social base="Abilita Social" it="" en="Enable social media"></it_abilita_social>
+<it_abilita_genrobot base="Abilita Genrobot" it=""></it_abilita_genrobot></preference>
+<tables><_packages><adm><user><user path="resources/tables/_packages/adm/user/user.py" ext="py"><en_repository_tokens base="Repository tokens"></en_repository_tokens>
+<en_subscription_token base="Subscription token"></en_subscription_token>
+<en_token base="Token"></en_token>
+<en_subscription_token_creation_date base="Subscription token creation date"></en_subscription_token_creation_date>
+<en_token_creation base="Token creation"></en_token_creation></user></user></adm>
+<dem><lista><th_lista path="resources/tables/_packages/dem/lista/th_lista.py" ext="py"><en_subscribed base="Subscribed" it="Iscritto" en="Subscribed" zh="已订阅"></en_subscribed></th_lista></lista></dem>
+<sys><service><th_service path="resources/tables/_packages/sys/service/th_service.py" ext="py"><en_add_a_repository_service base="Add a repository service" it="Aggiungere un servizio di repository"></en_add_a_repository_service>
+<en_implementation base="Implementation" it="Implementazione" en="Implementation"></en_implementation></th_service></service></sys></_packages>
+<developer><th_developer path="resources/tables/developer/th_developer.py" ext="py"><en_username fr="Nom d'utilisateur" de="Benutzername" en="Username" it="Nome utente" base="Username"></en_username>
+<en_languages fr="Langues" de="Sprachen" en="Languages" it="Linguaggi" base="Languages"></en_languages>
+<en_topics base="Topics" en="Topics" it="Argomenti"></en_topics>
+<en_hobbies base="Hobbies" it="Hobby"></en_hobbies>
+<en_bio base="Bio" it=""></en_bio>
+<en_location base="Location" it="Posizione"></en_location>
+<en_human_skills base="Human Skills" it="Competenze umane"></en_human_skills>
+<en_newsletter base="Newsletter" en="Newsletter" it="Newsletter"></en_newsletter>
+<en_projects base="Projects" it="Progetti"></en_projects>
+<en_level_of_consent base="Level of consent" it="Livello di consenso"></en_level_of_consent>
+<en_change_password base="Change password" it="Cambia password" en="Change password"></en_change_password>
+<en_delete_account base="Delete account" it="Elimina account"></en_delete_account>
+<en_are_you_sure_ base="Are you sure?" de="Sind Sie sicher?" en="Are you sure?" fr="Êtes-vous sûr?" it="Sei sicuro?"></en_are_you_sure_>
+<en_confirm_account_deletion base="Confirm account deletion" it="Conferma l'eliminazione dell'account"></en_confirm_account_deletion>
+<en_save fr="Sauvegarder" de="Speichern" en="Save" it="Salva" base="Save"></en_save>
+<en_profile fr="Profil" de="Profil" en="Profile" it="Profilo" base="Profile"></en_profile>
+<en_skills base="Skills" it="Competenze"></en_skills>
+<en_settings base="Settings" en="Settings" it="Impostazioni"></en_settings>
+<en_access base="Access" de="Zugriff" en="Access" fr="Accès" it="Accesso"></en_access></th_developer></developer>
+<event><th_event path="resources/tables/event/th_event.py" ext="py"><en_event_details base="Event details" it="Dettagli dell'evento"></en_event_details>
+<en_additional_details base="Additional details" it="Dettagli aggiuntivi"></en_additional_details>
+<en_new_event base="New event" it="Nuovo evento"></en_new_event>
+<en_event_type base="Event type" it="Tipo di evento"></en_event_type></th_event></event>
+<hobby><th_hobby path="resources/tables/hobby/th_hobby.py" ext="py"><en_level_of_interest base="Level of interest" it="Livello di interesse"></en_level_of_interest>
+<en_no base="No" en="No" it="No" zh="没有"></en_no>
+<en_low base="Low" it="Basso"></en_low>
+<en_medium base="Medium" it="Medio"></en_medium>
+<en_high base="High" it="Alto"></en_high></th_hobby></hobby>
+<language><th_language path="resources/tables/language/th_language.py" ext="py"><en_level base="Level" de="Höhe" en="Level" fr="Niveau" it="Livello"></en_level>
+<en_no base="No" en="No" it="No" zh="没有"></en_no>
+<en_low base="Low" it="Basso"></en_low>
+<en_medium base="Medium" it="Medio"></en_medium>
+<en_good base="Good" it="Buono"></en_good>
+<en_excellent base="Excellent" it="Eccellente"></en_excellent></th_language></language>
+<meeting><th_meeting path="resources/tables/meeting/th_meeting.py" ext="py"><en_attachments base="Attachments" de="Zubehör" en="Attachments" fr="Pièces jointes" it="Allegati"></en_attachments>
+<en_developers base="Developers" en="Developers" it="Sviluppatori"></en_developers>
+<en_subscribe base="Subscribe" it="Abbonati"></en_subscribe></th_meeting></meeting>
+<project><th_project path="resources/tables/project/th_project.py" ext="py"><en_attachments base="Attachments" de="Zubehör" en="Attachments" fr="Pièces jointes" it="Allegati"></en_attachments>
+<en_developers base="Developers" en="Developers" it="Sviluppatori"></en_developers>
+<en_project_details base="Project details" it="Dettagli del progetto"></en_project_details>
+<en_lines_of_code base="Lines of code" it="Righe di codice"></en_lines_of_code>
+<en_additional_details base="Additional details" it="Dettagli aggiuntivi"></en_additional_details>
+<en_count_lines base="Count lines" it="Conta le righe"></en_count_lines>
+<en_get_projects base="Get projects" it="Ottieni progetti"></en_get_projects>
+<en_new_project base="New project" it="Nuovo progetto"></en_new_project>
+<en_project_type base="Project type" it="Tipo di progetto"></en_project_type>
+<en_subscribe base="Subscribe" it="Abbonati"></en_subscribe></th_project></project>
+<project_developer><th_project_developer path="resources/tables/project_developer/th_project_developer.py" ext="py"><en_approve base="Approve" it="Approvare"></en_approve></th_project_developer></project_developer>
+<skill><th_skill path="resources/tables/skill/th_skill.py" ext="py"><en_free base="Free" it="Gratuito"></en_free>
+<en_payment base="Payment" it="Pagamento"></en_payment>
+<en_mentoring base="Mentoring" it="Tutoraggio"></en_mentoring>
+<en_speaker base="Speaker" it="altoparlante"></en_speaker></th_skill></skill>
+<suggestion><th_suggestion path="resources/tables/suggestion/th_suggestion.py" ext="py"><en_developers base="Developers" en="Developers" it="Sviluppatori"></en_developers>
+<en_suggestion_details base="Suggestion details" it="Dettagli del suggerimento"></en_suggestion_details>
+<en_topics base="Topics" en="Topics" it="Argomenti"></en_topics>
+<en_additional_details base="Additional details" it="Dettagli aggiuntivi"></en_additional_details>
+<en_make_initiative base="Make initiative" it="Fai iniziativa"></en_make_initiative>
+<en_make_initiative_from_suggestion base="Make initiative from suggestion" it="Prendi iniziativa partendo da un suggerimento"></en_make_initiative_from_suggestion>
+<en_initiative_type base="Initiative type" it="Tipo di iniziativa"></en_initiative_type>
+<en_new_suggestion base="New suggestion" it="Nuovo suggerimento"></en_new_suggestion>
+<en_suggestion_type base="Suggestion type" it="Tipo di suggerimento"></en_suggestion_type>
+<en_i_m_interested base="I'm interested" it="Sono interessato"></en_i_m_interested></th_suggestion></suggestion>
+<topic><th_topic path="resources/tables/topic/th_topic.py" ext="py"><en_level_of_interest base="Level of interest" it="Livello di interesse"></en_level_of_interest>
+<en_no base="No" en="No" it="No" zh="没有"></en_no>
+<en_low base="Low" it="Basso"></en_low>
+<en_medium base="Medium" it="Medio"></en_medium>
+<en_high base="High" it="Alto"></en_high></th_topic></topic></tables></resources>
+<webpages><community path="webpages/community.py" ext="py"><en_home base="Home" it=""></en_home>
+<en_profile fr="Profil" de="Profil" en="Profile" it="Profilo" base="Profile"></en_profile>
+<en_community_map base="Community Map" it="Mappa della comunità"></en_community_map></community></webpages></GenRoBag>
