@@ -33,7 +33,7 @@ class ApplicationMenu(object):
     @metadata(group_code='COMM')
     def config_community(self,root,**kwargs):
         root.webpage("!![en]My profile", filepath='/comm/app_dev/profile', openOnStart=True)
-        root.webpage('!!Messages', filepath='/email/my_messages', table='email.message', 
+        root.webpage('!!Messages', filepath='/comm/my_messages', table='email.message', 
                          titleCounter=True, titleCounter_condition='$dest_user_id=:env_user_id AND $read IS NOT TRUE',
                          menucode='messages')
         root.webpage('!![en]Subscriptions', filepath='/repomgm/user_subscriptions')
