@@ -34,7 +34,7 @@ class ApplicationMenu(object):
     def config_community(self,root,**kwargs):
         root.webpage("!![en]My profile", filepath='/comm/app_dev/profile', openOnStart=True)
         root.webpage('!!Messages', filepath='/comm/my_messages', table='email.message', 
-                         titleCounter=True, titleCounter_condition='$dest_user_id=:env_user_id AND $read IS NOT TRUE',
+                         menuLineBadge='getMyUnreadMessages',
                          menucode='messages')
         root.webpage('!![en]Subscriptions', filepath='/repomgm/user_subscriptions')
         root.webpage(u"!![en]Community map", filepath="/comm/community_map")
