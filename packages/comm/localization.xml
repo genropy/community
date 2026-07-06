@@ -103,7 +103,7 @@
 <en_events base="Events" it="Eventi"></en_events>
 <en_title base="Title" de="Titel" en="Title" fr="Titre" it="Titolo"></en_title>
 <en_description base="Description" en="Description" it="Descrizione"></en_description>
-<en_descr_ base="Descr." it="Descrive."></en_descr_>
+<en_descr_ base="Descr." it="Descr."></en_descr_>
 <en_event_url base="Event URL" it="URL dell'evento"></en_event_url>
 <en_repository_url base="Repository URL" it="URL del repository"></en_repository_url>
 <en_event_type base="Event type" it="Tipo di evento"></en_event_type>
@@ -123,7 +123,7 @@
 <en_meetings base="Meetings" it="Riunioni"></en_meetings>
 <en_title base="Title" de="Titel" en="Title" fr="Titre" it="Titolo"></en_title>
 <en_description base="Description" en="Description" it="Descrizione"></en_description>
-<en_descr_ base="Descr." it="Descrive."></en_descr_>
+<en_descr_ base="Descr." it="Descr."></en_descr_>
 <en_meeting_url base="Meeting URL" it="URL della riunione"></en_meeting_url>
 <en_start_date fr="Date De Début" de="Anfangsdatum" en="Start date" it="Data Di Inizio" base="Start date"></en_start_date>
 <en_start base="Start" en="Start" it="Inizio"></en_start>
@@ -148,7 +148,7 @@
 <en_projects base="Projects" it="Progetti"></en_projects>
 <en_title base="Title" de="Titel" en="Title" fr="Titre" it="Titolo"></en_title>
 <en_description base="Description" en="Description" it="Descrizione"></en_description>
-<en_descr_ base="Descr." it="Descrive."></en_descr_>
+<en_descr_ base="Descr." it="Descr."></en_descr_>
 <en_project_url base="Project URL" it="URL del progetto"></en_project_url>
 <en_repository_url base="Repository URL" it="URL del repository"></en_repository_url>
 <en_start_date fr="Date De Début" de="Anfangsdatum" en="Start date" it="Data Di Inizio" base="Start date"></en_start_date>

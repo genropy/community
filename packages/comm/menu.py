@@ -49,7 +49,8 @@ class ApplicationMenu(object):
         
     def config(self,root,**kwargs):
         root.packageBranch(u"!![en]Community", pkg="comm")
-        root.packageBranch(u"!![en]Repository management", pkg="sbs")
+        root.packageBranch(u"!![en]Subscriptions management", pkg="sbs")
+        root.packageBranch(u"!![en]GitHub", pkg="github")
         root.packageBranch(u"!![en]Surveys", pkg="srvy", tags='admin')
         if self.db.application.getPreference('enable_social', pkg='comm'):
             root.packageBranch(u"!![en]Social", pkg="social", tags='admin')
