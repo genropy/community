@@ -1,0 +1,79 @@
+name: Build and push Docker image
+
+on:
+  push:
+    branches: [ "main" ]
+    tags: [ "release-*" ]
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  REGISTRY_USER: genropy
+  IMAGE_NAME: community
+  INSTANCE_NAME: gnr_comm
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # The build.json dependencies live in private repositories
+      # cloned via ssh by "gnr app dockerize"
+      - name: Set up SSH agent for private dependencies
+        uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Genropy
+        run: pip install genropy
+
+      - name: Initialize Genropy environment
+        run: gnr app initgenropy
+
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract version from ref
+        id: version
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/release-* ]]; then
+            echo "version=${GITHUB_REF#refs/tags/release-}" >> $GITHUB_OUTPUT
+          else
+            echo "version=latest" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Build Docker image with gnr dockerize
+        env:
+          # let PathResolver find instances/gnr_comm from the checkout
+          GNR_LOCAL_PROJECTS: ${{ github.workspace }}/..
+        run: |
+          gnr app dockerize --progress plain \
+            -n ${{ env.IMAGE_NAME }} \
+            -t ${{ steps.version.outputs.version }} \
+            ${{ env.INSTANCE_NAME }}
+
+      - name: Push Docker image
+        run: |
+          VERSION=${{ steps.version.outputs.version }}
+          IMAGE=${{ env.REGISTRY }}/${{ env.REGISTRY_USER }}/${{ env.IMAGE_NAME }}
+          docker tag ${{ env.IMAGE_NAME }}:$VERSION $IMAGE:$VERSION
+          docker push $IMAGE:$VERSION
+          if [ "$VERSION" != "latest" ]; then
+            docker tag ${{ env.IMAGE_NAME }}:$VERSION $IMAGE:latest
+            docker push $IMAGE:latest
+          fi
