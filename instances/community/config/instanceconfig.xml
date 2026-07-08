@@ -10,7 +10,9 @@
 		<gnrcore_biz pkgcode="gnrcore:biz"/>
 		<community_comm pkgcode="community:comm"/>
 	</packages>
-
+	<api_keys>
+       <google mapkey="{GNR_GOOGLE_MAP_KEY}"/>
+    </api_keys>
 	<authentication pkg="adm">
 		<py_auth defaultTags="user" pkg="adm" method="authenticate"/>
 	</authentication>
