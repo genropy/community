@@ -37,9 +37,6 @@ class ApplicationMenu(object):
                          menuLineBadge='getMyUnreadMessages',
                          menucode='messages')
         root.webpage(u"!![en]Community map", filepath="/comm/community_map")
-        #root.thpage(u"!![en]Suggestions", table="comm.suggestion")
-        #root.thpage(u"!![en]Projects", table="comm.project", viewResource='ViewDevelopers', formResource='FormDevelopers')
-        #root.thpage(u"!![en]Events", table="comm.event", viewResource='ViewDevelopers', formResource='FormDevelopers')
         
     def config(self,root,**kwargs):
         root.packageBranch(u"!![en]Community", pkg="comm")
