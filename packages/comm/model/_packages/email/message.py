@@ -8,3 +8,7 @@ class Table(object):
         tbl.subtable('user_messages', condition='$dest_user_id=:env_user_id')
         tbl.joinColumn('dest_user_id', name_long='!!Destination user').relation('adm.user.id', 
                                 cnd="""@dest_user_id.email=$to_address""", relation_name='received_messages')
+        
+    @public_method 
+    def getMyUnreadMessages(self):
+        return self.query(where='$dest_user_id=:env_user_id AND $read IS NOT TRUE').count()
