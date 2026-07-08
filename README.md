@@ -8,40 +8,47 @@ A [Genropy](https://www.genropy.org) application powering the Genropy developer 
 - **Community map** — geolocalized map of community members
 - **Projects and events** — community projects, event calendar, meetings and suggestions
 - **Messages** — in-app messaging with unread-message badge
-- **Publications** — social posts and blog posts authored by developers
-- **Subscriptions** — membership management via the `sbs` package
 - **Mobile-friendly** — PWA support with app mode for developers
-- **OIDC authentication** — single sign-on via the `gnrauth:oidc` package
+
+With the optional packages installed (see below) the platform also provides publications
+(social and blog posts), subscriptions management, surveys, web push notifications,
+GitHub integration and OIDC single sign-on.
 
 ## Repository layout
 
 ```
 instances/
-  gnr_comm/          # Genropy instance configuration
+  community/         # Base Genropy instance (core packages + comm only)
 packages/
   comm/              # Main community package (model, webpages, resources)
 ```
 
 ## Dependencies
 
-The `comm` package requires the following Genropy repositories/packages:
+The `comm` package only requires the core [Genropy](https://github.com/genropy/genropy)
+framework packages: `adm`, `sys`, `email`, `flib`, `biz`. The bundled `community`
+instance uses exactly these plus `comm`.
+
+The following packages are optional: when they are added to the instance configuration
+the related features are enabled automatically.
 
 | Repository | Packages | Purpose |
 |---|---|---|
-| [genropy](https://github.com/genropy/genropy) | `adm`, `sys`, `email`, `flib`, `biz` | Core framework packages |
-| gnr_it | `glbl` | Italian localization data |
 | gnrextra | `wpn`, `srvy` | Web push notifications, surveys |
-| gnrcommunication | `genrobot`, `social`, `video`, `wordpress`, `dem` | Communication tools (optional, enabled via package preferences) |
+| gnrcommunication | `genrobot`, `social`, `video`, `wordpress`, `dem` | Communication tools (enabled via package preferences) |
 | gnrauth | `oidc` | OIDC authentication |
 | gnrcloudtools | `github` | GitHub integration |
 | gnrsubscriptions | `sbs` | Subscriptions management |
 
+The production instance of the Genropy community platform (all optional packages
+enabled, Docker build and deployment) is maintained in a separate deployment repository.
+
 ## Getting started
 
-1. Install [Genropy](https://github.com/genropy/genropy) and the dependent repositories listed above.
-2. Register the `gnr_comm` instance in your Genropy environment.
-3. Create the database configured in `instances/gnr_comm/config/instanceconfig.xml` and run the standard Genropy database setup for the instance.
-4. Serve the `gnr_comm` instance with your usual Genropy web server command.
+1. Install [Genropy](https://github.com/genropy/genropy).
+2. Register the `community` instance in your Genropy environment.
+3. Create the database configured in `instances/community/config/instanceconfig.xml` and run the standard Genropy database setup for the instance.
+4. Serve the `community` instance with your usual Genropy web server command.
 
 ## Development
 
